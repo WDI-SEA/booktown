@@ -27,7 +27,7 @@ Your life will be made easier with a GUI PostgreSQL client. Download [PG Command
 
 ##Joins
 
-1. Find all books about Computers list ONLY book title
+* Find all books about Computers list ONLY book title
 
 * Find all books and display ONLY
 	* Book title
