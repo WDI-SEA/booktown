@@ -1,0 +1,6 @@
+ORDER
+1. SELECT * FROM subjects ORDER BY subject ASC;
+2. SELECT * FROM subjects ORDER BY location ASC;
+
+WHERE
+1.
