@@ -17,18 +17,14 @@ Your life will be made easier with a GUI PostgreSQL client. Download [PG Command
 
 ##Order
 1. Find all subjects sorted by subject
-
 	select subject from subjects;
 2. Find all subjects sorted by location
-
 	select subject from subjects order by location asc;
 
 ##Where
 1. Find the book "Little Women"
-
 	select title from books where title = 'Little Women';
 2. Find all books containing the word "Python"
-
 	select title from books where title like '%Python%';
 3. Find all subjects with the location "Main St" sort them by subject
 	select subject from subjects where location = 'Main St' order by subject;
@@ -64,12 +60,15 @@ Your life will be made easier with a GUI PostgreSQL client. Download [PG Command
  Bartholomew and the Oobleck | Geisel       | Theodor Seuss    | Children's Books
 (15 rows)
 
-
 * Find all books that are listed in the stock table
 	* Sort them by retail price (most expensive first)
 	* Display ONLY: title and price
 select b.title, s.retail from stock s join editions e on s.isbn = e.isbn join books b on e.book_id = b.id;
-
+* Find the book "Dune" and display ONLY
+	* Book title
+	* ISBN number
+	* Publisher name
+	* Retail price
             title            | retail 
 -----------------------------+--------
  The Cat in the Hat          |  32.95
@@ -90,17 +89,15 @@ select b.title, s.retail from stock s join editions e on s.isbn = e.isbn join bo
  Dynamic Anatomy             |  28.95
 (16 rows)
 
-* Find the book "Dune" and display ONLY
-	* Book title
-	* ISBN number
-	* Publisher name
-	* Retail price
+
+
 select b.title, s.retail, e.isbn, p.name from stock s join editions e on s.isbn = e.isbn join publishers p on p.id = e.publisher_id join books b on e.book_id = b.id where b.title = 'Dune';
  title | retail |    isbn    |   name    
 -------+--------+------------+-----------
  Dune  |  21.95 | 0441172717 | Ace Books
  Dune  |  45.95 | 044100590X | Ace Books
 (2 rows)
+
 
 * Find all shipments sorted by ship date display ONLY:
 	* Customer first name
@@ -139,21 +136,21 @@ select b.title, s.ship_date, c.last_name, c.first_name from shipments s join cus
 
 ##Grouping and Counting
 
-1. Get the COUNT of all books
-select count(*) from books;
+Get the COUNT of all books
+	select count(*) from books;
  count 
 -------
     15
 (1 row)
-
-* Get the COUNT of all Locations
-select count(location) from subjects;
+Get the COUNT of all Locations
+	select count(location) from subjects;
 -------
      7
 (1 row)
 
-* Get the COUNT of each unique location in the subjects table. Display the count and the location name. (hint: requires GROUP BY).
-select distinct(location), count(location) from subjects group by location;
+
+Get the COUNT of each unique location in the subjects table. Display the count and the location name. (hint: requires GROUP BY).
+	select distinct(location), count(location) from subjects group by location;
      location     | count 
 ------------------+-------
  Creativity St    |     2
@@ -167,6 +164,8 @@ select distinct(location), count(location) from subjects group by location;
 (8 rows)
 
 * List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)
+
+
  select e.book_id, b.title, count(e.book_id) from books b join editions e on b.id = e.book_id group by e.book_id, b.title   
  book_id |            title            | count 
 ---------+-----------------------------+-------
