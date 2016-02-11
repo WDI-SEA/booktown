@@ -42,6 +42,7 @@ Your life will be made easier with a GUI PostgreSQL client. Download [PG Command
 	* Author's first name
 	* Author's last name
 	* Book subject
+
 > SELECT b.title, a.first_name, a.last_name, s.subject FROM books b
 > JOIN authors a 
 > ON b.author_id = a.id
@@ -51,6 +52,7 @@ Your life will be made easier with a GUI PostgreSQL client. Download [PG Command
 * Find all books that are listed in the stock table
 	* Sort them by retail price (most expensive first)
 	* Display ONLY: title and price
+	
 > SELECT b.title, s.retail FROM books b
 > JOIN editions e 
 > ON b.id = e.book_id
