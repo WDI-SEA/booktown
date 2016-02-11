@@ -1,0 +1,127 @@
+#SQL Books
+
+For each item below figure out the approriate SQL. Create a text file that contains all of your answers and submit it in the Homework repo.
+
+##Getting Started
+
+To get started we'll need to import the booktown.sql file.
+
+1. open terminal
+2. use the command `psql -f booktown.sql`
+3. type `psql` to open your psql console
+4. type \list to ensure the booktown database was successfully completed
+
+###Additionally...
+
+Your life will be made easier with a GUI PostgreSQL client. Download [PG Commander](https://eggerapps.at/pgcommander/) if you have a Mac, or [pgAdmin](http://www.pgadmin.org/) if you have Linux.
+
+##Order
+1. Find all subjects sorted by subject
+	select subject from subjects order by subject asc;
+
+2. Find all subjects sorted by location
+	select location from subjects order by location asc;
+
+
+##Where
+1. Find the book "Little Women"
+	select * from  books where title = 'Little Women';
+
+2. Find all books containing the word "Python"
+	select title from books where title like '%Python%'
+
+3. Find all subjects with the location "Main St" sort them by subject
+	select * from subjects where location = 'Main St' order by subject asc;
+
+
+
+
+##Joins
+
+* Find all books about Computers list ONLY book title
+
+	select books.title from books inner join subjects on books.subject_id = subjects.id where subjects.subject = 'Computers';
+
+
+
+* Find all books and display ONLY
+	* Book title
+	* Author's first name
+	* Author's last name
+	* Book subject
+
+	          select author.firstname, author.lastname from authors on books.author_id = author.id 
+
+	          SELECT books.title, authors.first_name, authors.last_name, subjects.subject
+	          FROM books
+	          JOIN subjects ON books.subject_id = subjects.id
+	          JOIN authors ON books.author_id = authors.id;
+
+
+	          subjects: subject
+	          books: subject_id, author_id
+	          authors: firstname, lastname
+
+
+* Find all books that are listed in the stock table
+	* Sort them by retail price (most expensive first)
+	* Display ONLY: title and price
+
+		SELECT books.title, stock.retail 
+		FROM stock 
+		JOIN editions ON editions.isbn = stock.isbn 
+		JOIN books ON editions.book_id = books.id
+		ORDER BY stock.retail desc; 
+
+
+
+* Find the book "Dune" and display ONLY
+	* Book title
+	* ISBN number
+	* Publisher name
+	* Retail price
+
+	select books.title, editions.isbn, publishers.name, stock.retail
+	from editions
+	join books ON books.id = editions.book_id
+	join publishers ON publishers.id = editions.publisher_id
+	join stock ON stock.isbn = editions.isbn
+	where title = 'Dune';
+
+
+
+* Find all shipments sorted by ship date display ONLY:
+	* Customer first name
+	* Customer last name
+	* ship date
+	* book title
+
+	select shipments.ship_date, customers.first_name, customers.last_name, books.title
+	From shipments 
+	join customers on customers.id = shipments.customer_id
+	join editions on editions.isbn = shipments.isbn 
+	join books on books.id = editions.book_id
+	order by shipments.ship_date asc;
+
+
+##Grouping and Counting
+
+1. Get the COUNT of all books
+
+	select count(*) from books;
+
+* Get the COUNT of all Locations
+
+	select count(location) from subjects;
+
+* Get the COUNT of each unique location in the subjects table. Display the count and the location name. (hint: requires GROUP BY).
+	
+	select count(location), location from subjects group by subjects.location ;
+
+* List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)
+
+	select books.id, books.title, count(editions.edition)
+	from editions
+	join books ON editions.book_id = books.id
+	group by books.id;
+	 
