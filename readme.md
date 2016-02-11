@@ -69,11 +69,7 @@ Your life will be made easier with a GUI PostgreSQL client. Download [PG Command
 	* Sort them by retail price (most expensive first)
 	* Display ONLY: title and price
 select b.title, s.retail from stock s join editions e on s.isbn = e.isbn join books b on e.book_id = b.id;
-* Find the book "Dune" and display ONLY
-	* Book title
-	* ISBN number
-	* Publisher name
-	* Retail price
+
             title            | retail 
 -----------------------------+--------
  The Cat in the Hat          |  32.95
