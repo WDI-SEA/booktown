@@ -25,7 +25,7 @@ subject
 
 
 /* ORDER 2
-Find all subjects sorted by subject */
+Find all subjects sorted by location */
 
 SELECT subject FROM subjects ORDER BY location;
 
@@ -50,8 +50,51 @@ subject
 (16 rows)
 
 
+/*WHERE 1:
+Find the book "Little Women" */
+
+SELECT title
+FROM books
+WHERE title = 'Little Women';
+
+    title     
+--------------
+ Little Women
+(1 row)
+
+/*WHERE 2:
+Find all books containing the word "Python" */
+
+SELECT title
+FROM books
+WHERE title ILIKE '%Python%';
+
+       title        
+--------------------
+ Programming Python
+ Learning Python
+(2 rows)
+
+
+/*WHERE 3:
+Find all subjects with the location "Main St" sort them by subject */
+
+SELECT subject
+FROM subjects
+WHERE location = 'Main St'
+ORDER BY subject;
+
+     subject     
+-----------------
+ Drama
+ Entertainment
+ Romance
+ Science Fiction
+(4 rows)
+
+
 /*JOINS 1:
-*/
+Find all books about Computers list ONLY book title */
 
 SELECT b.title 
 FROM books b
@@ -68,6 +111,11 @@ title
 
 
 /*JOINS 2:
+Find all books and display ONLY
+  -Book title
+  -Author's first name
+  -Author's last name
+  -Book subject
 */
 
 SELECT b.title, a.first_name, a.last_name, s.subject
@@ -96,6 +144,9 @@ JOIN authors a ON b.author_id = a.id;
 
 
 /*JOINS 3:
+Find all books that are listed in the stock table
+  -Sort them by retail price (most expensive first)
+  -Display ONLY: title and price
 */
 
 SELECT b.title, s.cost
@@ -125,6 +176,11 @@ ORDER BY s.retail DESC;
 (16 rows)
 
 /*JOINS 4:
+Find the book "Dune" and display ONLY
+  -Book title
+  -ISBN number
+  -Publisher name
+  -Retail price
 */
 
 SELECT b.title, s.isbn, p.name, s.retail
