@@ -1,13 +1,28 @@
 Order:
 
-1. SELECT * from subjects ORDER BY subject;
-2. SELECT * from subjects ORDER BY location;
+1. SELECT * 
+	 FROM subjects 
+	 ORDER BY subject;
+
+2. SELECT * 
+	 FROM subjects 
+	 ORDER BY location;
 
 Where:
 
-1. SELECT * from books WHERE title = ‘Little Women’;
-2. SELECT * from books WHERE title like ‘%Python%’;
-3. SELECT * from subjects WHERE location = 'Main St' ORDER BY subject;
+1. SELECT * 
+	 FROM books 
+	 WHERE title = ‘Little Women’;
+
+2. SELECT * 
+	 FROM books 
+	 WHERE title 
+	 LIKE ‘%Python%’;
+
+3. SELECT * 
+	 FROM subjects 
+	 WHERE location = 'Main St' 
+	 ORDER BY subject;
 
 Join:
 
@@ -24,7 +39,8 @@ Join:
 3. SELECT stock.retail, books.title
    FROM stock
 	 JOIN editions ON stock.isbn = editions.isbn
-	 JOIN books ON editions.book_id = books.id;
+	 JOIN books ON editions.book_id = books.id
+	 ORDER BY retail desc;
 
 4. SELECT books.title, stock.isbn, publishers.name, stock.retail
 	 FROM stock
@@ -43,9 +59,16 @@ Join:
 
 Grouping and Counting:
 
-1. SELECT count(*) FROM books;
-2. SELECT count(location) FROM subjects;
-3. SELECT location, count(location) FROM subjects GROUP BY(location);
+1. SELECT count(*) 
+	 FROM books;
+
+2. SELECT count(location) 
+	 FROM subjects;
+
+3. SELECT location, count(location) 
+	 FROM subjects 
+	 GROUP BY(location);
+
 4. SELECT books.title, books.id, count(editions.edition)
 	 FROM books
 	 LEFT JOIN editions ON books.id = editions.book_id
