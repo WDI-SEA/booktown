@@ -7,13 +7,13 @@ Where:
 
 1. SELECT * from books WHERE title = ‘Little Women’;
 2. SELECT * from books WHERE title like ‘%Python%’;
-
+3. SELECT * from subjects WHERE location = 'Main St' ORDER BY subject;
 
 Join:
 
 1. SELECT books.title
 	 FROM books
-	 join subjects ON subjects.id = books.subject_id
+	 JOIN subjects ON subjects.id = books.subject_id
 	 WHERE books.subject_id = 4;
 
 2. SELECT books.title, authors.first_name, authors.last_name, subjects.subject
