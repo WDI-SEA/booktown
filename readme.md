@@ -61,3 +61,51 @@ Your life will be made easier with a GUI PostgreSQL client. Download [PG Command
 
 
 ####YAY! You're done!!
+
+ANSWERS:
+
+#Order:
+1. SELECT * FROM subjects ORDER BY subject ASC;
+
+2. SELECT * FROM subjects ORDER BY location ASC;
+
+#Where:
+1. SELECT * FROM books WHERE title = 'Little Women';
+
+2. SELECT * FROM books WHERE title LIKE '%Python%';
+
+3. SELECT * FROM subjects WHERE location = 'Main St' ORDER by
+	subject ASC;
+
+#Joins: 
+1.	SELECT title FROM books b
+	JOIN subjects s
+	ON b.subject_id = s.id
+	WHERE b.subject_id = 4;
+
+2.	SELECT title, first_name, last_name, subject
+	FROM authors JOIN books ON authors.id = books.author_id JOIN subjects ON books.subject_id = subjects.id
+	WHERE title NOTNULL;
+
+3.	SELECT title, retail
+	FROM books JOIN editions ON books.id = editions.book_id JOIN stock ON editions.isbn = stock.isbn
+	ORDER BY retail DESC;
+
+4. 	SELECT title, editions.isbn, name, retail
+	FROM books JOIN editions ON books.id = editions.book_id JOIN publishers ON editions.publisher_id = publishers.id JOIN stock ON editions.isbn = stock.isbn
+	WHERE title = 'Dune';
+
+5.	SELECT first_name, last_name, ship_date, title
+	FROM books JOIN editions ON books.id = editions.book_id JOIN shipments ON editions.isbn = shipments.isbn JOIN customers ON shipments.customer_id = customers.id;
+
+#Counts:
+1. SELECT COUNT(*) FROM books;
+
+2. SELECT COUNT(location) FROM subjects;
+
+3.  SELECT location, COUNT(location) FROM subjects
+	GROUP BY location;
+
+4.	SELECT books.id, books.title, count(editions.edition)
+	FROM books JOIN editions ON books.id = editions.book_id
+	GROUP BY books.id;
