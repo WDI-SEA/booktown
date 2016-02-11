@@ -1,0 +1,238 @@
+ORDER
+
+1. SELECT * FROM subjects ORDER BY subject ASC;
+2. SELECT * FROM subjects ORDER BY location ASC;
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+WHERE
+
+1. SELECT * FROM books WHERE title = ‘Little Women’;
+2. SELECT * FROM books WHERE title LIKE ‘%Python’;
+3. SELECT * FROM subjects WHERE location = ‘Main St’ ORDER BY subject ASC;
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+JOINS
+
+1. 
+
+SELECT title FROM books a
+JOIN subjects b
+ON a.subject_id = b.id
+WHERE subject = ‘Computers’ ORDER BY a.title ASC;
+
+
+title         
+----------------------
+ Learning Python
+ Perl Cookbook
+ Practical PostgreSQL
+ Programming Python
+(4 rows)
+
+
+
+2.
+
+SELECT a.title, b.subject, c.last_name, c.first_name FROM books a
+JOIN subjects b
+ON a.subject_id = b.id
+JOIN authors c
+ON a.author_id = c.id
+ORDER BY a.title ASC;
+
+
+title            |     subject      |  last_name   |    first_name    
+-----------------------------+------------------+--------------+------------------
+ 2001: A Space Odyssey       | Science Fiction  | Clarke       | Arthur C.
+ Bartholomew and the Oobleck | Children's Books | Geisel       | Theodor Seuss
+ Dune                        | Science Fiction  | Herbert      | Frank
+ Dynamic Anatomy             | Arts             | Hogarth      | Burne
+ Franklin in the Dark        | Children's Books | Bourgeois    | Paulette
+ Goodnight Moon              | Children's Books | Brown        | Margaret Wise
+ Learning Python             | Computers        | Lutz         | Mark
+ Little Women                | Drama            | Alcott       | Louisa May
+ Perl Cookbook               | Computers        | Christiansen | Tom
+ Practical PostgreSQL        | Computers        | Worsley      | John
+ Programming Python          | Computers        | Lutz         | Mark
+ The Cat in the Hat          | Children's Books | Geisel       | Theodor Seuss
+ The Shining                 | Horror           | King         | Stephen
+ The Tell-Tale Heart         | Horror           | Poe          | Edgar Allen
+ The Velveteen Rabbit        | Classics         | Bianco       | Margery Williams
+(15 rows)
+
+
+3.
+
+SELECT DISTINCT a.title, c.cost from books a
+JOIN editions b
+ON a.id = b.book_id
+JOIN stock c
+ON c.isbn = b.isbn
+ORDER BY c.cost DESC;
+
+
+ title            | cost  
+-----------------------------+-------
+ 2001: A Space Odyssey       | 36.00
+ Dune                        | 36.00
+ The Cat in the Hat          | 30.00
+ The Shining                 | 29.00
+ Dynamic Anatomy             | 26.00
+ Goodnight Moon              | 25.00
+ The Shining                 | 24.00
+ Franklin in the Dark        | 23.00
+ The Cat in the Hat          | 23.00
+ The Tell-Tale Heart         | 23.00
+ The Velveteen Rabbit        | 20.00
+ The Tell-Tale Heart         | 19.00
+ Little Women                | 18.00
+ 2001: A Space Odyssey       | 17.00
+ Dune                        | 17.00
+ Bartholomew and the Oobleck | 16.00
+(16 rows)
+
+
+
+4.	
+
+SELECT DISTINCT a.title, d.cost, d.isbn, c.name from books a
+JOIN editions b
+ON a.id = b.book_id
+JOIN publishers c
+ON c.id = b.publisher_id
+JOIN stock d
+ON d.isbn = b.isbn
+WHERE a.title = ‘Dune’;
+
+
+title | cost  |    isbn    |   name    
+-------+-------+------------+-----------
+ Dune  | 36.00 | 044100590X | Ace Books
+ Dune  | 17.00 | 0441172717 | Ace Books
+(2 rows)
+
+
+
+5.
+
+SELECT a.title, d.last_name, d.first_name, c.ship_date from books a
+JOIN editions b
+ON a.id = b.book_id
+JOIN shipments c
+ON b.isbn = c.isbn
+JOIN customers d
+ON c.customer_id = d.id
+ORDER BY c.ship_date ASC;
+
+
+title            | last_name | first_name |       ship_date        
+-----------------------------+-----------+------------+------------------------
+ Little Women                | Bollman   | Owen       | 2001-08-05 09:34:04-07
+ Goodnight Moon              | Bennett   | Laura      | 2001-08-06 07:49:44-07
+ The Cat in the Hat          | Allen     | Chad       | 2001-08-06 09:29:21-07
+ Bartholomew and the Oobleck | Jackson   | Annie      | 2001-08-06 11:46:36-07
+ Bartholomew and the Oobleck | Jackson   | Annie      | 2001-08-07 10:58:36-07
+ The Tell-Tale Heart         | Morrill   | Royce      | 2001-08-07 11:31:57-07
+ 2001: A Space Odyssey       | Holloway  | Christine  | 2001-08-07 11:56:42-07
+ Little Women                | Morrill   | Eric       | 2001-08-07 13:00:48-07
+ The Shining                 | Anderson  | Jonathan   | 2001-08-08 08:36:44-07
+ The Shining                 | Gould     | Ed         | 2001-08-08 09:53:46-07
+ Bartholomew and the Oobleck | Jackson   | Annie      | 2001-08-08 10:46:13-07
+ The Velveteen Rabbit        | Olson     | Dave       | 2001-08-09 07:30:07-07
+ The Velveteen Rabbit        | Black     | Wendy      | 2001-08-09 09:30:46-07
+ Franklin in the Dark        | Thomas    | Rich       | 2001-08-10 07:29:52-07
+ The Tell-Tale Heart         | Black     | Jean       | 2001-08-10 08:29:42-07
+ The Cat in the Hat          | Morrill   | Eric       | 2001-08-10 13:47:52-07
+ Bartholomew and the Oobleck | Jackson   | Annie      | 2001-08-11 09:55:05-07
+ Goodnight Moon              | Brown     | Richard    | 2001-08-11 10:52:34-07
+ The Cat in the Hat          | Williams  | James      | 2001-08-11 13:34:08-07
+ Dune                        | Gerdes    | Kate       | 2001-08-12 08:46:35-07
+ Franklin in the Dark        | Owens     | Jean       | 2001-08-12 12:09:47-07
+ The Shining                 | Becker    | Owen       | 2001-08-12 13:39:22-07
+ The Cat in the Hat          | Bollman   | Julie      | 2001-08-13 09:42:10-07
+ The Cat in the Hat          | Corner    | Kathy      | 2001-08-13 09:47:04-07
+ Dynamic Anatomy             | Owens     | Tim        | 2001-08-14 07:33:47-07
+ Dune                        | Young     | Trevor     | 2001-08-14 08:42:58-07
+ The Shining                 | Brown     | Chuck      | 2001-08-14 10:36:41-07
+ The Tell-Tale Heart         | Holloway  | Adam       | 2001-08-14 13:41:39-07
+ The Shining                 | King      | Jenny      | 2001-08-14 13:45:51-07
+ Franklin in the Dark        | Robinson  | Tammy      | 2001-08-14 13:49:00-07
+ Goodnight Moon              | Clark     | James      | 2001-08-15 11:57:40-07
+ 2001: A Space Odyssey       | Gould     | Shirley    | 2001-08-15 14:02:01-07
+ The Cat in the Hat          | King      | Jenny      | 2001-09-14 16:46:32-07
+ The Cat in the Hat          | Jackson   | Annie      | 2001-09-14 17:42:22-07
+ Bartholomew and the Oobleck | Jackson   | Annie      | 2001-09-22 11:23:28-07
+ Bartholomew and the Oobleck | Jackson   | Annie      | 2001-09-22 20:58:56-07
+(36 rows)
+
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+GROUPING AND COUNTING
+
+1.
+
+
+select count(*) from books;
+ count 
+-------
+    15
+(1 row)
+
+
+
+
+2.
+
+
+select count(*) from states;
+ count 
+-------
+     2
+(1 row)
+
+
+
+3.
+
+
+select count(*) from subjects where location <> '';
+ count 
+-------
+    15
+(1 row)
+
+
+
+4.
+
+
+sselect a.title, b.book_id, b.edition from books a
+join editions b
+on a.id = b.book_id
+order by a.title asc;
+
+
+            title            | book_id | edition 
+-----------------------------+---------+---------
+ 2001: A Space Odyssey       |    4267 |       3
+ 2001: A Space Odyssey       |    4267 |       3
+ Bartholomew and the Oobleck |    1590 |       1
+ Dune                        |    4513 |       3
+ Dune                        |    4513 |       2
+ Dynamic Anatomy             |    2038 |       1
+ Franklin in the Dark        |   25908 |       1
+ Goodnight Moon              |    1501 |       1
+ Little Women                |     190 |       1
+ Programming Python          |   41473 |       2
+ The Cat in the Hat          |    1608 |       1
+ The Cat in the Hat          |    1608 |       1
+ The Shining                 |    7808 |       2
+ The Shining                 |    7808 |       1
+ The Tell-Tale Heart         |     156 |       2
+ The Tell-Tale Heart         |     156 |       1
+ The Velveteen Rabbit        |    1234 |       1
+(17 rows)
+
