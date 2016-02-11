@@ -17,23 +17,30 @@ Your life will be made easier with a GUI PostgreSQL client. Download [PG Command
 
 ##Order
 1. Find all subjects sorted by subject
+	select subject from subjects;
 2. Find all subjects sorted by location
+	select subject from subjects order by location asc;
 
 ##Where
 1. Find the book "Little Women"
+	select title from books where title = 'Little Women';
 2. Find all books containing the word "Python"
+	select title from books where title like '%Python%';
 3. Find all subjects with the location "Main St" sort them by subject
+	select subject from subjects where location = 'Main St' order by subject;
 
 
 ##Joins
 
 * Find all books about Computers list ONLY book title
+	select title from books b join subjects s on b.subject_id = s.id where s.subject = 'Computers';
 
 * Find all books and display ONLY
 	* Book title
 	* Author's first name
 	* Author's last name
 	* Book subject
+	select b.title, a.last_name, a.first_name, s.subject from books b full join authors a on b.author_id = a.id join subjects s on b.subject_id = s.id;
 
 * Find all books that are listed in the stock table
 	* Sort them by retail price (most expensive first)
