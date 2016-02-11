@@ -1,0 +1,34 @@
+Order
+1. booktown=# select * from subjects;
+2. booktown=# select location from subjects;
+
+Where
+1. booktown=# select * from books where title='Little Women';
+2.booktown=# select * from books where title like ('%Python%');
+3.booktown=# select subject from subjects where location='Main St';
+
+Joins
+1. booktown=# select a.title from books a join subjects b on b.id = a.subject_id where b.subject like 'Computers';
+
+2.booktown=# select a.title, b.first_name, b.last_name, c.subject 
+from books a 
+join authors b on b.id = a.author_id 
+join subjects c on a.subject_id = c.id;
+
+3.select books.title, editions.isbn, publishers.name, stock.retail 
+from  books join editions on books.id = editions.book_id
+join publishers on publishers.id = editions.publisher_id
+join stock on editions.isbn = stock.isbn
+where books.title = 'Dune';
+
+4.select customers.first_name, customers.last_name, shipments.ship_date, books.title
+from shipments join customers on shipments.customer_id = customers.id
+join editions on shipments.isbn = editions.isbn
+join books on editions.book_id = books.id order by ship_date desc;
+
+Grouping and Counting
+1.booktown=# select count(*) from books;
+2.booktown=# select count(location) from subjects;
+3.booktown=# select count(location), location from subjects group by location;
+4.select books.id, books.title, count(editions.edition)
+from books join editions on books.id = editions.book_id group by books.id;
