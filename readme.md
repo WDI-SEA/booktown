@@ -12,7 +12,21 @@ To get started we'll need to import the booktown.sql file.
 4. type \list to ensure the booktown database was successfully completed
 5. type `\c booktown` to connect to the booktown database
 6. type `\d` to see a list of all the tables in the booktown database
-7. type `\d [TABLE_NAME]` to see information about columns and their types for a specific table
+7. type `\d [TABLE_NAME]` to see information about columns and their types for a specific table. You should see output like below:
+
+```
+booktown=# \d books
+       Table "public.books"
+   Column   |  Type   | Modifiers 
+------------+---------+-----------
+ id         | integer | not null
+ title      | text    | not null
+ author_id  | integer | 
+ subject_id | integer | 
+Indexes:
+    "books_id_pkey" PRIMARY KEY, btree (id)
+    "books_title_idx" btree (title)
+```
 
 ###Additionally...
 
