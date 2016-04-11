@@ -33,12 +33,19 @@ Indexes:
 Your life will be made easier with a GUI PostgreSQL client. Download [PG Commander](https://eggerapps.at/pgcommander/) if you have a Mac, or [pgAdmin](http://www.pgadmin.org/) if you have Linux.
 
 1. PG Commander asks for a lot of information to begin with. The defaults are fine. Leave everything alone and just press connect.
-![PG Commander new localhost connection](pg-commander-localhost-connection.png)
+  ![PG Commander new localhost connection](00-default-localhost-connection.png)
 2. If you don't see the booktown database after connecting you may need to move up a directory. Press the "localhost" under the back and forward buttons.
+  ![navigate to localhost](01-click-localhost)
 3. Double click on the `booktown` database to connect.
+  ![booktown database](02-available-databases)
 4. See the list of tables in the database (alternate_stock, authors, book_backup...)
+  ![booktown database tables](03-booktown)
 5. Double click a table to see it's contents
 6. Double click SQL Terminal to get to a text box where you can write and execute some queries.
+
+# Exercises
+
+Complete the following exercises to practice using SQL.
 
 ##Order
 1. Find all subjects sorted by subject
