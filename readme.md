@@ -10,6 +10,9 @@ To get started we'll need to import the booktown.sql file.
 2. use the command `psql -f booktown.sql`
 3. type `psql` to open your psql console
 4. type \list to ensure the booktown database was successfully completed
+5. type `\c booktown` to connect to the booktown database
+6. type `\d` to see a list of all the tables in the booktown database
+7. type `\d [TABLE_NAME]` to see information about columns and their types for a specific table
 
 ###Additionally...
 
