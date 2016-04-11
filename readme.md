@@ -35,11 +35,11 @@ Your life will be made easier with a GUI PostgreSQL client. Download [PG Command
 1. PG Commander asks for a lot of information to begin with. The defaults are fine. Leave everything alone and just press connect.
   ![PG Commander new localhost connection](00-default-localhost-connection.png)
 2. If you don't see the booktown database after connecting you may need to move up a directory. Press the "localhost" under the back and forward buttons.
-  ![navigate to localhost](01-click-localhost)
+  ![navigate to localhost](01-click-localhost.png)
 3. Double click on the `booktown` database to connect.
-  ![booktown database](02-available-databases)
+  ![booktown database](02-available-databases.png)
 4. See the list of tables in the database (alternate_stock, authors, book_backup...)
-  ![booktown database tables](03-booktown)
+  ![booktown database tables](03-booktown.png)
 5. Double click a table to see it's contents
 6. Double click SQL Terminal to get to a text box where you can write and execute some queries.
 
