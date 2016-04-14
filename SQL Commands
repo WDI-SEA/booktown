@@ -32,6 +32,10 @@
 
 3. SELECT location, COUNT(location) FROM subjects GROUP BY location
 
-4. SELECT EDITION, COUNT(edition)FROM editions GROUP BY edition; SELECT title, id FROM books JOIN editions ON books.id = editions.book_id 
+4. 
+
+SELECT EDITION, COUNT(edition)FROM editions GROUP BY edition; 
+
+SELECT title, id FROM books JOIN editions ON books.id = editions.book_id 
 
 
