@@ -1,0 +1,26 @@
+Order
+
+1. Find all subjects sorted by subject:
+booktown=# select subject from subjects;
+
+2. Find all subjects sorted by location:
+booktown=# select location from subjects;
+
+
+Where
+
+1. Find the book Little Women:
+booktown=# select title from books where title = 'Little Women';
+
+2. Find all books containing the word "Python":
+booktown=# select * from books where subject_id = '4';
+
+3. Find all subjects with the location "Main St" sort them by subject:
+booktown=# select * from subjects where location = 'Main St';
+
+
+Joins
+
+1. Find all books about Computers list ONLY book title:
+
+
