@@ -1,0 +1,89 @@
+ORDER
+1. select * from subjects order by subject;
+2. select * from subjects order by location;
+
+WHERE
+1. select * from books where title = 'Little Women';
+2. select * from books where title like '%Python';
+3. select * from subjects where location = 'Main St';
+
+JOINS
+1. select title from books b
+join subjects s
+on s.id = b.subject_id
+where s.subject like '%Computers';
+
+2. select title from books;
+3. select first_name from authors;
+4. select last_name from authors;
+5. select subject from subjects;
+
+6. select * from stock s
+join editions e
+on s.isbn = e.isbn
+join books b
+on e.book_id = b.id
+order by retail desc;
+
+7. select title, retail from books b
+join editions e
+on e.book_id = b.id
+join stock s
+on s.isbn = e.isbn;
+
+8. select title from books where title = 'Dune';
+
+9. select isbn from books b
+join editions e
+on e.book_id = b.id
+where title = 'Dune';
+
+10. select name from publishers p
+join editions e
+on e.publisher_id = p.id
+join books b
+on e.book_id = b.id
+where title = 'Dune';
+
+11. select retail from stock s
+join editions e
+on s.isbn = e.isbn
+join books b
+on e.book_id = b.id
+where title = 'Dune';
+
+12. select first_name from customers c
+join shipments s
+on s.customer_id = c.id
+order by ship_date;
+
+13. select last_name from customers c
+join shipments s
+on s.customer_id = c.id
+order by ship_date;
+
+14. select ship_date from customers c
+join shipments s
+on s.customer_id = c.id
+order by ship_date;
+
+15. select title from books b
+join editions e
+on b.id = e.book_id
+join shipments s
+on e.isbn = s.isbn
+order by ship_date;
+
+16. select count('title') from books b
+join book_backup p
+on b.title = p.title;
+
+17. select count('location') from subjects;
+
+18. select distinct location, count ('location') from subjects
+group by location;
+
+19. select book_id, title, edition from books b
+join editions e
+on b.id = e.book_id
+group by title, book_id, edition;
