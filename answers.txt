@@ -1,0 +1,47 @@
+SELECT subject FROM subjects ORDER BY subject;
+SELECT subject FROM subjects ORDER BY location;
+SELECT * FROM books WHERE title = 'Little Women';
+SELECT * FROM books WHERE title LIKE '%Python';
+SELECT subject, location FROM subjects WHERE location = 'Main St' ORDER BY subject;
+
+
+SELECT title FROM books WHERE subject_id = '4';
+
+SELECT title, first_name, last_name, subject 
+FROM books 
+JOIN authors 
+ON books.author_id = authors.id 
+JOIN subjects 
+ON books.subject_id = subjects.id;
+
+SELECT title, cost, retail FROM books b
+JOIN editions e
+ON b.id = e.book_id
+JOIN stock s
+ON e.isbn = s.isbn
+ORDER BY retail;
+
+SELECT title, e.isbn, name, retail FROM books b
+JOIN editions e
+ON b.id = e.book_id
+JOIN publishers p
+ON e.publisher_id = p.id
+JOIN stock s
+ON e.isbn = s.isbn
+WHERE title = 'Dune';
+
+SELECT title, first_name, last_name, ship_date
+FROM books b
+JOIN editions e
+ON b.id = e.book_id
+JOIN shipments s
+ON e.isbn = s.isbn
+JOIN customers c
+ON s.customer_id = c.id;
+
+SELECT count(*) FROM books;
+
+SELECT count(location) FROM subjects;
+
+SELECT location, COUNT(location) FROM subjects
+GROUP BY location;
