@@ -5,10 +5,15 @@ Complete the following exercises to practice using SQL.
 
 ###Order
 
+
+I forgot to use table prefixes in some places--- I corrected what I could during the morning review.
+
 1. Find all subjects sorted by subject
   
   > select * from subjects order by subjects desc;
-
+  - above is wrong
+  > select * from subjects order by subject asc;
+  - correct answer
 
 2. Find all subjects sorted by location
 
@@ -27,13 +32,15 @@ Complete the following exercises to practice using SQL.
 3. Find all subjects with the location "Main St" sort them by subject
 
   > select * from subjects where location = 'Main St';
+  above is wrong
+  > select * from subjects where localtion = 'Main St order by subject asc;
 
 
 ###Joins
 
 * Find all books about Computers list ONLY book title
 
-  > select title from books inner join subjects on books.subject_id = subjects.id where subject ilike 'computers';
+  > select books.title from books inner join subjects on books.subject_id = subjects.id where subjects.subject ilike '%computers%';
 
 * Find all books and display ONLY
   * Book title
@@ -66,6 +73,10 @@ Complete the following exercises to practice using SQL.
   * book title
 
   > select books.title, shipments.ship_date, customers.first_name, customers.last_name from shipments left join customers on shipments.customer_id = customers.id left join editions on shipments.isbn = editions.isbn left join books on books.id = editions.book_id order by shipments.ship_date asc;
+  
+  
+  > select books.title, shipments.ship_date, customers.first_name, customers.last_name from shipments inner join customers on shipments.customer_id = customers.id inner join editions on shipments.isbn = editions.isbn inner join books on books.id = editions.book_id order by shipments.ship_date asc;
+  --answer from class
 
 ###Grouping and Counting
 
@@ -75,11 +86,13 @@ Complete the following exercises to practice using SQL.
 
 * Get the COUNT of all Locations
  
-  > select count(distinct location) from subjects;
+  > select count(distinct subjects.location) from subjects;
 
 * Get the COUNT of each unique location in the subjects table. Display the count and the location name. (hint: requires GROUP BY).
 
-  > select location, count(location) from subjects group by location;
+  > select subjects.location, count(subjects.location) from subjects group by subjects.location;
+  --incorrect, we have a blank row
+  > select subjects.location, count(subjects.location) from subjects group by subjects.location having count(subjects.location) > 0;
 
 * List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)
 
