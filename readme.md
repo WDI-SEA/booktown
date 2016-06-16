@@ -89,3 +89,40 @@ Complete the following exercises to practice using SQL.
 * List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)
 
 ####YAY! You're done!!
+
+1.) `SELECT * FROM subjects ORDER BY subject ASC;`
+2.) `SELECT * FROM subjects ORDER BY location ASC;`
+
+1.) `select * from books WHERE title ILIKE 'Little Women';`
+2.) `select * from books WHERE title ILIKE '%python%';`
+3.) `SELECT * FROM subjects WHERE location ILIKE 'Main St' ORDER BY subject ASC;`
+
+JOINS
+1.) `SELECT books.title FROM books INNER JOIN subjects ON subjects.id = books.subject_id WHERE subjects.subject ILIKE '%computer%';`
+2.) `SELECT books.title, authors.first_name, authors.last_name, subjects.subject FROM books INNER JOIN authors ON authors.id = books.author_id INNER JOIN subjects ON subjects.id = books.subject_id;`
+3.) `SELECT books.title, stock.cost FROM STOCK INNER JOIN editions on stock.isbn = editions.isbn inner join books on books.id = editions.book_id order by stock.cost DESC;`
+4.) `select books.title, editions.isbn, publishers.name, stock.retail 
+FROM books 
+INNER JOIN editions 
+ON books.id = editions.book_id 
+INNER JOIN publishers 
+ON editions.publisher_id = publishers.id 
+INNER JOIN stock 
+ON stock.isbn = editions.isbn 
+WHERE books.title = 'Dune';`
+
+5.) `SELECT customers.first_name, customers.last_name, shipments.ship_date, books.title 
+FROM shipments 
+INNER JOIN customers 
+ON customer_id = shipments.customer_id 
+INNER JOIN editions
+ON editions.isbn = shipments.isbn
+INNER JOIN books
+ON editions.book_id = book_id;`
+
+GROUPING
+
+1.) `SELECT count(*) FROM books;`
+2.) `SELECT count(location) FROM subjects;`
+3.) `SELECT location, count(location) FROM subjects GROUP BY location;`
+4.) `SELECT books.id, books.title, COUNT(editions.edition) FROM books INNER JOIN editions ON editions.book_id = books.id GROUP BY books.id;`
