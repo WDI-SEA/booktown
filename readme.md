@@ -90,7 +90,6 @@ Complete the following exercises to practice using SQL.
 
 ####YAY! You're done!!
 
-
 1.) `SELECT * FROM subjects ORDER BY subject ASC;`
 2.) `SELECT * FROM subjects ORDER BY location ASC;`
 
