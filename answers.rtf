@@ -1,0 +1,225 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Regular;\f2\fnil\fcharset0 Menlo-Bold;
+\f3\fnil\fcharset0 HelveticaNeue;\f4\fnil\fcharset0 LucidaGrande;}
+{\colortbl;\red255\green255\blue255;\red30\green60\blue255;\red20\green30\blue185;\red191\green43\blue36;
+\red38\green38\blue38;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid1\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid101\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid2}
+{\list\listtemplateid3\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid201\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{circle\}}{\leveltext\leveltemplateid202\'01\uc0\u9702 ;}{\levelnumbers;}\fi-360\li1440\lin1440 }{\listname ;}\listid3}
+{\list\listtemplateid4\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid301\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid4}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}{\listoverride\listid4\listoverridecount0\ls4}}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs36 \cf0 \
+Order\
+\pard\pardeftab577\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf2 1. SELECT\cf0  subject \cf2 FROM\cf0  subjects \cf2 ORDER\cf0  \cf3 BY\cf0  subject;
+\f0\fs36 \
+3. 
+\f1\fs24 \cf2 SELECT\cf0  subject \cf2 FROM\cf0  subjects \cf2 ORDER\cf0  \cf3 BY\cf0  \cf3 location\cf0 ;\
+\
+
+\f2\b Where
+\f1\b0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 1. \cf2 SELECT\cf0  title \cf2 FROM\cf0  books \cf2 WHERE\cf0  title = \cf4 'Little Women'\cf0 ;\
+2. \cf2 SELECT\cf0  * \cf2 FROM\cf0  books \cf2 WHERE\cf0  title \cf2 ILIKE\cf0  \cf4 '%Python%'\cf0 ;\
+3. \cf2 SELECT\cf0  * \cf2 FROM\cf0  subjects \cf2 WHERE\cf0  \cf3 location\cf0  \cf2 ILIKE\cf0  \cf4 '%Main St%'\cf0  \cf2 ORDER\cf0  \cf3 BY\cf0  subject ASC;  \
+\
+
+\f2\b Joins\
+
+\f1\b0 1. 
+\f0\fs36 \
+\pard\pardeftab577\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf2 SELECT\cf0  books.title \cf2 FROM\cf0  books\
+\cf2 INNER JOIN\cf0  subjects\
+	\cf2 ON\cf0  books.subject_id = subjects.id\
+	\cf2 WHERE\cf0  subjects.subject \cf2 ILIKE\cf0  \cf4 \'91%computer%\'92\cf0 ;\
+2.\
+\cf2 Select\cf0  books.title, authors.first_name, authors.last_name, subjects.subject \cf2 FROM\cf0  books\
+\cf2 INNER\cf0  \cf2 JOIN\cf0  authors\
+	\cf2 ON\cf0  books.author_id = authors.id\
+\cf2 INNER\cf0  \cf2 JOIN\cf0  subjects\
+	\cf2 ON\cf0  books.subject_id = subjects.id;\
+3.\
+\cf2 SELECT\cf0  books.title, stock.retail \cf2 FROM\cf0  stock\
+	\cf2 INNER\cf0  \cf2 JOIN\cf0  editions\
+		\cf2 ON\cf0  editions.isbn = stock.isbn\
+	\cf2 INNER\cf0  \cf2 JOIN\cf0  books\
+		\cf2 ON\cf0  editions.book_id = books.id\
+	\cf2 ORDER\cf0  \cf3 BY\cf0  stock.retail \cf2 DESC\cf0 ;\
+4.\
+\cf2 SELECT\cf0  books.title, stock.isbn, publishers.\cf3 name\cf0 , stock.retail \cf2 FROM\cf0  books\
+	\cf2 INNER\cf0  \cf2 JOIN\cf0  editions\
+		\cf2 ON\cf0  editions.book_id = books.id\
+	\cf2 INNER\cf0  \cf2 JOIN\cf0  stock\
+		\cf2 ON\cf0  editions.isbn = stock.isbn\
+	\cf2 INNER\cf0  \cf2 JOIN\cf0  publishers\
+		\cf2 ON\cf0  editions.publisher_id = publishers.id\
+	\cf2 WHERE\cf0  books.title \cf2 ILIKE\cf0  \cf4 '%DUNE%'\cf0 ;\
+5.\
+\cf2 SELECT\cf0  customers.first_name, customers.last_name, shipments.ship_date, books.title \cf2 FROM\cf0  books\
+	\cf2 INNER\cf0  \cf2 JOIN\cf0  editions\
+		\cf2 ON\cf0  editions.book_id = books.id\
+	\cf2 INNER\cf0  \cf2 JOIN\cf0  shipments\
+		\cf2 ON\cf0  shipments.isbn = editions.isbn\
+	\cf2 INNER\cf0  \cf2 JOIN\cf0  customers\
+		\cf2 ON\cf0  customers.id = shipments.customer_id	\
+	\cf2 ORDER\cf0  \cf3 BY\cf0  shipments.ship_date \cf2 DESC\cf0 ;\
+\
+\
+Grouping and Counting\
+1. \
+\cf2 SELECT\cf0  COUNT(title) \cf2 FROM\cf0  books\
+\
+2.\
+\cf2 SELECT\cf0  COUNT(DISTINCT subjects.\cf3 location\cf0 ) \cf2 FROM\cf0  subjects;\
+\
+3. \
+\cf2 SELECT\cf0  \cf3 location\cf0 , COUNT(\cf3 location\cf0 ) \
+\cf2 FROM\cf0  subjects\
+\cf2 GROUP\cf0  \cf3 BY\cf0  \cf3 location\cf0 \
+\cf2 HAVING\cf0  COUNT(\cf3 location\cf0 ) > 0;\
+\
+(another method:)\
+\
+\cf2 SELECT\cf0  subjects.\cf3 location\cf0 , COUNT(subjects.\cf3 location\cf0 ) \
+\cf2 FROM\cf0  subjects\
+\cf2 WHERE\cf0  subjects.\cf3 location\cf0  \cf2 IS\cf0  \cf2 NOT\cf0  \cf2 NULL\cf0 \
+\cf2 GROUP\cf0  \cf3 BY\cf0  subjects.\cf3 location\cf0 ;\
+\
+4.\
+\
+\cf2 SELECT\cf0  books.id, books.title,\
+COUNT(editions.edition)\
+\cf2 FROM\cf0  books\
+\cf2 INNER\cf0  \cf2 JOIN\cf0  editions\
+	\cf2 ON\cf0  editions.book_id = books.id\
+\cf2 GROUP\cf0  \cf3 BY\cf0  books.id, books.title;
+\f0\fs36 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\
+\
+\pard\pardeftab720\sl500\sa320\partightenfactor0
+
+\f3\b \cf5 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 Order\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl512\partightenfactor0
+\ls1\ilvl0
+\b0\fs32 \cf5 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	1.	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 Find all subjects sorted by subject\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	2.	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 Find all subjects sorted by location\
+\pard\pardeftab720\sl500\sa320\partightenfactor0
+
+\b\fs36 \cf5 Where\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl512\partightenfactor0
+\ls2\ilvl0
+\b0\fs32 \cf5 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	1.	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 Find the book "Little Women"\
+\ls2\ilvl0\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	2.	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 Find all books containing the word "Python"\
+\ls2\ilvl0\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	3.	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 Find all subjects with the location "Main St" sort them by subject\
+\pard\tx720\pardeftab720\sl512\partightenfactor0
+\cf5 \
+\pard\pardeftab720\sl500\sa320\partightenfactor0
+
+\b\fs36 \cf5 Joins\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl512\partightenfactor0
+\ls3\ilvl0
+\b0\fs32 \cf5 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 Find all books about Computers list ONLY book title\
+\ls3\ilvl0\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 Find all books and display ONLY\
+\pard\tx940\tx1440\pardeftab720\li1440\fi-1440\sl512\partightenfactor0
+\ls3\ilvl1\cf5 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	
+\f4 \uc0\u9702 
+\f3 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 Book title\
+\ls3\ilvl1\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	
+\f4 \uc0\u9702 
+\f3 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 Author's first name\
+\ls3\ilvl1\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	
+\f4 \uc0\u9702 
+\f3 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 Author's last name\
+\ls3\ilvl1\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	
+\f4 \uc0\u9702 
+\f3 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 Book subject\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl512\partightenfactor0
+\ls3\ilvl0\cf5 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 Find all books that are listed in the stock table\
+\pard\tx940\tx1440\pardeftab720\li1440\fi-1440\sl512\partightenfactor0
+\ls3\ilvl1\cf5 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	
+\f4 \uc0\u9702 
+\f3 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 Sort them by retail price (most expensive first)\
+\ls3\ilvl1\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	
+\f4 \uc0\u9702 
+\f3 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 Display ONLY: title and price\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl512\partightenfactor0
+\ls3\ilvl0\cf5 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 Find the book "Dune" and display ONLY\
+\pard\tx940\tx1440\pardeftab720\li1440\fi-1440\sl512\partightenfactor0
+\ls3\ilvl1\cf5 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	
+\f4 \uc0\u9702 
+\f3 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 Book title\
+\ls3\ilvl1\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	
+\f4 \uc0\u9702 
+\f3 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 ISBN number\
+\ls3\ilvl1\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	
+\f4 \uc0\u9702 
+\f3 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 Publisher name\
+\ls3\ilvl1\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	
+\f4 \uc0\u9702 
+\f3 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 Retail price\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl512\partightenfactor0
+\ls3\ilvl0\cf5 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 Find all shipments sorted by ship date display ONLY:\
+\pard\tx940\tx1440\pardeftab720\li1440\fi-1440\sl512\partightenfactor0
+\ls3\ilvl1\cf5 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	
+\f4 \uc0\u9702 
+\f3 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 Customer first name\
+\ls3\ilvl1\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	
+\f4 \uc0\u9702 
+\f3 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 Customer last name\
+\ls3\ilvl1\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	
+\f4 \uc0\u9702 
+\f3 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 ship date\
+\ls3\ilvl1\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	
+\f4 \uc0\u9702 
+\f3 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 book title\
+\pard\pardeftab720\sl500\sa320\partightenfactor0
+
+\b\fs36 \cf5 Grouping and Counting\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl512\partightenfactor0
+\ls4\ilvl0
+\b0\fs32 \cf5 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	1.	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 Get the COUNT of all books\
+\ls4\ilvl0\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	2.	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 Get the COUNT of all Locations\
+\ls4\ilvl0\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	3.	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 Get the COUNT of each unique location in the subjects table. Display the count and the location name. (hint: requires GROUP BY).\
+\ls4\ilvl0\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	4.	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs36 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+}
