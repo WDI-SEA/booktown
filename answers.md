@@ -12,7 +12,7 @@
 
 2. Find all subjects sorted by location
 
-  SELECT location FROM subjects
+  SELECT subject FROM subjects
   ORDER BY location ASC;
 
 
@@ -36,7 +36,7 @@
 3. Find all subjects with the location "Main St" sort them by subject
 
 
-  SELECT location, subject FROM subjects
+  SELECT subject FROM subjects
   WHERE location = 'Main St'
   ORDER BY subject ASC;
 
@@ -129,13 +129,14 @@
 
 2. Get the COUNT of all Locations
 
-  SELECT COUNT(subjects.location) FROM subjects;
+  SELECT COUNT(DISTINCT subjects.location) FROM subjects;
 
 
 3. Get the COUNT of each unique location in the subjects table. Display the count and the location name. (hint: requires GROUP BY).
 
-  SELECT COUNT(DISTINCT subjects.location), subjects.location FROM subjects
-  GROUP BY subjects.location;
+  SELECT COUNT(subjects.location), subjects.location FROM subjects
+  GROUP BY subjects.location
+  HAVING count(subjects.location) > 0;
 
 
 4. List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)
@@ -143,5 +144,5 @@
   SELECT books.id, books.title, COUNT(editions.edition) FROM books
   INNER JOIN editions
   ON books.id = editions.book_id
-  GROUP BY books.id
+  GROUP BY books.id, books.title
   ORDER BY books.id ASC;
