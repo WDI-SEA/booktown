@@ -107,7 +107,7 @@ JOINS
 
 4.) `select books.title, editions.isbn, publishers.name, stock.retail FROM books INNER JOIN editions ON books.id = editions.book_id INNER JOIN publishers ON editions.publisher_id = publishers.id INNER JOIN stock ON stock.isbn = editions.isbn WHERE books.title = 'Dune';`
 
-5.) `SELECT customers.first_name, customers.last_name, shipments.ship_date, books.title FROM shipments INNER JOIN customers ON customers.id = shipments.customer_id INNER JOIN editions ON editions.isbn = shipments.isbn INNER JOIN books ON editions.book_id = book_id;`
+5.) `SELECT customers.first_name, customers.last_name, shipments.ship_date, books.title FROM shipments INNER JOIN customers ON customers.id = shipments.customer_id INNER JOIN editions ON editions.isbn = shipments.isbn INNER JOIN books ON editions.book_id = book_id ORDER BY shipments.ship_date ASC;`
 
 GROUPING
 
