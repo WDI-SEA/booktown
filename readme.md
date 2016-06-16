@@ -97,8 +97,9 @@ Complete the following exercises to practice using SQL.
 2.) `select * from books WHERE title ILIKE '%python%'; 
 3.) `SELECT * FROM subjects WHERE location ILIKE 'Main St' ORDER BY subject ASC;`
 
-JOINS 
-1.) `SELECT books.title FROM books INNER JOIN subjects ON subjects.id = books.subject_id WHERE subjects.subject ILIKE '%computer%'; 
+JOINS
+
+1.) `SELECT books.title FROM books INNER JOIN subjects ON subjects.id = books.subject_id WHERE subjects.subject ILIKE '%computer%';` 
 
 2.) `SELECT books.title, authors.first_name, authors.last_name, subjects.subject FROM books INNER JOIN authors ON authors.id = books.author_id INNER JOIN subjects ON subjects.id = books.subject_id;`
 
