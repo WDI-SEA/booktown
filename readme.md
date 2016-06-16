@@ -112,5 +112,6 @@ JOINS
 GROUPING
 
 1.) `SELECT count(*) FROM books;`
-2.) `SELECT count(location) FROM subjects;` 
-3.) `SELECT location, count(location) FROM subjects GROUP BY location;`4.) `SELECT books.id, books.title, COUNT(editions.edition) FROM books INNER JOIN editions ON editions.book_id = books.id GROUP BY books.id;`
+2.) `SELECT count(DISTINCT location) FROM subjects;` 
+3.) `SELECT subjects.location, count(subjects.location) FROM subjects WHERE subjects.location IS NOT null GROUP BY location;`
+4.) `SELECT books.id, books.title, COUNT(editions.edition) FROM books INNER JOIN editions ON editions.book_id = books.id GROUP BY books.id, books.title, books.id;`
