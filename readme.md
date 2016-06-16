@@ -103,7 +103,7 @@ JOINS
 
 2.) `SELECT books.title, authors.first_name, authors.last_name, subjects.subject FROM books INNER JOIN authors ON authors.id = books.author_id INNER JOIN subjects ON subjects.id = books.subject_id;`
 
-3.) `SELECT books.title, stock.cost FROM STOCK INNER JOIN editions on stock.isbn = editions.isbn inner join books on books.id = editions.book_id order by stock.cost DESC;`
+3.) `SELECT books.title, stock.retail FROM STOCK INNER JOIN editions on stock.isbn = editions.isbn inner join books on books.id = editions.book_id order by stock.retail DESC;`
 
 4.) `select books.title, editions.isbn, publishers.name, stock.retail FROM books INNER JOIN editions ON books.id = editions.book_id INNER JOIN publishers ON editions.publisher_id = publishers.id INNER JOIN stock ON stock.isbn = editions.isbn WHERE books.title = 'Dune';`
 
