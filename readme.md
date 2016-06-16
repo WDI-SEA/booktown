@@ -93,8 +93,8 @@ Complete the following exercises to practice using SQL.
 1.) `SELECT * FROM subjects ORDER BY subject ASC;`
 2.) `SELECT * FROM subjects ORDER BY location ASC;`
 
-1.) `select * from books WHERE title ILIKE 'Little Women'; 
-2.) `select * from books WHERE title ILIKE '%python%'; 
+1.) `select * from books WHERE title ILIKE 'Little Women';`
+2.) `select * from books WHERE title ILIKE '%python%'; `
 3.) `SELECT * FROM subjects WHERE location ILIKE 'Main St' ORDER BY subject ASC;`
 
 JOINS
