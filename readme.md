@@ -89,3 +89,26 @@ Complete the following exercises to practice using SQL.
 * List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)
 
 ####YAY! You're done!!
+
+1. SELECT * FROM subjects ORDER BY subjects ASC;
+2. SELECT * FROM subjects ORDER BY location ASC;
+3. SELECT * FROM books WHERE title = 'Little Women';
+4. SELECT * FROM books where title ilike '%Python%';
+5. SELECT * FROM subjects where locaiton = 'Main St';
+6. SELECT * FROM subjects INNER JOIN books ON books.subject_id = subject.id WHERE subjects.subject - 'Computers';
+7.  select books.title, subjects.subject, authors.first_name, authors.last_name FROM  books inner join subjects on books.subject_id = subjects.id
+inner join authors on books.author_id = authors.id;
+8. select books.title, stock.cost from stock inner join editions on stock.isbn = editions.isbn
+inner join books on books.id = editions.book_id order by stock.cost DESC;
+9.select books.title, editions.isbn, publishers.name, stock.retail from books
+inner join editions on books.id = editions.book_id
+inner join publishers on editions.publisher_id = publishers.id
+inner join stock on stock.isbn = editions.isbn where books.title = 'Dune';
+10. select customers.first_name, customers.last_name, shipments.ship_date, books.title from customers inner join shipments on customers.id = shipments.customer_id
+inner join editions on shipments.isbn = editions.isbn 
+inner join books on editions.book_id = books.id;
+11. 15
+12. 15
+13. select count(distinct(subjects.location)) from subjects;
+14. select books.id, books.title, count(editions.edition) from books 
+inner join editions on books.id = editions.book_id group by books.id;
