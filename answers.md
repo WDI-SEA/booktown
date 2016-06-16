@@ -6,23 +6,28 @@ Complete the following exercises to practice using SQL.
 ###Order
 
 1. Find all subjects sorted by subject
-* SELECT * FROM subjects ORDER BY subjects DESC;
+  
+  > SELECT * FROM subjects ORDER BY subjects DESC;
 
 
 2. Find all subjects sorted by location
-* SELECT * FROM subjects ORDER BY location DESC;
+
+  > SELECT * FROM subjects ORDER BY location DESC;
 
 ###Where
 
 1. Find the book "Little Women"
-* select title from books where title = 'Little Women';
+
+  > select title from books where title = 'Little Women';
 
 2. Find all books containing the word "Python"
-* select * from books where title   
+
+  > select * from books where title   
 where title ilike '%python%';
 
 3. Find all subjects with the location "Main St" sort them by subject
-* select * from subjects 
+
+  > select * from subjects 
 where location = 'Main St'
 
 
@@ -30,6 +35,7 @@ where location = 'Main St'
 ###Joins
 
 * Find all books about Computers list ONLY book title
+
 * Find all books and display ONLY
   * Book title
   * Author's first name
