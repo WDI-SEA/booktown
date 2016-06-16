@@ -1,0 +1,71 @@
+1. select * 
+from subjects 
+order by subject asc;
+
+2. select * 
+from subjects 
+order by location asc;
+
+3. select * 
+from books 
+where title ='Little Women';
+
+4. select * 
+from books 
+where title ilike '%python%';
+
+5. select * 
+from subjects 
+where location ilike '%main st%' 
+order by subject asc; 
+
+6. select books.title from books inner join subjects on books.subject_id = subjects.id where subject ilike '%computers%';
+
+7. select books.title, subjects.subject, authors.first_name, authors.last_name 
+from books 
+inner join subjects 
+on books.subject_id = subjects.id
+inner join authors
+on books.author_id = authors.id;
+
+8. select books.title, stock.retail 
+from books 
+inner join editions 
+on books.id = editions.book_id
+inner join stock
+on editions.isbn = stock.isbn
+order by stock.retail;
+
+9. select books.title, stock.retail, stock.isbn, publishers.name 
+from books 
+inner join editions 
+on books.id = editions.book_id
+inner join stock
+on editions.isbn = stock.isbn
+inner join publishers
+on editions.publisher_id = publishers.id
+where books.title ilike 'dune';
+
+10. select customers.first_name, customers.last_name, shipments.ship_date, books.title 
+from books 
+inner join editions 
+on books.id = editions.book_id
+inner join shipments
+on editions.isbn = shipments.isbn
+inner join customers
+on shipments.customer_id = customers.id
+order by shipments.ship_date;
+
+11. SELECT count(*) FROM books;
+
+12. SELECT count(location) FROM subjects;
+
+13. SELECT count(location), subjects.location FROM subjects
+where subjects.location is not null
+group by location
+
+14. SELECT books.id, books.title, count(editions.edition) 
+FROM books
+inner join editions
+on books.id = editions.book_id
+group by books.id;
