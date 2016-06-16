@@ -51,26 +51,31 @@ Complete the following exercises to practice using SQL.
 
 ###Order
 1. Find all subjects sorted by subject
+
   > SELECT subject FROM subjects ORDER BY subjects ASC;
 2. Find all subjects sorted by location
+
   > SELECT subject FROM subjects ORDER BY location ASC;
 
 ###Where
 1. Find the book "Little Women"
+
   > SELECT * FROM books WHERE title = 'Little Women';
 2. Find all books containing the word "Python"
+
   > SELECT * FROM books WHERE title ILIKE '%python%';
 3. Find all subjects with the location "Main St" sort them by subject
+
   > SELECT * FROM subjects WHERE location = 'Main St' ORDER BY subject ASC;
 
 
 ###Joins
 
 * Find all books about Computers list ONLY book title
-  `SELECT title FROM books
-  `INNER JOIN subjects
-  `ON books.subject_id = subjects.id
-  `WHERE subject = 'Computers';
+  > SELECT title FROM books
+  > INNER JOIN subjects
+  > ON books.subject_id = subjects.id
+  > WHERE subject = 'Computers';
 
 * Find all books and display ONLY
 	* Book title
