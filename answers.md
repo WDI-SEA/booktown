@@ -11,9 +11,9 @@ I forgot to use table prefixes in some places--- I corrected what I could during
 1. Find all subjects sorted by subject
   
   > select * from subjects order by subjects desc;
-  - above is wrong
+  > above is wrong
   > select * from subjects order by subject asc;
-  - correct answer
+  > correct answer
 
 2. Find all subjects sorted by location
 
@@ -32,7 +32,7 @@ I forgot to use table prefixes in some places--- I corrected what I could during
 3. Find all subjects with the location "Main St" sort them by subject
 
   > select * from subjects where location = 'Main St';
-  above is wrong
+  > above is wrong
   > select * from subjects where localtion = 'Main St order by subject asc;
 
 
@@ -91,7 +91,7 @@ I forgot to use table prefixes in some places--- I corrected what I could during
 * Get the COUNT of each unique location in the subjects table. Display the count and the location name. (hint: requires GROUP BY).
 
   > select subjects.location, count(subjects.location) from subjects group by subjects.location;
-  --incorrect, we have a blank row
+  > incorrect, we have a blank row
   > select subjects.location, count(subjects.location) from subjects group by subjects.location having count(subjects.location) > 0;
 
 * List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)
