@@ -1,0 +1,21 @@
+ORDER
+1. SELECT * FROM subjects ORDER BY subject;
+2. SELECT * FROM subjects ORDER BY location;
+
+WHERE
+1.SELECT * FROM books WHERE title = 'Little Women';
+2.SELECT * FROM books WHERE title LIKE '%Python%';
+3.SELECT * FROM subjects WHERE location = 'Main St' ORDER BY subject;
+
+JOINS
+1.SELECT title FROM books JOIN subjects ON books.subject_id = subjects.id WHERE subject = 'Computers';
+2.SELECT title, last_name, first_name, subject FROM books JOIN authors ON books.author_id = authors.id JOIN subjects ON book;
+3.SELECT books.title, stock.retail FROM books JOIN editions ON books.id = editions.book_id JOIN stock ON editions.isbn = stock.isbn ORDER BY retail DESC;
+4.SELECT books.title, editions.isbn, publishers.name, stock.retail FROM books JOIN editions ON books.id = editions.book_id JOIN stock ON editions.isbn = stock.isbn JOIN publishers ON editions.publisher_id = publishers.id WHERE books.title = 'Dune';
+5.SELECT customers.first_name, customers.last_name, books.title, shipments.ship_date FROM books JOIN editions ON books.id = editions.book_id JOIN shipments ON editions.isbn = shipments.isbn JOIN customers ON shipments.customer_id = customers.id;
+
+GROUPING & COUNTING
+1.SELECT COUNT(*) FROM books;
+2.SELECT COUNT(subjects.location) FROM subjects;
+3.SELECT COUNT(subjects.location), subjects.location FROM subjects GROUP BY subjects.location;
+4.SELECT books.title, books.id, editions.edition FROM books JOIN editions ON editions.book_id = books.id GROUP BY books.title, books.id, editions.edition;
