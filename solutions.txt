@@ -1,0 +1,68 @@
+1. SELECT * FROM subjects;
+2. SELECT * FROM states;
+3. SELECT * FROM books WHERE books.title = 'Little Women';
+4. SELECT * FROM books WHERE books.title LIKE '%Python%';
+5. SELECT * FROM subjects WHERE subjects.location = 'Main St';
+
+6. SELECT books.title FROM books INNER JOIN subjects 
+ON books.subject_id = subjects.id
+WHERE subjects.id = '4';
+
+7. SELECT books.title, authors.first_name, authors.last_name, subjects.subject
+FROM books 
+INNER JOIN subjects 
+ON books.subject_id = subjects.id
+INNER JOIN authors
+ON books.author_id = authors.id;
+
+8. SELECT stock.retail, books.title 
+FROM editions 
+INNER JOIN stock 
+ON stock.isbn = editions.isbn
+INNER JOIN books
+ON editions.book_id = books.id
+ORDER BY stock.retail DESC;
+
+9. SELECT books.title, stock.isbn, stock.retail, publishers.name
+FROM editions 
+INNER JOIN stock 
+ON stock.isbn = editions.isbn
+INNER JOIN books
+ON editions.book_id = books.id
+INNER JOIN publishers
+ON editions.publisher_id = publishers.id
+WHERE books.title = 'Dune'
+ORDER BY stock.retail DESC;
+
+10. SELECT customers.first_name, customers.last_name, shipments.ship_date, books.title
+FROM customers 
+INNER JOIN shipments 
+ON customers.id = shipments.customer_id
+INNER JOIN editions
+ON shipments.isbn = editions.isbn
+INNER JOIN books
+ON editions.book_id = books.id
+ORDER BY shipments.ship_date DESC;
+
+11. SELECT COUNT(*)
+FROM books; 
+
+12. SELECT COUNT(*)
+FROM subject.location;
+
+13. SELECT
+  subjects.location,
+  COUNT(DISTINCT subjects.location)
+FROM subjects
+GROUP BY subjects.location;
+
+14. SELECT
+  books.title,
+  books.id,
+  editions.edition,
+  COUNT(*)
+FROM books
+INNER JOIN editions
+ON books.id = editions.book_id
+GROUP BY books.id, books.title, editions.edition;
+ 
