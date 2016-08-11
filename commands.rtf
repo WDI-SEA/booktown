@@ -4,17 +4,20 @@
 \margl1440\margr1440\vieww10800\viewh8400\viewkind0
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
-\f0\fs24 \cf0 SELECT * FROM subjects ORDER BY subject ASC;\
-SELECT * FROM subjects ORDER BY location ASC;\
+\f0\fs24 \cf0 SELECT * FROM subjects ORDER BY subject;\
+SELECT * FROM subjects ORDER BY location;\
  SELECT * FROM books WHERE title='Little Women';\
 SELECT * FROM book_backup WHERE title LIKE '%Python%';\
-SELECT * FROM subjects WHERE location ='Main St' ORDER BY subject ASC;\
-SELECT title FROM book_backup JOIN subjects ON subject_id = subjects.id WHERE subject = Find all books and display ONLY\
-SELECT books.title, authors.first_name, authors.last_name, subjects.subject FROM books LEFT JOIN authors ON authors.id = books.author_id LEFT JOIN subjects ON subjects.id = books.subject_id\
-SELECT books.title, stock.cost FROM stock JOIN editions ON editions.isbn = stock.isbn JOIN books on books.id = editions.book_id ORDER BY cost DESC\
+SELECT * FROM subjects WHERE location ='Main St' ORDER BY subject;\
+SELECT title FROM book_backup\
+JOIN subjects ON subject_id = subjects.id\
+ WHERE subject _id =4;\
+SELECT books.title, authors.first_name, authors.last_name, subjects.subject \
+FROM books INNER JOIN authors ON authors.id = books.author_id INNER JOIN subjects ON subjects.id = books.subject_id;\
+SELECT books.title, stock.cost FROM stock JOIN editions ON editions.isbn = stock.isbn JOIN books on books.id = editions.book_id ORDER BY cost DESC;\
 SELECT books.title, stocks.isbn, publishers.name, stocks.cost FROM books JOIN editions ON editions.book_id = books.id LEFT JOIN publishers ON publishers.id = editions.publisher_id LEFT JOIN stock ON stock.isbn = editions.isbn WHERE book.title = 'Dune';\
-SELECT customers.first_name, customers.last_name, ship_date, books.title FROM shipments JOIN customers ON customers.id = shipments.customer_id JOIN editions ON editions.isbn = shipments.isbn LEFT JOIN books ON books.id = editions.book_id ORDER BY ship_date ASC\
+SELECT customers.first_name, customers.last_name, ship_date, books.title FROM shipments JOIN customers ON customers.id = shipments.customer_id JOIN editions ON editions.isbn = shipments.isbn LEFT JOIN books ON books.id = editions.book_id ORDER BY ship_date ASC;\
 SELECT COUNT(*) FROM books;\
 SELECT COUNT(subjects.location) FROM subjects;\
 SELECT COUNT(DISTINCT location), location FROM subjects GROUP BY location;\
-SELECT books.id, title, COUNT(edition) from books LEFT JOIN editions ON editions.book_id = books.id GROUP BY books.id}
+SELECT books.id, title, COUNT(edition) from books LEFT JOIN editions ON editions.book_id = books.id GROUP BY books.id;}
