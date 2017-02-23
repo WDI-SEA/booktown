@@ -1,15 +1,6 @@
 #Booktown, USA
 
-For each question below, find the approriate SQL query to obtain the information requested. Create a `.txt` or `.md` file that contains all of your answers.
-
 ##Getting Started
-
-To get started we'll need to import the booktown.sql file.
-
-1. Fork and clone this repository
-2. `cd` into the repository
-3. use the command `psql -f booktown.sql`
-4. type `psql` to open your psql console
 5. type \list to ensure the booktown database was successfully completed
 6. type `\c booktown` to connect to the booktown database
 7. type `\d` to see a list of all the tables in the booktown database
@@ -29,69 +20,60 @@ Indexes:
     "books_title_idx" btree (title)
 ```
 
-###Additionally...
-
-Your life will be made easier with a GUI PostgreSQL client. We downloaded these during the installfest. Open up **Postico** if you have a Mac, or **pgAdmin** if you have Linux.
-
-If you're missing the PostgreSQL client, download [Postico here](https://eggerapps.at/postico/) if you have a Mac, or [pgAdmin here](http://www.pgadmin.org/) if you have Linux.
-
-1. Postico asks for a lot of information to begin with. The defaults are fine. Leave everything alone and just press connect.
-2. If you don't see the booktown database after connecting you may need to move up a directory. Press the "localhost" under the back and forward buttons.
-3. Double click on the `booktown` database to connect.
-4. See the list of tables in the database (alternate_stock, authors, book_backup...)
-5. Double click a table to see it's contents
-6. Double click SQL Terminal to get to a text box where you can write and execute some queries.
-
-![Postico new localhost connection](images/postico/00-postico-localhost-connection.jpg)
-![Postico databases](images/postico/01-postico-databases.jpg)
-
-## Queries
-
-Complete the following exercises to practice using SQL.
 
 ###Order
-1. Find all subjects sorted by subject
-2. Find all subjects sorted by location
+1. Find all subjects sorted by subject -- booktown=# SELECT subject FROM subjects ORDER BY subject;
+2. Find all subjects sorted by location -- booktown=# SELECT subject FROM subjects ORDER BY location;
 
 ###Where
-1. Find the book "Little Women"
-2. Find all books containing the word "Python"
-3. Find all subjects with the location "Main St" sort them by subject
+1. Find the book "Little Women" -- booktown=# SELECT * FROM books WHERE title = 'Little Women';
+2. Find all books containing the word "Python" -- booktown=# SELECT * FROM books WHERE title LIKE '%Python';
+3. Find all subjects with the location "Main St" sort them by subject -- booktown=# SELECT subject FROM subjects WHERE location = 'Main St' ORDER BY subject;
 
 
 ###Joins
 
-* Find all books about Computers list ONLY book title
+* Find all books about Computers list ONLY book title -- booktown=# SELECT title FROM books INNER JOIN subjects ON books.subject_id=subjects.id WHERE subject = 'Computers';
 * Find all books and display a result table with ONLY the following columns
 	* Book title
 	* Author's first name
 	* Author's last name
 	* Book subject
+  -- booktown=# SELECT title, first_name, last_name, subject FROM books INNER JOIN authors ON books.author_id=authors.id INNER JOIN subjects ON books.subject_id=subjects.id;
+
 * Find all books that are listed in the stock table
 	* Sort them by retail price (most expensive first)
 	* Display ONLY: title and price
+  -- booktown=# SELECT title, cost FROM book_backup INNER JOIN editions ON book_backup.id=editions.book_id INNER JOIN stock ON stock.isbn=editions.isbn ORDER BY cost DESC;
+
+
 * Find the book "Dune" and display ONLY the following columns
 	* Book title
 	* ISBN number
 	* Publisher name
 	* Retail price
+  -- booktown=# SELECT title, editions.isbn, name, retail FROM books INNER JOIN editions ON books.id=editions.book_id INNER JOIN stock ON editions.isbn=stock.isbn INNER JOIN publishers ON editio
+ns.publisher_id=publishers.id WHERE title = 'Dune';
+
+
 * Find all shipments sorted by ship date display a result table with ONLY the following columns:
 	* Customer first name
 	* Customer last name
 	* ship date
 	* book title
+  -- booktown=# SELECT customers.first_name, customers.last_name, ship_date, title FROM book_backup INNER JOIN editions ON book_backup.id=editions.book_id INNER JOIN shipments ON editions.isbn=shipments.isbn INNER
+ JOIN customers ON shipments.customer_id=customers.id ORDER BY ship_date;
 
 ###Grouping and Counting
 
-1. Get the COUNT of all books
-* Get the COUNT of all Locations
-* Get the COUNT of each unique location in the subjects table. Display the count and the location name. (hint: requires GROUP BY).
-* List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)
+1. Get the COUNT of all books -- booktown=# SELECT COUNT(*) FROM book_backup;
+
+* Get the COUNT of all Locations -- booktown=# SELECT COUNT(location) FROM subjects;
+
+* Get the COUNT of each unique location in the subjects table. Display the count and the location name. (hint: requires GROUP BY). -- booktown=# SELECT COUNT(location), location FROM subjects GROUP BY location;
+
+* List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN) -- booktown=# SELECT book_id, title, COUNT(editions.edition) FROM book_backup INNER JOIN editions ON book_backup.id=editions.book_id GROUP BY book_id, title;
+
 
 ####YAY! You're done!!
 
----
-
-## Licensing
-1. All content is licensed under a CC-BY-NC-SA 4.0 license.
-2. All software code is licensed under GNU GPLv3. For commercial use or alternative licensing, please contact legal@ga.co.
