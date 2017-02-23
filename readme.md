@@ -1,26 +1,5 @@
 #Booktown, USA
 
-##Getting Started
-5. type \list to ensure the booktown database was successfully completed
-6. type `\c booktown` to connect to the booktown database
-7. type `\d` to see a list of all the tables in the booktown database
-8. type `\d [TABLE_NAME]` to see information about columns and their types for a specific table. You should see output like below:
-
-```
-booktown=# \d books
-       Table "public.books"
-   Column   |  Type   | Modifiers 
-------------+---------+-----------
- id         | integer | not null
- title      | text    | not null
- author_id  | integer | 
- subject_id | integer | 
-Indexes:
-    "books_id_pkey" PRIMARY KEY, btree (id)
-    "books_title_idx" btree (title)
-```
-
-
 ###Order
 1. Find all subjects sorted by subject -- booktown=# SELECT subject FROM subjects ORDER BY subject;
 2. Find all subjects sorted by location -- booktown=# SELECT subject FROM subjects ORDER BY location;
