@@ -15,7 +15,7 @@ Find all books containing the word "Python"
 `SELECT * FROM books WHERE title like '%Python%';`
 
 Find all subjects with the location "Main St" sort them by subject
-`SELECT * FROM subjects WHERE location = 'Main St';`
+`SELECT * FROM subjects WHERE location = 'Main St' ORDER BY subject;`
 
 # Joins
 
@@ -39,8 +39,8 @@ Find all books that are listed in the stock table
 Sort them by retail price (most expensive first)
 Display ONLY: title and price
 `SELECT b.title, s.cost FROM stock s
-JOIN editions e on e.isbn = s.isbn
-JOIN books b on b.id = e.book_id
+RIGHT JOIN editions e on e.isbn = s.isbn
+RIGHT JOIN books b on b.id = e.book_id
 ORDER BY retail DESC;`
 
 
