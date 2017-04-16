@@ -1,8 +1,8 @@
-#Booktown, USA
+# Booktown, USA
 
-For each question below, find the approriate SQL query to obtain the information requested. Create a `.txt` or `.md` file that contains all of your answers.
+For each question below, find the approriate SQL query to obtain the information requested. Create a `.sql` file that contains all of your answers.
 
-##Getting Started
+## Getting Started
 
 To get started we'll need to import the booktown.sql file.
 
@@ -10,7 +10,7 @@ To get started we'll need to import the booktown.sql file.
 2. `cd` into the repository
 3. use the command `psql -f booktown.sql`
 4. type `psql` to open your psql console
-5. type \list to ensure the booktown database was successfully completed
+5. type `\list` to ensure the booktown database was successfully completed
 6. type `\c booktown` to connect to the booktown database
 7. type `\d` to see a list of all the tables in the booktown database
 8. type `\d [TABLE_NAME]` to see information about columns and their types for a specific table. You should see output like below:
@@ -29,7 +29,7 @@ Indexes:
     "books_title_idx" btree (title)
 ```
 
-###Additionally...
+### Additionally...
 
 Your life will be made easier with a GUI PostgreSQL client. We downloaded these during the installfest. Open up **Postico** if you have a Mac, or **pgAdmin** if you have Linux.
 
@@ -49,19 +49,19 @@ If you're missing the PostgreSQL client, download [Postico here](https://eggerap
 
 Complete the following exercises to practice using SQL.
 
-###Order
-1. Find all subjects sorted by subject
-2. Find all subjects sorted by location
+### Order
+* Find all subjects sorted by subject
+* Find all subjects sorted by location
 
-###Where
-1. Find the book "Little Women"
-2. Find all books containing the word "Python"
-3. Find all subjects with the location "Main St" sort them by subject
+### Where
+* Find the book "Little Women"
+* Find all books containing the word "Python"
+* Find all subjects with the location "Main St" sort them by subject
 
 
-###Joins
+### Joins
 
-* Find all books about Computers list ONLY book title
+* Find all books about Computers and list ONLY the book titles
 * Find all books and display a result table with ONLY the following columns
 	* Book title
 	* Author's first name
@@ -81,14 +81,14 @@ Complete the following exercises to practice using SQL.
 	* ship date
 	* book title
 
-###Grouping and Counting
+### Grouping and Counting
 
-1. Get the COUNT of all books
+* Get the COUNT of all books
 * Get the COUNT of all Locations
 * Get the COUNT of each unique location in the subjects table. Display the count and the location name. (hint: requires GROUP BY).
 * List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)
 
-####YAY! You're done!!
+#### YAY! You're done!!
 
 ---
 
