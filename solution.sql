@@ -54,12 +54,32 @@ SELECT books.title, editions.isbn, publishers.name, stock.retail FROM books, sto
 -- Customer last name
 -- ship date
 -- book title
-
-
+-- // Shipments: id, customer_id, isbn, ship_date
+-- // Customers: id, last_name, first_name
+-- //Editions: isbn, book_id, edition, publisher_id, publication
+-- //Books: id, title, author_id, subject_id
+SELECT customers.first_name, customers.last_name, shipments.ship_date, books.title
+FROM shipments, customers, editions, books
+WHERE shipments.customer_id = customers.id
+AND shipments.isbn = editions.isbn
+AND editions.book_id = books.id;
 
 -- Grouping and Counting
 
 -- Get the COUNT of all books
+SELECT count(*) FROM books;
+
 -- Get the COUNT of all Locations
+SELECT COUNT(DISTINCT(location)) FROM subjects;
+
 -- Get the COUNT of each unique location in the subjects table. Display the count and the location name. (hint: requires GROUP BY).
+SELECT location, COUNT(location) FROM subjects GROUP BY location HAVING COUNT(location) > 0  ORDER BY COUNT(location) DESC;
+
 -- List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)
+-- //Books: id, title, author_id, subject_id
+-- //Editions: isbn, book_id, edition, publisher_id, publication
+
+SELECT books.id, books.title, count(books.id)
+FROM books LEFT OUTER JOIN (SELECT book_id, edition FROM editions GROUP BY book_id, edition) AS book_editions
+ON (books.id = book_editions.book_id)
+GROUP by books.id ORDER BY title;
