@@ -1,6 +1,4 @@
 --
--- Selected TOC Entries:
---
 --
 -- TOC Entry ID 1 (OID 0)
 --
@@ -13,7 +11,7 @@ Create Database "booktown";
 --
 -- TOC Entry ID 2 (OID 2991542)
 --
--- Name: DATABASE "booktown" Type: COMMENT Owner: 
+-- Name: DATABASE "booktown" Type: COMMENT Owner:
 --
 
 COMMENT ON DATABASE "booktown" IS 'The Book Town Database.';
