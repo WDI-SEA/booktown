@@ -38,7 +38,7 @@ ON books.subject_id = subjects.id
 WHERE subjects.subject = 'Computers'
 
 Find all books and display a result table with ONLY Book title, Author's first name, Author's last name, Book subject
- SELECT title,
+SELECT title,
   first_name,
   last_name,
   subject
