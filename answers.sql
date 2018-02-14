@@ -14,17 +14,17 @@ WHERE
 Find the book "Little Women"
 SELECT *
 FROM books
-WHERE title = "Little Women"
+WHERE title = 'Little Women'
 
 Find all books containing the word "Python"
 SELECT *
 FROM books
-WHERE title like "%Python%"
+WHERE title like '%Python%'
 
 Find all subjects with the location "Main St" sort them by subject
 SELECT *
 FROM subjects
-WHERE location = "Main St"
+WHERE location = 'Main St'
 ORDER BY subject
 
 
@@ -35,7 +35,7 @@ SELECT *
 FROM books
 JOIN subjects 
 ON books.subject_id = subjects.id
-WHERE subjects.subject = "Computers"
+WHERE subjects.subject = 'Computers'
 
 Find all books and display a result table with ONLY Book title, Author's first name, Author's last name, Book subject
  SELECT title,
@@ -70,7 +70,7 @@ JOIN stock
 ON editions.isbn = stock.isbn
 JOIN publishers
 ON editions.publisher_id = publishers.id
-WHERE title = "Dune"
+WHERE title = 'Dune'
 ORDER BY cost DESC
 
 Find all shipments sorted by ship date display a result table with ONLY the following columns: Customer first name, Customer last name, ship date, book title
