@@ -19,9 +19,10 @@ select title, editions.isbn, name, retail from books
     join publishers on editions.publisher_id = publishers.id
 where title = 'Dune';
 
-select first_name, last_name, ship_date from shipments
+select first_name, last_name, ship_date, title from shipments
     join editions on shipments.isbn = editions.isbn
     join customers on shipments.customer_id = customers.id
+    join books on editions.book_id = book_id
 order by ship_date;
 
 --- Grouping & Counting
