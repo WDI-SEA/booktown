@@ -13,7 +13,7 @@ Create Database "booktown";
 --
 -- TOC Entry ID 2 (OID 2991542)
 --
--- Name: DATABASE "booktown" Type: COMMENT Owner: 
+-- Name: DATABASE "booktown" Type: COMMENT Owner:
 --
 
 COMMENT ON DATABASE "booktown" IS 'The Book Town Database.';
@@ -802,4 +802,3 @@ CREATE  INDEX "books_title_idx" on "books" using btree ( "title" "text_ops" );
 --
 
 CREATE  INDEX "text_idx" on "text_sorting" using btree ( "letter" "bpchar_ops" );
-
