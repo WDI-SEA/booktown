@@ -5,15 +5,15 @@ Complete the following exercises to practice using SQL.
 Find all subjects sorted by subject
 
 Find all subjects sorted by location
-Where
 
+## Where
 Find the book "Little Women"
 
 Find all books containing the word "Python"
 
 Find all subjects with the location "Main St" sort them by subject
 
-Joins
+## Joins
 Find all books about Computers and list ONLY the book titles
 
 Find all books and display a result table with ONLY the following columns
@@ -62,7 +62,7 @@ Customer last name
 ship date
 book title
 
-Grouping and Counting
+## Grouping and Counting
 Get the COUNT of all books
 
 Get the COUNT of all Locations
