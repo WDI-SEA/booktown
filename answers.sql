@@ -22,10 +22,10 @@ where title = 'Dune';
 select first_name, last_name, ship_date, title from shipments
     join editions on shipments.isbn = editions.isbn
     join customers on shipments.customer_id = customers.id
-    join books on editions.book_id = book_id
+    join books on editions.book_id = book.id
 order by ship_date;
 
---- Grouping & Counting
+-- Grouping & Counting
 select count(*) from books;
 select count(location) from subjects;
 select distinct location, count(location) from subjects group by location order by count(location) desc; --added the 'order by' to push the null count of 0 to the end
