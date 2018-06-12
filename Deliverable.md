@@ -21,6 +21,7 @@ Book title
 Author's first name
 Author's last name
 Book subject
+
 booktown=# select books.title AS booktitle, authors.first_name AS firstname, authors.last_name AS lastname, subjects.subject
 booktown-# from
 booktown-# books join authors on books.author_id = authors.id join subjects on books.subject_id = subjects.id;
