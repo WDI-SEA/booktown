@@ -29,22 +29,6 @@ Indexes:
     "books_title_idx" btree (title)
 ```
 
-### Additionally...
-
-Your life will be made easier with a GUI PostgreSQL client. We downloaded these during the installfest. Open up **Postico** if you have a Mac, or **pgAdmin** if you have Linux.
-
-If you're missing the PostgreSQL client, download [Postico here](https://eggerapps.at/postico/) if you have a Mac, or [pgAdmin here](http://www.pgadmin.org/) if you have Linux.
-
-1. Postico asks for a lot of information to begin with. The defaults are fine. Leave everything alone and just press connect.
-2. If you don't see the booktown database after connecting you may need to move up a directory. Press the "localhost" under the back and forward buttons.
-3. Double click on the `booktown` database to connect.
-4. See the list of tables in the database (alternate_stock, authors, book_backup...)
-5. Double click a table to see it's contents
-6. Double click SQL Terminal to get to a text box where you can write and execute some queries.
-
-![Postico new localhost connection](images/postico/00-postico-localhost-connection.jpg)
-![Postico databases](images/postico/01-postico-databases.jpg)
-
 ## Queries
 
 Complete the following exercises to practice using SQL.
