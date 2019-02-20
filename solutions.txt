@@ -1,0 +1,232 @@
+Booktown, USA
+For each question below, find the approriate SQL query to obtain the information requested. Create a .sql file that contains all of your answers.
+
+Getting Started
+To get started we'll need to import the booktown.sql file.
+
+Fork and clone this repository
+cd into the repository
+use the command psql -f booktown.sql
+type psql to open your psql console
+type \list to ensure the booktown database was successfully completed
+type \c booktown to connect to the booktown database
+type \d to see a list of all the tables in the booktown database
+type \d [TABLE_NAME] to see information about columns and their types for a specific table. You should see output like below:
+booktown=# \d books
+       Table "public.books"
+   Column   |  Type   | Modifiers 
+------------+---------+-----------
+ id         | integer | not null
+ title      | text    | not null
+ author_id  | integer | 
+ subject_id | integer | 
+Indexes:
+    "books_id_pkey" PRIMARY KEY, btree (id)
+    "books_title_idx" btree (title)
+Queries
+    Complete the following exercises to practice using SQL.
+
+Order
+    Find all subjects sorted by subject:
+        subject
+        ------------------
+        Arts
+        Business
+        Children's Books
+        Classics
+        Computers
+        Cooking
+        Drama
+        Entertainment
+        History
+        Horror
+        Mystery
+        Poetry
+        Religion
+        Romance
+        Science
+        Science Fiction
+
+    Find all subjects sorted by location:
+        subject      |     location
+        ------------------+------------------
+        History          | Academic Rd
+        Classics         | Academic Rd
+        Mystery          | Black Raven Dr
+        Horror           | Black Raven Dr
+        Arts             | Creativity St
+        Cooking          | Creativity St
+        Children's Books | Kids Ct
+        Entertainment    | Main St
+        Drama            | Main St
+        Romance          | Main St
+        Science Fiction  | Main St
+        Science          | Productivity Ave
+        Computers        | Productivity Ave
+        Business         | Productivity Ave
+        Poetry           | Sunset Dr
+        Religion         |
+Where
+    Find the book "Little Women":
+        id   |    title     | author_id | subject_id
+        -----+--------------+-----------+------------
+        190  | Little Women |        16 |          6
+    Find all books containing the word "Python":
+         id   |       title        | author_id | subject_id
+        ------+--------------------+-----------+------------
+        41473 | Programming Python |      7805 |          4
+        41477 | Learning Python    |      7805 |          4
+    Find all subjects with the location "Main St" sort them by subject
+         id |     subject     | location
+        ----+-----------------+----------
+        6   | Drama           | Main St
+        7   | Entertainment   | Main St
+        13  | Romance         | Main St
+        15  | Science Fiction | Main St
+Joins
+    Find all books about Computers and list ONLY the book titles
+        title
+        ----------------------
+        Programming Python
+        Learning Python
+        Perl Cookbook
+        Practical PostgreSQL
+    Find all books and display a result table with ONLY the following columns
+        Book title
+        Author's first name
+        Author's last name
+        Book subject
+                       title            |    first_name    |  last_name   |     subject
+            ----------------------------+------------------+--------------+------------------
+            Practical PostgreSQL        | John             | Worsley      | Computers
+            Franklin in the Dark        | Paulette         | Bourgeois    | Children's Books
+            The Velveteen Rabbit        | Margery Williams | Bianco       | Classics
+            Little Women                | Louisa May       | Alcott       | Drama
+            The Shining                 | Stephen          | King         | Horror
+            Dune                        | Frank            | Herbert      | Science Fiction
+            Dynamic Anatomy             | Burne            | Hogarth      | Arts
+            Goodnight Moon              | Margaret Wise    | Brown        | Children's Books
+            The Tell-Tale Heart         | Edgar Allen      | Poe          | Horror
+            Programming Python          | Mark             | Lutz         | Computers
+            Learning Python             | Mark             | Lutz         | Computers
+            Perl Cookbook               | Tom              | Christiansen | Computers
+            2001: A Space Odyssey       | Arthur C.        | Clarke       | Science Fiction
+            The Cat in the Hat          | Theodor Seuss    | Geisel       | Children's Books
+            Bartholomew and the Oobleck | Theodor Seuss    | Geisel       | Children's Books
+    Find all books that are listed in the stock table
+        Sort them by retail price (most expensive first)
+        Display ONLY: title and price
+                    title               | retail
+            ----------------------------+--------
+            2001: A Space Odyssey       |  46.95
+            Dune                        |  45.95
+            The Shining                 |  36.95
+            The Cat in the Hat          |  32.95
+            Goodnight Moon              |  28.95
+            The Shining                 |  28.95
+            Dynamic Anatomy             |  28.95
+            The Tell-Tale Heart         |  24.95
+            The Velveteen Rabbit        |  24.95
+            The Cat in the Hat          |  23.95
+            Franklin in the Dark        |  23.95
+            Little Women                |  23.95
+            2001: A Space Odyssey       |  22.95
+            The Tell-Tale Heart         |  21.95
+            Dune                        |  21.95
+            Bartholomew and the Oobleck |  16.95
+    Find the book "Dune" and display ONLY the following columns
+        Book title
+        ISBN number
+        Publisher name
+        Retail price
+            title |    isbn    |   name    | retail
+            ------+------------+-----------+--------
+            Dune  | 0441172717 | Ace Books |  21.95
+            Dune  | 044100590X | Ace Books |  45.95
+    Find all shipments sorted by ship date display a result table with ONLY the following columns:
+        Customer first name
+        Customer last name
+        ship date
+        book title
+             first_name| last_name |       ship_date        |            title
+            -----------+-----------+------------------------+-----------------------------
+            Annie      | Jackson   | 2001-09-14 16:42:22-08 | The Cat in the Hat
+            Jenny      | King      | 2001-09-14 15:46:32-08 | The Cat in the Hat
+            Julie      | Bollman   | 2001-08-13 08:42:10-08 | The Cat in the Hat
+            Eric       | Morrill   | 2001-08-10 12:47:52-08 | The Cat in the Hat
+            Chad       | Allen     | 2001-08-06 08:29:21-08 | The Cat in the Hat
+            Jonathan   | Anderson  | 2001-08-08 07:36:44-08 | The Shining
+            Jenny      | King      | 2001-08-14 12:45:51-08 | The Shining
+            Chuck      | Brown     | 2001-08-14 09:36:41-08 | The Shining
+            Annie      | Jackson   | 2001-09-22 19:58:56-08 | Bartholomew and the Oobleck
+            Annie      | Jackson   | 2001-09-22 10:23:28-08 | Bartholomew and the Oobleck
+            Annie      | Jackson   | 2001-08-08 09:46:13-08 | Bartholomew and the Oobleck
+            Annie      | Jackson   | 2001-08-06 10:46:36-08 | Bartholomew and the Oobleck
+            Annie      | Jackson   | 2001-08-07 09:58:36-08 | Bartholomew and the Oobleck
+            Annie      | Jackson   | 2001-08-11 08:55:05-08 | Bartholomew and the Oobleck
+            Rich       | Thomas    | 2001-08-10 06:29:52-08 | Franklin in the Dark
+            Tammy      | Robinson  | 2001-08-14 12:49:00-08 | Franklin in the Dark
+            Jean       | Owens     | 2001-08-12 11:09:47-08 | Franklin in the Dark
+            James      | Clark     | 2001-08-15 10:57:40-08 | Goodnight Moon
+            Laura      | Bennett   | 2001-08-06 06:49:44-08 | Goodnight Moon
+            Richard    | Brown     | 2001-08-11 09:52:34-08 | Goodnight Moon
+            Wendy      | Black     | 2001-08-09 08:30:46-08 | The Velveteen Rabbit
+            Dave       | Olson     | 2001-08-09 06:30:07-08 | The Velveteen Rabbit
+            Eric       | Morrill   | 2001-08-07 12:00:48-08 | Little Women
+            Owen       | Bollman   | 2001-08-05 08:34:04-08 | Little Women
+            Kathy      | Corner    | 2001-08-13 08:47:04-08 | The Cat in the Hat
+            James      | Williams  | 2001-08-11 12:34:08-08 | The Cat in the Hat
+            Owen       | Becker    | 2001-08-12 12:39:22-08 | The Shining
+            Ed         | Gould     | 2001-08-08 08:53:46-08 | The Shining
+            Royce      | Morrill   | 2001-08-07 10:31:57-08 | The Tell-Tale Heart
+            Adam       | Holloway  | 2001-08-14 12:41:39-08 | The Tell-Tale Heart
+            Jean       | Black     | 2001-08-10 07:29:42-08 | The Tell-Tale Heart
+            Trevor     | Young     | 2001-08-14 07:42:58-08 | Dune
+            Kate       | Gerdes    | 2001-08-12 07:46:35-08 | Dune
+            Christine  | Holloway  | 2001-08-07 10:56:42-08 | 2001: A Space Odyssey
+            Shirley    | Gould     | 2001-08-15 13:02:01-08 | 2001: A Space Odyssey
+            Tim        | Owens     | 2001-08-14 06:33:47-08 | Dynamic Anatomy
+
+Grouping and Counting
+    Get the COUNT of all books
+         count
+        -------
+            15
+
+    Get the COUNT of all Locations
+        booktown=# SELECT count(DISTINCT location) FROM subjects;
+        count
+        -------
+            15
+
+    Get the COUNT of each unique location in the subjects table.
+    Display the count and the location name. (hint: requires GROUP BY).
+         booktown=# SELECT count(DISTINCT location) FROM subjects;
+         count|     location
+        ------+------------------
+            0 |
+            1 | Sunset Dr
+            1 | Kids Ct
+            2 | Black Raven Dr
+            2 | Creativity St
+            2 | Academic Rd
+            4 | Main St
+            3 | Productivity Ave
+
+    List all books. Display the book_id, title, and a count of how many editions each book has.
+    (hint: requires GROUP BY and JOIN)
+          id   |            title            | number_of_editions
+        -------+-----------------------------+--------------------
+        1234   | The Velveteen Rabbit        |                  1
+        1608   | The Cat in the Hat          |                  2
+        7808   | The Shining                 |                  2
+        156    | The Tell-Tale Heart         |                  2
+        41473  | Programming Python          |                  1
+        2038   | Dynamic Anatomy             |                  1
+        190    | Little Women                |                  1
+        1590   | Bartholomew and the Oobleck |                  1
+        4513   | Dune                        |                  2
+        4267   | 2001: A Space Odyssey       |                  2
+        25908  | Franklin in the Dark        |                  1
+        1501   | Goodnight Moon              |                  1
+    YAY! You're done!!
