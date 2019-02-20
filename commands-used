@@ -1,0 +1,15 @@
+select*from subjects;
+select*from subjects order by location;
+select*from books where title='Little Women';
+select*from books where title like '%Python%';
+select*from subjects where location='Main St' order by subject;
+select title from books;
+select title from subjects join books on books.subject_id = subjects.id where subject='Computers';
+select title, subject, first_name, last_name from books join subjects on books.subject_id = subjects.id join authors on books.author_id = authors.id;
+select title, retail from (books join editions on books.id = editions.book_id) join stock on stock.isbn = editions.isbn order by retail desc;
+select title, retail, editions.isbn, publishers.name from books join editions on books.id = editions.book_id join stock on stock.isbn = editions.isbn join publishers on publishers.id = editions.publisher_id where title='Dune';
+select title, first_name, last_name, ship_date from books join editions on books.id = editions.book_id join shipments on shipments.isbn = editions.isbn join customers on customers.id = shipments.customer_id order by ship_date;
+select count(*) from books;
+select count(location) from subjects;
+select location, count(location) from subjects group by location;
+select title, book_id, editions.edition, count(editions.edition) from editions join books on books.id = editions.book_id group by editions.book_id, books.title, editions.edition;
