@@ -1,0 +1,48 @@
+1 - booktown=# SELECT * FROM subjects ORDER BY subject;
+
+2 - booktown=# SELECT * FROM subjects ORDER BY location;
+
+3 - booktown=# SELECT * FROM books WHERE title='Little Women';
+
+4 - booktown=# SELECT * FROM books WHERE title like '%Python%';
+
+5 - booktown=# SELECT * FROM subjects WHERE location like '%Main St%';
+
+6 - booktown=# SELECT books.title FROM subjects
+    INNER JOIN books                                   
+    ON subject = 'Computers';
+
+7 - booktown=# SELECT books.title, authors.first_name, authors.last_name, subjects.subject 
+booktown-# FROM books
+booktown-# JOIN authors ON authors.id=books.author_id
+booktown-# JOIN subjects ON subjects.id=books.subject_id;
+
+8 - booktown=# SELECT books.title, stock.retail
+FROM books 
+JOIN editions ON editions.book_id = books.id                                                                                                                                                                                                                                                                                                                         
+JOIN stock ON stock.isbn=editions.isbn;
+
+9 - booktown=# SELECT books.title, editions.isbn, publishers.name, stock.retail 
+FROM books
+JOIN editions on editions.book_id=books.id 
+JOIN publishers ON publishers.id = editions.publisher_id
+JOIN stock on stock.isbn = editions.isbn
+WHERE books.title='Dune';
+
+10 - SELECT customers.first_name, customers.last_name, ship_date, books.title    
+FROM shipments
+JOIN customers ON shipments.customer_id=customers.id
+JOIN editions ON shipments.isbn=editions.isbn
+JOIN books ON editions.book_id=books.id
+ORDER BY ship_date;
+
+11 - booktown=# SELECT count(*) FROM books;
+
+12 - booktown=# SELECT count(location) FROM subjects;
+
+13 - booktown=# SELECT count(location), location FROM subjects GROUP BY location;
+
+14 - booktown=# SELECT books.id, books.title, COUNT(editions.edition)  
+FROM books
+JOIN editions ON books.id=editions.book_id
+GROUP BY books.id;
