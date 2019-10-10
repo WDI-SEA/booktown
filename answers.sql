@@ -50,10 +50,13 @@ FROM books
 INNER JOIN editions on editions.book_id=books.id
 INNER JOIN shipments on shipments.isbn=editions.isbn
 INNER JOIN customers on customers.id=shipments.customer_id
+ORDER BY shipments.ship_date DESC
 ;
 
 -- GROUPING and COUNTING: answer 1 
 SELECT COUNT(title) FROM books;
+-- Better option is the code below as it would take into acount all NULL 
+SELECT COUNT(*) FROM books;
 
 -- GROUPING and COUNTING: answer 2
 SELECT COUNT(location) FROM subjects;
