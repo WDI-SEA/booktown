@@ -55,7 +55,7 @@ ORDER BY shipments.ship_date DESC
 
 -- GROUPING and COUNTING: answer 1 
 SELECT COUNT(title) FROM books;
--- Better option is the code below as it would take into acount all NULL 
+    -- Better option is the code below as it would take into acount all NULL 
 SELECT COUNT(*) FROM books;
 
 -- GROUPING and COUNTING: answer 2
@@ -63,23 +63,23 @@ SELECT COUNT(location) FROM subjects;
 
 -- GROUPING and COUNTING: answer 3
 SELECT location, COUNT(location) FROM subjects GROUP BY location;
+SELECT location, COUNT(location) FROM subjects GROUP BY location OFFSET 1;
 
 -- GROUPING and COUNTING: answer 4
-SELECT books.id, books.title, editions.edition
+
+SELECT books.id, books.title, count(editions.edition)
 FROM books
-INNER JOIN editions ON books.id=editions.book_id
-;
+INNER JOIN editions ON editions.book_id = books.id
+GROUP BY books.title, books.id;
 
-SELECT edition, COUNT(edition) FROM editions GROUP BY edition;
 
--- SELECT books.id, editions.edition
+-- SELECT books.id, books.title, editions.edition
 -- FROM books
 -- INNER JOIN editions ON books.id=editions.book_id
--- GROUP BY books.title, editions.edition
 -- ;
 
+-- SELECT edition, COUNT(edition) FROM editions GROUP BY edition;
 
-select books.id, books.title, count(editions.edition)
-from books
-inner join editions on editions.book_id = books.id
-group by books.title, books.id
+
+
+
