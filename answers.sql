@@ -42,9 +42,9 @@ SELECT c.first_name, c.last_name, b.title, s.ship_date FROM books b INNER JOIN e
 -- Get the COUNT of all books
 SELECT count(*) FROM books;
 -- Get the COUNT of all Locations
-SELECT COUNT(subjects.location) FROM subjects;
+SELECT COUNT(location) FROM subjects;
 -- Get the COUNT of each unique location in the subjects table. Display the count and the location name. (hint: requires GROUP BY).
-SELECT COUNT(s.location), s.location  FROM subjects s GROUP BY s.location;
+SELECT COUNT(location), location  FROM subjects GROUP BY location;
 -- List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)
 SELECT b.id,b.title, COUNT(e.edition) AS number_of_editions FROM books b INNER JOIN editions e ON b.id = e.book_id GROUP BY b.id;
 --or(incase i did this wrong)
