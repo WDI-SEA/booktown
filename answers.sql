@@ -3,6 +3,7 @@ SELECT subject FROM subjects;
 
 -- ORDER: answer 2
 SELECT location FROM subjects;
+SELECT * FROM subjects ORDER BY location;
 
 -- WHERE: answer 1 
 SELECT title FROM books WHERE title='Little Women';
@@ -68,11 +69,14 @@ INNER JOIN editions ON books.id=editions.book_id
 
 SELECT edition, COUNT(edition) FROM editions GROUP BY edition;
 
-SELECT books.id, editions.edition
-FROM books
-INNER JOIN editions ON books.id=editions.book_id
-GROUP BY books.title, editions.edition
-;
+-- SELECT books.id, editions.edition
+-- FROM books
+-- INNER JOIN editions ON books.id=editions.book_id
+-- GROUP BY books.title, editions.edition
+-- ;
 
 
-
+select books.id, books.title, count(editions.edition)
+from books
+inner join editions on editions.book_id = books.id
+group by books.title, books.id
