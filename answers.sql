@@ -51,4 +51,28 @@ INNER JOIN shipments on shipments.isbn=editions.isbn
 INNER JOIN customers on customers.id=shipments.customer_id
 ;
 
--- GROUPING and COUNTING 
+-- GROUPING and COUNTING: answer 1 
+SELECT COUNT(title) FROM books;
+
+-- GROUPING and COUNTING: answer 2
+SELECT COUNT(location) FROM subjects;
+
+-- GROUPING and COUNTING: answer 3
+SELECT location, COUNT(location) FROM subjects GROUP BY location;
+
+-- GROUPING and COUNTING: answer 4
+SELECT books.id, books.title, editions.edition
+FROM books
+INNER JOIN editions ON books.id=editions.book_id
+;
+
+SELECT edition, COUNT(edition) FROM editions GROUP BY edition;
+
+SELECT books.id, editions.edition
+FROM books
+INNER JOIN editions ON books.id=editions.book_id
+GROUP BY books.title, editions.edition
+;
+
+
+
