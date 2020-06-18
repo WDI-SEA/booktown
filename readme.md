@@ -1,6 +1,6 @@
 # Booktown, USA
 
-For each question below, find the approriate SQL query to obtain the information requested. Create a `.sql` file that contains all of your answers.
+For each question below, find the approriate SQL query to obtain the information requested. Create a `solutions.sql` file that contains all of your answers.
 
 ## Getting Started
 
