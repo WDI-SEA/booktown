@@ -1,0 +1,72 @@
+Order
+1. Find all subjects sorted by subject
+SELECT * FROM subjects ORDER BY subject;
+
+2. Find all subjects sorted by location
+SELECT * FROM subjects ORDER BY location;
+
+
+Where
+1. Find the book "Little Women"
+SELECT * FROM books WHERE title = 'Little Women';
+
+2. Find all books containing the word "Python"
+SELECT * FROM books WHERE title LIKE '%Python%';
+
+3. Find all subjects with the location "Main St" sort them by subject
+SELECT * FROM subjects WHERE location = 'Main St' ORDER BY subject;
+
+Joins
+-Find all books about Computers list ONLY book title
+	SELECT books.title FROM books INNER JOIN subjects ON books.subject_id = 		subjects.id WHERE subjects.subject = 'Computers' GROUP BY books.title;
+
+-Find all books and display ONLY
+  -Book title
+	SELECT books.title FROM books GROUP BY books.title;
+  -Author's first name
+	SELECT authors.first_name FROM books INNER JOIN authors ON books.author_id = 	authors.id GROUP BY authors.first_name;
+  -Author's last name
+	SELECT authors.last_name FROM books INNER JOIN authors ON books.author_id = 	authors.id GROUP BY authors.last_name;
+  -Book subject
+	SELECT subjects.subject FROM books INNER JOIN subjects ON books.subject_id = 	subjects.id GROUP BY subjects.subject;
+-Find all books that are listed in the stock table
+  -Sort them by retail price (most expensive first)
+  -Display ONLY: title and price
+	SELECT stock.retail, books.title FROM stock RIGHT JOIN editions 
+	ON stock.isbn = editions.isbn RIGHT JOIN books ON editions.book_id = books.id
+	GROUP BY stock.retail, books.title ORDER BY stock.retail ASC;
+-Find the book "Dune" and display ONLY
+  -Book title
+  -ISBN number
+  -Publisher name
+  -Retail price
+	SELECT stock.retail, books.title, editions.isbn, publishers.name FROM stock 
+	RIGHT JOIN editions ON stock.isbn = editions.isbn RIGHT JOIN publishers
+	ON editions.publisher_id = publishers.id RIGHT JOIN books
+	ON editions.book_id = books.id GROUP BY stock.retail, books.title, 			editions.isbn, publishers.name HAVING books.title = 'Dune';
+-Find all shipments sorted by ship date display ONLY:
+  -Customer first name
+  -Customer last name
+  -ship date
+  -book title
+
+SELECT customers.first_name, customers.last_name, shipments.ship_date,books.title FROM shipments INNER JOIN customers ON shipments.customer_id = customers.id 
+INNER JOIN editions ON shipments.isbn = editions.isbn INNER JOIN books ON editions.book_id = books.id GROUP BY customers.first_name, customers.last_name, shipments.ship_date, books.title;
+
+Grouping and Counting
+1. Get the COUNT of all books
+
+SELECT COUNT(*) FROM books FULL JOIN editions ON books.id = editions.book_id FULL JOIN stock ON editions.isbn = stock.isbn ORDER BY COUNT(*);
+
+2. Get the COUNT of all Locations
+
+SELECT COUNT(*) FROM subjects GROUP BY subjects.location ORDER BY COUNT(*);
+
+3. Get the COUNT of each unique location in the subjects table. Display the count and the location name. (hint: requires GROUP BY).
+
+SELECT location, COUNT(*) FROM subjects GROUP BY subjects.location;
+
+4. List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)
+
+SELECT books.id, books.title, COUNT(editions.book_id) FROM books INNER JOIN editions
+ON books.id = editions.book_id GROUP BY books.id, books.title ORDER BY COUNT(editions.book_id);
