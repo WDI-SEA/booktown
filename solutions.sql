@@ -35,13 +35,24 @@ WHERE s.id = 4;
 -- 	* Author's last name
 -- 	* Book subject
 
-
+SELECT b.title, a.first_name, a.last_name, s.subject
+FROM books b 
+LEFT JOIN authors a
+ON b.author_id = a.id
+LEFT JOIN subjects s
+ON b.subject_id = s.id;
 
 -- 8. Find all books that are listed in the stock table
 -- 	* Sort them by retail price (most expensive first)
 -- 	* Display ONLY: title and price
 
-
+SELECT b.title, s.retail
+FROM books b
+LEFT JOIN editions e
+ON b.id = e.book_id
+INNER JOIN stock s
+ON s.isbn = e.isbn
+ORDER BY s.retail DESC;
 
 -- 9. Find the book "Dune" and display ONLY the following columns
 -- 	* Book title
@@ -49,6 +60,15 @@ WHERE s.id = 4;
 -- 	* Publisher name
 -- 	* Retail price
 
+SELECT b.title, s.isbn, p.name, s.retail
+FROM books b
+LEFT JOIN editions e
+ON b.id = e.book_id
+INNER JOIN stock s
+ON s.isbn = e.isbn
+LEFT JOIN publishers p
+ON p.id = e.publisher_id
+WHERE b.title = 'Dune';  
 
 
 -- 10. Find all shipments sorted by ship date display a result table with ONLY the following columns:
@@ -56,6 +76,16 @@ WHERE s.id = 4;
 -- 	* Customer last name
 -- 	* ship date
 -- 	* book title
+
+SELECT c.first_name, c.last_name, ship.ship_date, b.title
+FROM shipments ship
+LEFT JOIN customers c
+ON c.id = ship.customer_id
+LEFT JOIN editions e
+ON e.isbn = ship.isbn
+LEFT JOIN books b
+ON b.id = e.book_id
+ORDER BY ship.ship_date DESC;
 
 -- ### Grouping and Counting
 
