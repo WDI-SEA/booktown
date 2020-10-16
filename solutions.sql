@@ -7,7 +7,7 @@ SELECT location FROM subjects ORDER BY location;
 
 -- ### Where
 -- 3. Find the book "Little Women"
-SELECT * FROM books;
+--SELECT * FROM books;
 SELECT * FROM books WHERE title='Little Women';
 
 -- 4. Find all books containing the word "Python"
@@ -25,7 +25,6 @@ SELECT title FROM books INNER JOIN subjects s ON subject_id = s.id WHERE s.subje
 SELECT title FROM books;
 --SELECT b.title, bb.title FROM books b FULL OUTER JOIN book_backup bb ON b.id=bb.id ORDER BY bb.title;
 -- 	* Author's first name
---\dt; --shows there is an authors table
 --SELECT * FROM authors; --shows authors table has id, last_name, and first_name columns
 SELECT first_name FROM authors a INNER JOIN books ON author_id= a.id;
 -- 	* Author's last name
