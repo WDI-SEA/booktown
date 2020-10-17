@@ -1,24 +1,118 @@
 -- ### Order
 -- 1. Find all subjects sorted by subject
-SELECT * from subjects ORDER BY subject;
+-- Query: SELECT * from subjects ORDER BY subject;
+-- RESULT:
+--  id |     subject      |     location
+-- ----+------------------+------------------
+--   0 | Arts             | Creativity St
+--   1 | Business         | Productivity Ave
+--   2 | Children's Books | Kids Ct
+--   3 | Classics         | Academic Rd
+--   4 | Computers        | Productivity Ave
+--   5 | Cooking          | Creativity St
+--   6 | Drama            | Main St
+--   7 | Entertainment    | Main St
+--   8 | History          | Academic Rd
+--   9 | Horror           | Black Raven Dr
+--  10 | Mystery          | Black Raven Dr
+--  11 | Poetry           | Sunset Dr
+--  12 | Religion         |
+--  13 | Romance          | Main St
+--  14 | Science          | Productivity Ave
+--  15 | Science Fiction  | Main St
+-- (16 rows)
+
 -- 2. Find all subjects sorted by location
-SELECT * from subjects ORDER BY location;
+-- Query: SELECT * from subjects ORDER BY location;
+-- RESULT:
+--  id |     subject      |     location
+-- ----+------------------+------------------
+--   8 | History          | Academic Rd
+--   3 | Classics         | Academic Rd
+--  10 | Mystery          | Black Raven Dr
+--   9 | Horror           | Black Raven Dr
+--   0 | Arts             | Creativity St
+--   5 | Cooking          | Creativity St
+--   2 | Children's Books | Kids Ct
+--   7 | Entertainment    | Main St
+--   6 | Drama            | Main St
+--  13 | Romance          | Main St
+--  15 | Science Fiction  | Main St
+--  14 | Science          | Productivity Ave
+--   4 | Computers        | Productivity Ave
+--   1 | Business         | Productivity Ave
+--  11 | Poetry           | Sunset Dr
+--  12 | Religion         |
+-- (16 rows)
+
 -- ### Where
 -- 3. Find the book "Little Women"
-SELECT * FROM books WHERE title='Little Women';
+-- Query: SELECT * FROM books WHERE title='Little Women';
+-- RESULT:
+--  id  |    title     | author_id | subject_id
+-- -----+--------------+-----------+------------
+--  190 | Little Women |        16 |          6
+-- (1 row)
+
 -- 4. Find all books containing the word "Python"
+-- Query: SELECT * FROM books WHERE title LIKE '%Python';
+-- RESULT:
+--   id   |       title        | author_id | subject_id
+-- -------+--------------------+-----------+------------
+--  41473 | Programming Python |      7805 |          4
+--  41477 | Learning Python    |      7805 |          4
+-- (2 rows)
 
 -- 5. Find all subjects with the location "Main St" sort them by subject
+-- Query: SELECT * FROM subjects WHERE location='Main St';
+-- RESULT:
+--  id |     subject     | location
+-- ----+-----------------+----------
+--   6 | Drama           | Main St
+--   7 | Entertainment   | Main St
+--  13 | Romance         | Main St
+--  15 | Science Fiction | Main St
+-- (4 rows)
 
 
 -- ### Joins
 
 -- 6. Find all books about Computers and list ONLY the book titles
+-- Query: SELECT title FROM books WHERE subject_id=4;
+-- RESULT:
+--         title
+-- ----------------------
+--  Programming Python
+--  Learning Python
+--  Perl Cookbook
+--  Practical PostgreSQL
+-- (4 rows)
+
 -- 7. Find all books and display a result table with ONLY the following columns
 -- 	* Book title
 -- 	* Author's first name
 -- 	* Author's last name
 -- 	* Book subject
+--  Query: SELECT b.title, a.first_name, a.last_name, s.subject FROM books b INNER JOIN authors a ON a.id=b.author_id INNER JOIN subjects s ON b.subject_id=s.id;
+--  RESULT:
+--             title            |    first_name    |  last_name   |     subject
+-- -----------------------------+------------------+--------------+------------------
+--  Practical PostgreSQL        | John             | Worsley      | Computers
+--  Franklin in the Dark        | Paulette         | Bourgeois    | Children's Books
+--  The Velveteen Rabbit        | Margery Williams | Bianco       | Classics
+--  Little Women                | Louisa May       | Alcott       | Drama
+--  The Shining                 | Stephen          | King         | Horror
+--  Dune                        | Frank            | Herbert      | Science Fiction
+--  Dynamic Anatomy             | Burne            | Hogarth      | Arts
+--  Goodnight Moon              | Margaret Wise    | Brown        | Children's Books
+--  The Tell-Tale Heart         | Edgar Allen      | Poe          | Horror
+--  Programming Python          | Mark             | Lutz         | Computers
+--  Learning Python             | Mark             | Lutz         | Computers
+--  Perl Cookbook               | Tom              | Christiansen | Computers
+--  2001: A Space Odyssey       | Arthur C.        | Clarke       | Science Fiction
+--  The Cat in the Hat          | Theodor Seuss    | Geisel       | Children's Books
+--  Bartholomew and the Oobleck | Theodor Seuss    | Geisel       | Children's Books
+-- (15 rows)
 -- 8. Find all books that are listed in the stock table
 -- 	* Sort them by retail price (most expensive first)
 -- 	* Display ONLY: title and price
