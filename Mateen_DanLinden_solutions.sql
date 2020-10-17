@@ -113,19 +113,102 @@
 --  The Cat in the Hat          | Theodor Seuss    | Geisel       | Children's Books
 --  Bartholomew and the Oobleck | Theodor Seuss    | Geisel       | Children's Books
 -- (15 rows)
+
 -- 8. Find all books that are listed in the stock table
 -- 	* Sort them by retail price (most expensive first)
 -- 	* Display ONLY: title and price
+-- Query to find all tables that contain ISBN: SELECT table_name FROM information_schema.columns WHERE column_name = 'isbn';
+-- RESULT:
+--    table_name
+-- -----------------
+--  stock
+--  daily_inventory
+--  shipments
+--  stock_backup
+--  editions
+--  alternate_stock
+-- (6 rows)
+-- Query for stock: SELECT b.title, s.retail FROM books b INNER JOIN editions e ON b.id=e.book_id INNER JOIN stock s ON e.isbn=s.isbn ORDER BY retail DESC;
+-- RESULT:
+--             title            | retail
+-- -----------------------------+--------
+--  2001: A Space Odyssey       |  46.95
+--  Dune                        |  45.95
+--  The Shining                 |  36.95
+--  The Cat in the Hat          |  32.95
+--  Goodnight Moon              |  28.95
+--  The Shining                 |  28.95
+--  Dynamic Anatomy             |  28.95
+--  The Tell-Tale Heart         |  24.95
+--  The Velveteen Rabbit        |  24.95
+--  The Cat in the Hat          |  23.95
+--  Franklin in the Dark        |  23.95
+--  Little Women                |  23.95
+--  2001: A Space Odyssey       |  22.95
+--  The Tell-Tale Heart         |  21.95
+--  Dune                        |  21.95
+--  Bartholomew and the Oobleck |  16.95
+-- (16 rows)
+
 -- 9. Find the book "Dune" and display ONLY the following columns
 -- 	* Book title
 -- 	* ISBN number
 -- 	* Publisher name
 -- 	* Retail price
+-- Query: SELECT b.title, e.isbn, p.name, s.retail FROM books b INNER JOIN editions e ON b.id=e.book_id INNER JOIN stock s ON e.isbn=s.isbn INNER JOIN publishers p ON e.publisher_id=p.id WHERE b.title='Dune';
+-- RESULT:
+--  title |    isbn    |   name    | retail
+-- -------+------------+-----------+--------
+--  Dune  | 0441172717 | Ace Books |  21.95
+--  Dune  | 044100590X | Ace Books |  45.95
+-- (2 rows)
+
 -- 10. Find all shipments sorted by ship date display a result table with ONLY the following columns:
 -- 	* Customer first name
 -- 	* Customer last name
 -- 	* ship date
 -- 	* book title
+-- Query: SELECT c.first_name, c.last_name, s.ship_date, b.title FROM customers c INNER JOIN shipments s ON c.id=s.customer_id INNER JOIN editions e ON e.isbn=s.isbn INNER JOIN books b ON b.id=e.book_id ORDER BY s.ship_date;
+-- RESULT:
+--  first_name | last_name |       ship_date        |            title
+------------+-----------+------------------------+-----------------------------
+--  Owen       | Bollman   | 2001-08-05 11:34:04-05 | Little Women
+--  Laura      | Bennett   | 2001-08-06 09:49:44-05 | Goodnight Moon
+--  Chad       | Allen     | 2001-08-06 11:29:21-05 | The Cat in the Hat
+--  Annie      | Jackson   | 2001-08-06 13:46:36-05 | Bartholomew and the Oobleck
+--  Annie      | Jackson   | 2001-08-07 12:58:36-05 | Bartholomew and the Oobleck
+--  Royce      | Morrill   | 2001-08-07 13:31:57-05 | The Tell-Tale Heart
+--  Christine  | Holloway  | 2001-08-07 13:56:42-05 | 2001: A Space Odyssey
+--  Eric       | Morrill   | 2001-08-07 15:00:48-05 | Little Women
+--  Jonathan   | Anderson  | 2001-08-08 10:36:44-05 | The Shining
+--  Ed         | Gould     | 2001-08-08 11:53:46-05 | The Shining
+--  Annie      | Jackson   | 2001-08-08 12:46:13-05 | Bartholomew and the Oobleck
+--  Dave       | Olson     | 2001-08-09 09:30:07-05 | The Velveteen Rabbit
+--  Wendy      | Black     | 2001-08-09 11:30:46-05 | The Velveteen Rabbit
+--  Rich       | Thomas    | 2001-08-10 09:29:52-05 | Franklin in the Dark
+--  Jean       | Black     | 2001-08-10 10:29:42-05 | The Tell-Tale Heart
+--  Eric       | Morrill   | 2001-08-10 15:47:52-05 | The Cat in the Hat
+--  Annie      | Jackson   | 2001-08-11 11:55:05-05 | Bartholomew and the Oobleck
+--  Richard    | Brown     | 2001-08-11 12:52:34-05 | Goodnight Moon
+--  James      | Williams  | 2001-08-11 15:34:08-05 | The Cat in the Hat
+--  Kate       | Gerdes    | 2001-08-12 10:46:35-05 | Dune
+--  Jean       | Owens     | 2001-08-12 14:09:47-05 | Franklin in the Dark
+--  Owen       | Becker    | 2001-08-12 15:39:22-05 | The Shining
+--  Julie      | Bollman   | 2001-08-13 11:42:10-05 | The Cat in the Hat
+--  Kathy      | Corner    | 2001-08-13 11:47:04-05 | The Cat in the Hat
+--  Tim        | Owens     | 2001-08-14 09:33:47-05 | Dynamic Anatomy
+--  Trevor     | Young     | 2001-08-14 10:42:58-05 | Dune
+--  Chuck      | Brown     | 2001-08-14 12:36:41-05 | The Shining
+--  Adam       | Holloway  | 2001-08-14 15:41:39-05 | The Tell-Tale Heart
+--  Jenny      | King      | 2001-08-14 15:45:51-05 | The Shining
+--  Tammy      | Robinson  | 2001-08-14 15:49:00-05 | Franklin in the Dark
+--  James      | Clark     | 2001-08-15 13:57:40-05 | Goodnight Moon
+--  Shirley    | Gould     | 2001-08-15 16:02:01-05 | 2001: A Space Odyssey
+--  Jenny      | King      | 2001-09-14 18:46:32-05 | The Cat in the Hat
+--  Annie      | Jackson   | 2001-09-14 19:42:22-05 | The Cat in the Hat
+--  Annie      | Jackson   | 2001-09-22 13:23:28-05 | Bartholomew and the Oobleck
+--  Annie      | Jackson   | 2001-09-22 22:58:56-05 | Bartholomew and the Oobleck
+-- (36 rows)
 
 -- ### Grouping and Counting
 
