@@ -1,6 +1,8 @@
 -- ### Order
 -- 1. Find all subjects sorted by subject
+SELECT * FROM subjects ORDER BY subject ASC;
 -- 2. Find all subjects sorted by location
+SELECT * FROM subjects ORDER BY location ASC;
 
 -- ### Where
 -- 3. Find the book "Little Women"
