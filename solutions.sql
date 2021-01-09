@@ -244,19 +244,21 @@ booktown=# SELECT COUNT(location),location FROM subjects GROUP BY location;
      4 | Main St
      3 | Productivity Ave
 -- 14. List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)
-booktown=# SELECT title,c.book_id,c.count FROM books INNER JOIN (SELECT COUNT(book_id) AS count,book_id FROM editions GROUP BY book_id) AS c 
-booktown-# ON books.id=c.book_id;
+booktown=# SELECT books.title,editions.book_id,COUNT(editions.book_id)
+booktown-# FROM books INNER JOIN editions                              
+booktown-# ON books.id=editions.book_id                                
+booktown-# GROUP BY editions.book_id , books.title;                    
             title            | book_id | count
 -----------------------------+---------+-------
- Little Women                |     190 |     1
  The Velveteen Rabbit        |    1234 |     1
- The Tell-Tale Heart         |     156 |     2
- Dynamic Anatomy             |    2038 |     1
- 2001: A Space Odyssey       |    4267 |     2
  Franklin in the Dark        |   25908 |     1
- Programming Python          |   41473 |     1
  Goodnight Moon              |    1501 |     1
- The Cat in the Hat          |    1608 |     2
+ Programming Python          |   41473 |     1
  Bartholomew and the Oobleck |    1590 |     1
+ The Tell-Tale Heart         |     156 |     2
+ Little Women                |     190 |     1
  The Shining                 |    7808 |     2
+ The Cat in the Hat          |    1608 |     2
+ 2001: A Space Odyssey       |    4267 |     2
  Dune                        |    4513 |     2
+ Dynamic Anatomy             |    2038 |     1
