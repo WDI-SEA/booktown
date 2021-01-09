@@ -1,6 +1,7 @@
 -- ### Order
 ----------------------------------------
 -- 1. Find all subjects sorted by subject
+
 -- booktown=# SELECT subject FROM subjects ;
 --      subject
 -- ------------------
@@ -23,6 +24,7 @@
 ------------------------------------------
 -------------------------------------------------------------------
 -- 2. Find all subjects sorted by location
+
 -- booktown=# SELECT subject, location FROM subjects;
 --      subject      |     location
 -- ------------------+------------------
@@ -46,41 +48,41 @@
 -- ### Where
 ----------------------------------------------------------------------
 -- 3. Find the book "Little Women"
--- booktown=# SELECT * FROM books WHERE title='Little Women';     
---  id  |    title     | author_id | subject_id
--- -----+--------------+-----------+------------
---  190 | Little Women |        16 |          6
+booktown=# SELECT * FROM books WHERE title='Little Women';     
+ id  |    title     | author_id | subject_id
+-----+--------------+-----------+------------
+ 190 | Little Women |        16 |          6
 ------------------------------------------------------------------
 -- 4. Find all books containing the word "Python"
 
--- booktown=# SELECT * FROM books WHERE title LIKE '%Python%'; 
---   id   |       title        | author_id | subject_id
--- -------+--------------------+-----------+------------
---  41473 | Programming Python |      7805 |          4
---  41477 | Learning Python    |      7805 |          4
+booktown=# SELECT * FROM books WHERE title LIKE '%Python%'; 
+  id   |       title        | author_id | subject_id
+-------+--------------------+-----------+------------
+ 41473 | Programming Python |      7805 |          4
+ 41477 | Learning Python    |      7805 |          4
 --------------------------------------------------------------------
 -- 5. Find all subjects with the location "Main St" sort them by subject
--- booktown=# SELECT * FROM subjects WHERE location='Main St' ORDER BY subject;
---  id |     subject     | location
--- ----+-----------------+----------
---   6 | Drama           | Main St
---   7 | Entertainment   | Main St
---  13 | Romance         | Main St
---  15 | Science Fiction | Main St
+booktown=# SELECT * FROM subjects WHERE location='Main St' ORDER BY subject;
+ id |     subject     | location
+----+-----------------+----------
+  6 | Drama           | Main St
+  7 | Entertainment   | Main St
+ 13 | Romance         | Main St
+ 15 | Science Fiction | Main St
 -----------------------------------------------------------------------------
 
 -- ### Joins
 
 -- 6. Find all books about Computers and list ONLY the book titles
--- booktown=# SELECT books.title  
--- booktown-# FROM books INNER JOIN subjects
--- booktown-# ON books.subject_id=subjects.id WHERE subjects.subject='Computers';
---         title
--- ----------------------
---  Practical PostgreSQL
---  Perl Cookbook
---  Learning Python
---  Programming Python
+booktown=# SELECT books.title  
+booktown-# FROM books INNER JOIN subjects
+booktown-# ON books.subject_id=subjects.id WHERE subjects.subject='Computers';
+        title
+----------------------
+ Practical PostgreSQL
+ Perl Cookbook
+ Learning Python
+ Programming Python
 -------------------------------------------------------------------------------------------
 -- 7. Find all books and display a result table with ONLY the following columns
 -- 	* Book title
@@ -219,6 +221,42 @@ booktown-# INNER JOIN customers ON customers.id=shipments.customer_id;
 -- ### Grouping and Counting
 
 -- 11. Get the COUNT of all books
+booktown=# SELECT COUNT(*) FROM books; 
+ count
+-------
+    15
+(1 row)
 -- 12. Get the COUNT of all Locations
+booktown=# SELECT COUNT(location) FROM subjects;
+ count
+-------
+    15
 -- 13. Get the COUNT of each unique location in the subjects table. Display the count and the location name. (hint: requires GROUP BY).
+booktown=# SELECT COUNT(location),location FROM subjects GROUP BY location; 
+ count |     location
+-------+------------------
+     0 |
+     1 | Sunset Dr
+     1 | Kids Ct
+     2 | Black Raven Dr
+     2 | Creativity St
+     2 | Academic Rd
+     4 | Main St
+     3 | Productivity Ave
 -- 14. List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)
+booktown=# SELECT title,c.book_id,c.count FROM books INNER JOIN (SELECT COUNT(book_id) AS count,book_id FROM editions GROUP BY book_id) AS c 
+booktown-# ON books.id=c.book_id;
+            title            | book_id | count
+-----------------------------+---------+-------
+ Little Women                |     190 |     1
+ The Velveteen Rabbit        |    1234 |     1
+ The Tell-Tale Heart         |     156 |     2
+ Dynamic Anatomy             |    2038 |     1
+ 2001: A Space Odyssey       |    4267 |     2
+ Franklin in the Dark        |   25908 |     1
+ Programming Python          |   41473 |     1
+ Goodnight Moon              |    1501 |     1
+ The Cat in the Hat          |    1608 |     2
+ Bartholomew and the Oobleck |    1590 |     1
+ The Shining                 |    7808 |     2
+ Dune                        |    4513 |     2
