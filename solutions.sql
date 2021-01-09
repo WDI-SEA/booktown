@@ -1,6 +1,8 @@
 -- ### Order
 -- 1. Find all subjects sorted by subject
+
 SELECT subject FROM subjects GROUP BY subject
+
      subject
 ------------------
  Arts
@@ -21,7 +23,9 @@ SELECT subject FROM subjects GROUP BY subject
  Science Fiction
 
 -- 2. Find all subjects sorted by location
+
 SELECT location FROM subjects GROUP BY location
+
      subject
 ------------------
  Religion
@@ -43,28 +47,40 @@ SELECT location FROM subjects GROUP BY location
 
 -- ### Where
 -- 3. Find the book "Little Women"
+
 SELECT location FROM subjects WHERE subject_id = 6;
+
 Main Street
 
 -- 4. Find all books containing the word "Python"
+
 SELECT * FROM books WHERE title LIKE '%Python%'
+
   id   |       title        | author_id | subject_id
 -------+--------------------+-----------+------------
  41473 | Programming Python |      7805 |          4
  41477 | Learning Python    |      7805 |          4
 
--- 5. Find all subjects with the location "Main St" sort them by subjec
-     subject
------------------
- Drama
- Entertainment
- Romance
- Science Fiction
+-- 5. Find all subjects with the location "Main St" sort them by subject
+
+ SELECT * FROM subjects WHERE location='Main St';
+
+ id |     subject     | location
+----+-----------------+----------
+  6 | Drama           | Main St
+  7 | Entertainment   | Main St
+ 13 | Romance         | Main St
+ 15 | Science Fiction | Main St
+
 
 
 -- ### Joins
 
 -- 6. Find all books about Computers and list ONLY the book titles
+
+ SELECT b.title FROM books b
+ INNER JOIN subjects s ON s.id = b.subject_id
+ WHERE s.subject = 'Computers';
         title
 ----------------------
  Practical PostgreSQL
@@ -72,11 +88,17 @@ SELECT * FROM books WHERE title LIKE '%Python%'
  Learning Python
  Programming Python
 
+
 -- 7. Find all books and display a result table with ONLY the following columns
 -- 	* Book title
 -- 	* Author's first name
 -- 	* Author's last name
 -- 	* Book subject
+
+SELECT b.title, a.first_name, a.last_name, s.subject
+FROM books b
+INNER JOIN authors a ON a.id = b.author_id
+INNER JOIN subjects s ON s.id = b.subject_id;
             title            |    first_name    |  last_name   |     subject
 -----------------------------+------------------+--------------+------------------
  Practical PostgreSQL        | John             | Worsley      | Computers
@@ -94,28 +116,39 @@ SELECT * FROM books WHERE title LIKE '%Python%'
  2001: A Space Odyssey       | Arthur C.        | Clarke       | Science Fiction
  The Cat in the Hat          | Theodor Seuss    | Geisel       | Children's Books
  Bartholomew and the Oobleck | Theodor Seuss    | Geisel       | Children's Books
-\d\
+ The Cat in the Hat          | Theodor Seuss    | Geisel       | Children's Books
+ Bartholomew and the Oobleck | Theodor Seuss    | Geisel       | Children's Books
+ The Cat in the Hat          | Theodor Seuss    | Geisel       | Children's Books
+ Bartholomew and the Oobleck | Theodor Seuss    | Geisel       | Children's Books
+
 -- 8. Find all books that are listed in the stock table
 -- 	* Sort them by retail price (most expensive first)
 -- 	* Display ONLY: title and price
-            title            | cost
------------------------------+-------
- 2001: A Space Odyssey       | 36.00
- Dune                        | 36.00
- The Cat in the Hat          | 30.00
- The Shining                 | 29.00
- Dynamic Anatomy             | 26.00
- Goodnight Moon              | 25.00
- The Shining                 | 24.00
- The Cat in the Hat          | 23.00
- Franklin in the Dark        | 23.00
- The Tell-Tale Heart         | 23.00
- The Velveteen Rabbit        | 20.00
- The Tell-Tale Heart         | 19.00
- Little Women                | 18.00
- 2001: A Space Odyssey       | 17.00
- Dune                        | 17.00
- Bartholomew and the Oobleck | 16.00
+
+booktown=# SELECT b.title, s.retail
+booktown-# FROM books b
+booktown-# INNER JOIN editions e ON e.book_id = b.id
+booktown-# INNER JOIN stock s ON s.isbn = e.isbn
+booktown-# ORDER BY retail DESC;
+            title            | retail
+-----------------------------+--------
+ 2001: A Space Odyssey       |  46.95
+ Dune                        |  45.95
+ The Shining                 |  36.95
+ The Cat in the Hat          |  32.95
+ Goodnight Moon              |  28.95
+ The Shining                 |  28.95
+ Dynamic Anatomy             |  28.95
+ The Tell-Tale Heart         |  24.95
+ The Velveteen Rabbit        |  24.95
+ The Cat in the Hat          |  23.95
+ Franklin in the Dark        |  23.95
+ Little Women                |  23.95
+ 2001: A Space Odyssey       |  22.95
+ The Tell-Tale Heart         |  21.95
+ Dune                        |  21.95
+ Bartholomew and the Oobleck |  16.95
+
 
 -- 9. Find the book "Dune" and display ONLY the following columns
 -- 	* Book title
@@ -197,16 +230,19 @@ booktown-# INNER JOIN books b ON e.book_id = b.id;
     15
 
 -- 13. Get the COUNT of each unique location in the subjects table. Display the count and the location name. (hint: requires GROUP BY).
- count
--------
-     0
-     1
-     1
-     2
-     2
-     2
-     4
-     3
+
+booktown=# SELECT location, COUNT(location) FROM subjects GROUP BY location;
+     location     | count
+------------------+-------
+                  |     0
+ Sunset Dr        |     1
+ Kids Ct          |     1
+ Black Raven Dr   |     2
+ Creativity St    |     2
+ Academic Rd      |     2
+ Main St          |     4
+ Productivity Ave |     3
+
 
 -- 14. List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)
 
