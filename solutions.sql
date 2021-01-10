@@ -238,4 +238,26 @@ booktown-# ON e.book_id = b.id;
      4 | Main St
      1 | Kids Ct
 
-14.
+14.booktown=# SELECT b.id, b.title, e.edition
+booktown-# FROM books b
+booktown-# JOIN editions e
+booktown-# ON b.id = e.book_id;
+  id   |            title            | edition 
+-------+-----------------------------+---------
+  1608 | The Cat in the Hat          |       1
+  7808 | The Shining                 |       1
+  1590 | Bartholomew and the Oobleck |       1
+ 25908 | Franklin in the Dark        |       1
+  1501 | Goodnight Moon              |       1
+  1234 | The Velveteen Rabbit        |       1
+   190 | Little Women                |       1
+  1608 | The Cat in the Hat          |       1
+  7808 | The Shining                 |       2
+   156 | The Tell-Tale Heart         |       1
+   156 | The Tell-Tale Heart         |       2
+  4513 | Dune                        |       2
+  4513 | Dune                        |       3
+  4267 | 2001: A Space Odyssey       |       3
+  4267 | 2001: A Space Odyssey       |       3
+  2038 | Dynamic Anatomy             |       1
+ 41473 | Programming Python          |       2
