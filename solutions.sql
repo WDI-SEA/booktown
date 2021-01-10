@@ -107,7 +107,13 @@ ANSWERS
  Learning Python
  Programming Python
 
-7.         title            |    first_name    |  last_name   |     subject      
+7.booktown=# SELECT b.title, a.first_name, a.last_name, s.subject 
+booktown-# FROM books b 
+booktown-# JOIN authors a
+booktown-# ON b.author_id = a.id
+booktown-# JOIN subjects s
+booktown-# ON b.subject_id = s.id;
+        title            |    first_name    |  last_name   |     subject      
 -----------------------------+------------------+--------------+------------------
  Practical PostgreSQL        | John             | Worsley      | Computers
  Franklin in the Dark        | Paulette         | Bourgeois    | Children's Books
@@ -126,4 +132,87 @@ ANSWERS
  Bartholomew and the Oobleck | Theodor Seuss    | Geisel       | Children's Books
 (15 rows)
 
+8.booktown=# SELECT s.retail, b.title FROM stock s
+booktown-# JOIN editions e 
+booktown-# ON s.isbn = e.isbn
+booktown-# JOIN books b
+booktown-# ON b.id = e.book_id
+booktown-# ORDER BY s.retail DESC;
+ retail |            title            
+--------+-----------------------------
+  46.95 | 2001: A Space Odyssey
+  45.95 | Dune
+  36.95 | The Shining
+  32.95 | The Cat in the Hat
+  28.95 | Goodnight Moon
+  28.95 | The Shining
+  28.95 | Dynamic Anatomy
+  24.95 | The Tell-Tale Heart
+  24.95 | The Velveteen Rabbit
+  23.95 | The Cat in the Hat
+  23.95 | Franklin in the Dark
+  23.95 | Little Women
+  22.95 | 2001: A Space Odyssey
+  21.95 | The Tell-Tale Heart
+  21.95 | Dune
+  16.95 | Bartholomew and the Oobleck
 
+9. booktown=# SELECT b.title, e.isbn, p.name, s.retail
+booktown-# FROM books b
+booktown-# JOIN editions e
+booktown-# ON b.id = e.book_id
+booktown-# JOIN publishers p
+booktown-# ON p.id = e.publisher_id
+booktown-# JOIN stock s
+booktown-# ON s.isbn = e.isbn
+booktown-# WHERE b.title = 'Dune';
+ title |    isbn    |   name    | retail 
+-------+------------+-----------+--------
+ Dune  | 0441172717 | Ace Books |  21.95
+ Dune  | 044100590X | Ace Books |  45.95
+
+ 10.booktown=# SELECT c.first_name, c.last_name, sh.ship_date, b.title
+booktown-# FROM customers c
+booktown-# JOIN shipments sh
+booktown-# ON c.id = sh.customer_id
+booktown-# JOIN editions e
+booktown-# ON e.isbn = sh.isbn
+booktown-# JOIN books b
+booktown-# ON e.book_id = b.id;
+ first_name | last_name |       ship_date        |            title            
+------------+-----------+------------------------+-----------------------------
+ Annie      | Jackson   | 2001-09-14 20:42:22-04 | The Cat in the Hat
+ Jenny      | King      | 2001-09-14 19:46:32-04 | The Cat in the Hat
+ Julie      | Bollman   | 2001-08-13 12:42:10-04 | The Cat in the Hat
+ Eric       | Morrill   | 2001-08-10 16:47:52-04 | The Cat in the Hat
+ Chad       | Allen     | 2001-08-06 12:29:21-04 | The Cat in the Hat
+ Jonathan   | Anderson  | 2001-08-08 11:36:44-04 | The Shining
+ Jenny      | King      | 2001-08-14 16:45:51-04 | The Shining
+ Chuck      | Brown     | 2001-08-14 13:36:41-04 | The Shining
+ Annie      | Jackson   | 2001-09-22 23:58:56-04 | Bartholomew and the Oobleck
+ Annie      | Jackson   | 2001-09-22 14:23:28-04 | Bartholomew and the Oobleck
+ Annie      | Jackson   | 2001-08-08 13:46:13-04 | Bartholomew and the Oobleck
+ Annie      | Jackson   | 2001-08-06 14:46:36-04 | Bartholomew and the Oobleck
+ Annie      | Jackson   | 2001-08-07 13:58:36-04 | Bartholomew and the Oobleck
+ Annie      | Jackson   | 2001-08-11 12:55:05-04 | Bartholomew and the Oobleck
+ Rich       | Thomas    | 2001-08-10 10:29:52-04 | Franklin in the Dark
+ Tammy      | Robinson  | 2001-08-14 16:49:00-04 | Franklin in the Dark
+ Jean       | Owens     | 2001-08-12 15:09:47-04 | Franklin in the Dark
+ James      | Clark     | 2001-08-15 14:57:40-04 | Goodnight Moon
+ Laura      | Bennett   | 2001-08-06 10:49:44-04 | Goodnight Moon
+ Richard    | Brown     | 2001-08-11 13:52:34-04 | Goodnight Moon
+ Wendy      | Black     | 2001-08-09 12:30:46-04 | The Velveteen Rabbit
+ Dave       | Olson     | 2001-08-09 10:30:07-04 | The Velveteen Rabbit
+ Eric       | Morrill   | 2001-08-07 16:00:48-04 | Little Women
+ Owen       | Bollman   | 2001-08-05 12:34:04-04 | Little Women
+ Kathy      | Corner    | 2001-08-13 12:47:04-04 | The Cat in the Hat
+ James      | Williams  | 2001-08-11 16:34:08-04 | The Cat in the Hat
+ Owen       | Becker    | 2001-08-12 16:39:22-04 | The Shining
+ Ed         | Gould     | 2001-08-08 12:53:46-04 | The Shining
+ Royce      | Morrill   | 2001-08-07 14:31:57-04 | The Tell-Tale Heart
+ Adam       | Holloway  | 2001-08-14 16:41:39-04 | The Tell-Tale Heart
+ Jean       | Black     | 2001-08-10 11:29:42-04 | The Tell-Tale Heart
+ Trevor     | Young     | 2001-08-14 11:42:58-04 | Dune
+ Kate       | Gerdes    | 2001-08-12 11:46:35-04 | Dune
+
+11.
