@@ -48,10 +48,18 @@ INNER JOIN books ON editions.book_id = books.id)
 ORDER BY stock.retail DESC;
 
 -- 9. Find the book "Dune" and display ONLY the following columns
--- 	* Book title
--- 	* ISBN number
--- 	* Publisher name
+-- 	* Book title / from 'books'
+-- 	* ISBN number / match 'books.id' with 'editions.book_id
+-- 	* Publisher name / match 'editions.publisher_id' with 'publishers.id'
 -- 	* Retail price
+
+SELECT books.title, editions.isbn, publishers.name, stock.retail
+FROM (((editions
+INNER JOIN books ON editions.book_id = books.id)
+INNER JOIN publishers ON editions.publisher_id = publishers.id)
+INNER JOIN stock ON editions.isbn = stock.isbn)
+WHERE books.title = 'Dune';
+
 -- 10. Find all shipments sorted by ship date display a result table with ONLY the following columns:
 -- 	* Customer first name
 -- 	* Customer last name
