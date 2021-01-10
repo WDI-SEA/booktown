@@ -40,6 +40,13 @@ INNER JOIN subjects ON books.subject_id = subjects.id);
 -- 8. Find all books that are listed in the stock table
 -- 	* Sort them by retail price (most expensive first)
 -- 	* Display ONLY: title and price
+
+SELECT books.title, stock.retail
+FROM ((editions
+INNER JOIN stock ON editions.isbn = stock.isbn)
+INNER JOIN books ON editions.book_id = books.id)
+ORDER BY stock.retail DESC;
+
 -- 9. Find the book "Dune" and display ONLY the following columns
 -- 	* Book title
 -- 	* ISBN number
