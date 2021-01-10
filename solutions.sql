@@ -18,6 +18,7 @@ SELECT * FROM books WHERE title LIKE '%Python%';
 
 -- 5. Find all subjects with the location "Main St" sort them by subject
 
+SELECT * FROM subjects WHERE location LIKE '%Main ST%' ORDER BY subject;
 
 -- ### Joins
 
