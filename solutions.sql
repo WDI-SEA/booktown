@@ -99,5 +99,31 @@ ANSWERS
  Main St
  Main St
 
-6.
+6.booktown=# SELECT books.title FROM books JOIN subjects ON books.subject_id = subjects.id WHERE subjects.subject = 'Computers';
+        title         
+----------------------
+ Practical PostgreSQL
+ Perl Cookbook
+ Learning Python
+ Programming Python
+
+7.         title            |    first_name    |  last_name   |     subject      
+-----------------------------+------------------+--------------+------------------
+ Practical PostgreSQL        | John             | Worsley      | Computers
+ Franklin in the Dark        | Paulette         | Bourgeois    | Children's Books
+ The Velveteen Rabbit        | Margery Williams | Bianco       | Classics
+ Little Women                | Louisa May       | Alcott       | Drama
+ The Shining                 | Stephen          | King         | Horror
+ Dune                        | Frank            | Herbert      | Science Fiction
+ Dynamic Anatomy             | Burne            | Hogarth      | Arts
+ Goodnight Moon              | Margaret Wise    | Brown        | Children's Books
+ The Tell-Tale Heart         | Edgar Allen      | Poe          | Horror
+ Programming Python          | Mark             | Lutz         | Computers
+ Learning Python             | Mark             | Lutz         | Computers
+ Perl Cookbook               | Tom              | Christiansen | Computers
+ 2001: A Space Odyssey       | Arthur C.        | Clarke       | Science Fiction
+ The Cat in the Hat          | Theodor Seuss    | Geisel       | Children's Books
+ Bartholomew and the Oobleck | Theodor Seuss    | Geisel       | Children's Books
+(15 rows)
+
 
