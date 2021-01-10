@@ -60,4 +60,29 @@ ANSWERS
  14 | Science          | Productivity Ave
  15 | Science Fiction  | Main St
 
- 2.
+ 2.booktown=# SELECT subjects FROM subjects ORDER BY location;
+             subjects             
+----------------------------------
+ (8,History,"Academic Rd")
+ (3,Classics,"Academic Rd")
+ (10,Mystery,"Black Raven Dr")
+ (9,Horror,"Black Raven Dr")
+ (0,Arts,"Creativity St")
+ (5,Cooking,"Creativity St")
+ (2,"Children's Books","Kids Ct")
+ (7,Entertainment,"Main St")
+ (6,Drama,"Main St")
+ (13,Romance,"Main St")
+ (15,"Science Fiction","Main St")
+ (14,Science,"Productivity Ave")
+ (4,Computers,"Productivity Ave")
+ (1,Business,"Productivity Ave")
+ (11,Poetry,"Sunset Dr")
+ (12,Religion,)
+
+3. booktown=# SELECT title FROM books WHERE title LIKE 'Litt%';
+    title     
+--------------
+ Little Women
+
+
