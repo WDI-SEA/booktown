@@ -123,13 +123,20 @@ SELECT location, COUNT(location) FROM subjects GROUP BY location;
 -- INNER JOIN editions
 -- ON books.id = editions.book_id;
 
-book_backup.id
-
-SELECT books.title,
+SELECT books.id, books.title,
     COUNT(editions.book_id) AS number_of_editions 
 FROM books 
 INNER JOIN editions
 ON books.id = editions.book_id
-GROUP BY books.title;
+GROUP BY books.id;
 
-This solution does not display book_id, but we couldn't figure out a way to do so. The solution to this problem *also* doesn't display book_id. 
+-- From below: https://www.sqltutorial.org/seeit/query/sql-group-by/#dsi-3-parkinglot
+SELECT 
+    b.id, b.title,
+    COUNT(e.book_id) number_of_editions
+FROM
+    books b
+        INNER JOIN
+    editions e ON b.id = e.book_id
+GROUP BY b.id
+ORDER BY number_of_editions DESC;
