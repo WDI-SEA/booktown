@@ -215,4 +215,10 @@ booktown-# ON e.book_id = b.id;
  Trevor     | Young     | 2001-08-14 11:42:58-04 | Dune
  Kate       | Gerdes    | 2001-08-12 11:46:35-04 | Dune
 
-11.
+11.booktown=# SELECT COUNT (*) FROM books;
+ count 
+-------
+    15
+(1 row)
+
+12.
