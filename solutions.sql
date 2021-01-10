@@ -89,6 +89,19 @@ ON s.isbn = e.isbn;
 -- 	* ship date
 -- 	* book title
 
+shipments.id, shipments.customer_id, shipments.isbn, shipments.ship_date
+customers.id, customers.last_name, customers.first_name
+editions.isbn, editions.book_id
+books.id, books.title
+
+SELECT c.first_name, c.last_name, s.ship_date, b.title
+FROM customers c INNER JOIN shipments s 
+ON c.id = s.customer_id
+INNER JOIN editions e
+ON e.isbn = s.isbn
+INNER JOIN books b
+ON e.book_id = b.id
+ORDER BY s.ship_date ASC;
 
 -- ### Grouping and Counting
 
