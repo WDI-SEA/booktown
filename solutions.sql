@@ -44,7 +44,7 @@ WHERE s.subject = 'Computers';
 -- How to join multiple tables: https://learnsql.com/blog/how-to-join-3-tables-or-more-in-sql/
 books.id, books.title, books.author_id, books.subject_id
 authors.id, authors.last_name, authors.first_name
-subjects.id, subjects.subject, subject.location
+subjects.id, subjects.subject, subjects.location
 
 SELECT b.title, a.first_name, a.last_name, s.subject
 FROM books b INNER JOIN authors a 
@@ -106,6 +106,25 @@ ORDER BY s.ship_date ASC;
 -- ### Grouping and Counting
 
 -- 11. Get the COUNT of all books
--- 12. Get the COUNT of all Locations
+SELECT COUNT(id) FROM books;
+SELECT id, COUNT(id) FROM books GROUP BY id;
+
+-- 12. Get the COUNT of all locations
+SELECT COUNT(location) FROM subjects;
+
 -- 13. Get the COUNT of each unique location in the subjects table. Display the count and the location name. (hint: requires GROUP BY).
+SELECT location, COUNT(location) FROM subjects GROUP BY location;
+
 -- 14. List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)
+SELECT book_id, COUNT(editions.isbn) AS number_of_editions FROM editions GROUP BY book_id;
+
+SELECT books.id, books.title, editions.number_of_editions
+FROM books 
+INNER JOIN editions
+ON books.id = editions.book_id;
+
+SELECT books.id, books.title,
+    (COUNT(editions.isbn) AS number_of_editions FROM editions GROUP BY book_id)
+FROM books 
+INNER JOIN editions
+ON books.id = editions.book_id;
