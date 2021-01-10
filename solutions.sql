@@ -31,6 +31,12 @@ SELECT books.title FROM books WHERE subject_id = '4';
 -- 	* Author's first name
 -- 	* Author's last name
 -- 	* Book subject
+
+SELECT books.title, authors.first_name, authors.last_name, subjects.subject
+FROM ((books
+INNER JOIN authors ON books.author_id = authors.id)
+INNER JOIN subjects ON books.subject_id = subjects.id);
+
 -- 8. Find all books that are listed in the stock table
 -- 	* Sort them by retail price (most expensive first)
 -- 	* Display ONLY: title and price
