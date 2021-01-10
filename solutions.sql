@@ -91,5 +91,13 @@ ANSWERS
  41473 | Programming Python |      7805 |          4
  41477 | Learning Python    |      7805 |          4
 
-5.
+5.booktown=# SELECT location FROM subjects WHERE location = 'Main St' ORDER BY subject;
+ location 
+----------
+ Main St
+ Main St
+ Main St
+ Main St
+
+6.
 
