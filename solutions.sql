@@ -23,6 +23,9 @@ SELECT * FROM subjects WHERE location LIKE '%Main ST%' ORDER BY subject;
 -- ### Joins
 
 -- 6. Find all books about Computers and list ONLY the book titles
+
+SELECT books.title FROM books WHERE subject_id = '4';
+
 -- 7. Find all books and display a result table with ONLY the following columns
 -- 	* Book title
 -- 	* Author's first name
