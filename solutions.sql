@@ -221,4 +221,21 @@ booktown-# ON e.book_id = b.id;
     15
 (1 row)
 
-12.
+12.booktown=# SELECT COUNT (*) FROM states;
+ count 
+-------
+     2
+
+13. booktown=# SELECT DISTINCT COUNT (location), location FROM subjects GROUP BY location;
+ count |     location     
+-------+------------------
+     2 | Black Raven Dr
+     1 | Sunset Dr
+     2 | Academic Rd
+     3 | Productivity Ave
+     2 | Creativity St
+     0 | 
+     4 | Main St
+     1 | Kids Ct
+
+14.
