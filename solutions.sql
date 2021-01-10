@@ -70,6 +70,19 @@ ON e.book_id = b.id;
 -- 	* ISBN number
 -- 	* Publisher name
 -- 	* Retail price
+books.id, books.title
+editions.isbn, editions.book_id, editions.publisher_id
+publishers.id, publishers.name
+stock.isbn, stock.cost
+
+SELECT b.title, e.isbn, p.name AS publisher_name, s.cost
+FROM books b INNER JOIN editions e
+ON b.id = e.book_id
+INNER JOIN publishers p
+ON e.publisher_id = p.id
+INNER JOIN stock s 
+ON s.isbn = e.isbn;
+
 -- 10. Find all shipments sorted by ship date display a result table with ONLY the following columns:
 -- 	* Customer first name
 -- 	* Customer last name
