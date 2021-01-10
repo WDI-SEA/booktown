@@ -1,5 +1,8 @@
 -- ### Order
 -- 1. Find all subjects sorted by subject
+
+SELECT * FROM subjects ORDER BY subject;
+
 -- 2. Find all subjects sorted by location
 
 -- ### Where
