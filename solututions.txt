@@ -1,0 +1,219 @@
+ public | alternate_stock       | table    | postgres
+ public | authors               | table    | postgres
+ public | book_backup           | table    | postgres
+ public | book_ids              | sequence | postgres
+ public | book_queue            | table    | postgres
+ public | books                 | table    | postgres
+ public | customers             | table    | postgres
+ public | daily_inventory       | table    | postgres
+ public | distinguished_authors | table    | postgres
+ public | editions              | table    | postgres
+ public | employees             | table    | postgres
+ public | favorite_authors      | table    | postgres
+ public | favorite_books        | table    | postgres
+ public | money_example         | table    | postgres
+ public | my_list               | table    | postgres
+ public | numeric_values        | table    | postgres
+ public | publishers            | table    | postgres
+ public | schedules             | table    | postgres
+ public | shipments             | table    | postgres
+ public | states                | table    | postgres
+ public | stock                 | table    | postgres
+ public | stock_backup          | table    | postgres
+ public | subject_ids           | sequence | postgres
+ public | subjects              | table    | postgres
+ public | text_sorting          | table    | postgres
+(25 rows)
+
+1. subjects by subjects:
+ id |     subject      |     location
+----+------------------+------------------
+  0 | Arts             | Creativity St
+  1 | Business         | Productivity Ave
+  2 | Children's Books | Kids Ct
+  3 | Classics         | Academic Rd
+  4 | Computers        | Productivity Ave
+  5 | Cooking          | Creativity St
+  6 | Drama            | Main St
+  7 | Entertainment    | Main St
+  8 | History          | Academic Rd
+  9 | Horror           | Black Raven Dr
+ 10 | Mystery          | Black Raven Dr
+ 11 | Poetry           | Sunset Dr
+ 12 | Religion         |
+ 13 | Romance          | Main St
+ 14 | Science          | Productivity Ave
+ 15 | Science Fiction  | Main S
+
+2 subjects by location: 
+ id |     subject      |     location
+----+------------------+------------------
+  8 | History          | Academic Rd
+  3 | Classics         | Academic Rd
+ 10 | Mystery          | Black Raven Dr
+  9 | Horror           | Black Raven Dr
+  0 | Arts             | Creativity St
+  5 | Cooking          | Creativity St
+  2 | Children's Books | Kids Ct
+  7 | Entertainment    | Main St
+  6 | Drama            | Main St
+ 13 | Romance          | Main St
+ 15 | Science Fiction  | Main St
+ 14 | Science          | Productivity Ave
+  4 | Computers        | Productivity Ave
+  1 | Business         | Productivity Ave
+ 11 | Poetry           | Sunset Dr
+ 12 | Religion         |
+(16 rows)
+
+3. booktown=# SELECT * FROM books WHERE title = 'Little Women';
+ id  |    title     | author_id | subject_id
+-----+--------------+-----------+------------
+ 190 | Little Women |        16 |          6
+(1 row)
+
+4. I might have this wrong and would like to go over it with someone. 
+
+booktown=# SELECT * FROM books WHERE title = 'Python';
+ id | title | author_id | subject_id
+----+-------+-----------+------------
+(0 rows)
+
+
+5. booktown=# SELECT * FROM subjects WHERE location ='Main St' ORDER BY subject;
+ id |     subject     | location
+----+-----------------+----------
+  6 | Drama           | Main St
+  7 | Entertainment   | Main St
+ 13 | Romance         | Main St
+ 15 | Science Fiction | Main St
+(4 rows)
+
+6. booktown=# SELECT title FROM books WHERE subject_id = 4;
+        title
+----------------------
+ Programming Python
+ Learning Python
+ Perl Cookbook
+ Practical PostgreSQL
+(4 rows)
+
+7. booktown=# SELECT books.title, authors.last_name, authors.first_name, subjects.subject FROM authors INNER JOIN books ON books.author_id=authors.id INNER JOIN subjects ON books.subject_id=subjects.id;
+            title            |  last_name   |    first_name    |     subject
+-----------------------------+--------------+------------------+------------------
+ Practical PostgreSQL        | Worsley      | John             | Computers
+ Franklin in the Dark        | Bourgeois    | Paulette         | Children's Books
+ The Velveteen Rabbit        | Bianco       | Margery Williams | Classics
+ Little Women                | Alcott       | Louisa May       | Drama
+ The Shining                 | King         | Stephen          | Horror
+ Dune                        | Herbert      | Frank            | Science Fiction
+ Dynamic Anatomy             | Hogarth      | Burne            | Arts
+ Goodnight Moon              | Brown        | Margaret Wise    | Children's Books
+ The Tell-Tale Heart         | Poe          | Edgar Allen      | Horror
+ Programming Python          | Lutz         | Mark             | Computers
+ Learning Python             | Lutz         | Mark             | Computers
+ Perl Cookbook               | Christiansen | Tom              | Computers
+ 2001: A Space Odyssey       | Clarke       | Arthur C.        | Science Fiction
+ The Cat in the Hat          | Geisel       | Theodor Seuss    | Children's Books
+ Bartholomew and the Oobleck | Geisel       | Theodor Seuss    | Children's Books
+
+8. booktown=# SELECT title, retail FROM stock INNER JOIN editions ON editions.isbn=stock.isbn INNER JOIN books ON books.id=editions.book_id;
+            title            | retail
+-----------------------------+--------
+ The Cat in the Hat          |  32.95
+ The Shining                 |  28.95
+ Bartholomew and the Oobleck |  16.95
+ Franklin in the Dark        |  23.95
+ Goodnight Moon              |  28.95
+ The Velveteen Rabbit        |  24.95
+ Little Women                |  23.95
+ The Cat in the Hat          |  23.95
+ The Shining                 |  36.95
+ The Tell-Tale Heart         |  24.95
+ The Tell-Tale Heart         |  21.95
+ Dune                        |  21.95
+ Dune                        |  45.95
+ 2001: A Space Odyssey       |  22.95
+ 2001: A Space Odyssey       |  46.95
+ Dynamic Anatomy             |  28.95
+(16 rows)
+
+9. booktown=# SELECT title, stock.isbn, publishers.name, retail FROM books INNER JOIN editions ON books.id=editions.book_id INNER JOIN publishers ON editions.publisher_id=publishers.id INNER JOIN stock ON stock.isbn=editions.isbn WHERE title ='Dune';
+ title |    isbn    |   name    | retail
+-------+------------+-----------+--------
+ Dune  | 0441172717 | Ace Books |  21.95
+ Dune  | 044100590X | Ace Books |  45.95
+(2 rows)
+
+booktown=# SELECT customers.last_name, customers.first_name, shipments.ship_date, title FROM shipments INNER JOIN customers ON customers.id=shipments.customer_id INNER JOIN editions ON editions.isbn = shipments.isbn INNER JOIN books ON editions.book_id=books.id ORDER BY ship_date;
+ last_name | first_name |       ship_date        |            title
+-----------+------------+------------------------+-----------------------------
+ Bollman   | Owen       | 2001-08-05 09:34:04-07 | Little Women
+ Bennett   | Laura      | 2001-08-06 07:49:44-07 | Goodnight Moon
+ Allen     | Chad       | 2001-08-06 09:29:21-07 | The Cat in the Hat
+ Jackson   | Annie      | 2001-08-06 11:46:36-07 | Bartholomew and the Oobleck
+ Jackson   | Annie      | 2001-08-07 10:58:36-07 | Bartholomew and the Oobleck
+ Morrill   | Royce      | 2001-08-07 11:31:57-07 | The Tell-Tale Heart
+ Holloway  | Christine  | 2001-08-07 11:56:42-07 | 2001: A Space Odyssey
+ Morrill   | Eric       | 2001-08-07 13:00:48-07 | Little Women
+ Anderson  | Jonathan   | 2001-08-08 08:36:44-07 | The Shining
+ Gould     | Ed         | 2001-08-08 09:53:46-07 | The Shining
+ Jackson   | Annie      | 2001-08-08 10:46:13-07 | Bartholomew and the Oobleck
+ Olson     | Dave       | 2001-08-09 07:30:07-07 | The Velveteen Rabbit
+ Black     | Wendy      | 2001-08-09 09:30:46-07 | The Velveteen Rabbit
+ Thomas    | Rich       | 2001-08-10 07:29:52-07 | Franklin in the Dark
+ Black     | Jean       | 2001-08-10 08:29:42-07 | The Tell-Tale Heart
+ Morrill   | Eric       | 2001-08-10 13:47:52-07 | The Cat in the Hat
+ Jackson   | Annie      | 2001-08-11 09:55:05-07 | Bartholomew and the Oobleck
+ Brown     | Richard    | 2001-08-11 10:52:34-07 | Goodnight Moon
+ Williams  | James      | 2001-08-11 13:34:08-07 | The Cat in the Hat
+ Gerdes    | Kate       | 2001-08-12 08:46:35-07 | Dune
+ Owens     | Jean       | 2001-08-12 12:09:47-07 | Franklin in the Dark
+ Becker    | Owen       | 2001-08-12 13:39:22-07 | The Shining
+ Bollman   | Julie      | 2001-08-13 09:42:10-07 | The Cat in the Hat
+ Corner    | Kathy      | 2001-08-13 09:47:04-07 | The Cat in the Hat
+ Owens     | Tim        | 2001-08-14 07:33:47-07 | Dynamic Anatomy
+ Young     | Trevor     | 2001-08-14 08:42:58-07 | Dune
+ Brown     | Chuck      | 2001-08-14 10:36:41-07 | The Shining
+ Holloway  | Adam       | 2001-08-14 13:41:39-07 | The Tell-Tale Heart
+ King      | Jenny      | 2001-08-14 13:45:51-07 | The Shining
+ Robinson  | Tammy      | 2001-08-14 13:49:00-07 | Franklin in the Dark
+ Clark     | James      | 2001-08-15 11:57:40-07 | Goodnight Moon
+ Gould     | Shirley    | 2001-08-15 14:02:01-07 | 2001: A Space Odyssey
+ King      | Jenny      | 2001-09-14 16:46:32-07 | The Cat in the Hat
+ Jackson   | Annie      | 2001-09-14 17:42:22-07 | The Cat in the Hat
+ Jackson   | Annie      | 2001-09-22 11:23:28-07 | Bartholomew and the Oobleck
+ Jackson   | Annie      | 2001-09-22 20:58:56-07 | Bartholomew and the Oobleck
+(36 rows)
+
+11. booktown=# SELECT COUNT(*) FROM books;
+ count
+-------
+    15
+(1 row)
+
+12. booktown=# SELECT COUNT(location) FROM subjects;
+ count
+-------
+    15
+(1 row)
+
+13. booktown=# SELECT COUNT(location) FROM subjects GROUP BY location;
+ count
+-------
+     0
+     1
+     1
+     2
+     2
+     2
+     4
+     3
+(8 rows)
+
+
+
+
+
+
+
