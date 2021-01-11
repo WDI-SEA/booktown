@@ -1,0 +1,711 @@
+Last login: Fri Jan  8 16:22:12 on ttys000
+You have new mail.
+➜  ~ cd desktop
+➜  desktop git clone https://github.com/katiemackenbrock/booktown.git
+Cloning into 'booktown'...
+remote: Enumerating objects: 74, done.
+remote: Total 74 (delta 0), reused 0 (delta 0), pack-reused 74
+Receiving objects: 100% (74/74), 366.25 KiB | 1.98 MiB/s, done.
+Resolving deltas: 100% (31/31), done.
+➜  desktop cd booktown
+➜  booktown git:(master) psql -f booktown.sql
+CREATE DATABASE
+You are now connected to database "booktown" as user "katiemackenbrock".
+COMMENT
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE SEQUENCE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE SEQUENCE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+COPY 13
+COPY 17
+COPY 2
+COPY 3
+COPY 16
+COPY 12
+COPY 7
+COPY 1
+COPY 36
+COPY 31
+COPY 2
+COPY 16
+COPY 2
+COPY 7
+COPY 17
+COPY 15
+COPY 2
+COPY 1
+COPY 12
+COPY 16
+COPY 16
+COPY 30
+COPY 1
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+➜  booktown git:(master) psql
+psql (13.1)
+Type "help" for help.
+
+katiemackenbrock=# \list
+katiemackenbrock=# \c booktown
+You are now connected to database "booktown" as user "katiemackenbrock".
+booktown=# \
+invalid command \
+Try \? for help.
+booktown=# \d
+booktown=# \d
+                      List of relations
+ Schema |         Name          |   Type   |      Owner       
+--------+-----------------------+----------+------------------
+ public | alternate_stock       | table    | katiemackenbrock
+ public | authors               | table    | katiemackenbrock
+ public | book_backup           | table    | katiemackenbrock
+ public | book_ids              | sequence | katiemackenbrock
+ public | book_queue            | table    | katiemackenbrock
+ public | books                 | table    | katiemackenbrock
+ public | customers             | table    | katiemackenbrock
+ public | daily_inventory       | table    | katiemackenbrock
+ public | distinguished_authors | table    | katiemackenbrock
+ public | editions              | table    | katiemackenbrock
+ public | employees             | table    | katiemackenbrock
+ public | favorite_authors      | table    | katiemackenbrock
+ public | favorite_books        | table    | katiemackenbrock
+ public | money_example         | table    | katiemackenbrock
+ public | my_list               | table    | katiemackenbrock
+ public | numeric_values        | table    | katiemackenbrock
+ public | publishers            | table    | katiemackenbrock
+ public | schedules             | table    | katiemackenbrock
+ public | shipments             | table    | katiemackenbrock
+ public | states                | table    | katiemackenbrock
+ public | stock                 | table    | katiemackenbrock
+ public | stock_backup          | table    | katiemackenbrock
+ public | subject_ids           | sequence | katiemackenbrock
+ public | subjects              | table    | katiemackenbrock
+ public | text_sorting          | table    | katiemackenbrock
+(25 rows)
+
+booktown=# \d books
+                 Table "public.books"
+   Column   |  Type   | Collation | Nullable | Default 
+------------+---------+-----------+----------+---------
+ id         | integer |           | not null | 
+ title      | text    |           | not null | 
+ author_id  | integer |           |          | 
+ subject_id | integer |           |          | 
+Indexes:
+    "books_id_pkey" PRIMARY KEY, btree (id)
+    "books_title_idx" btree (title)
+
+booktown=# SELECT subject FROM subjects;
+     subject      
+------------------
+ Arts
+ Business
+ Children's Books
+ Classics
+ Computers
+ Cooking
+ Drama
+ Entertainment
+ History
+ Horror
+ Mystery
+ Poetry
+ Religion
+ Romance
+ Science
+ Science Fiction
+(16 rows)
+
+booktown=# SELECT subjects From subjects ORDER BY location
+booktown-# ;
+             subjects             
+----------------------------------
+ (8,History,"Academic Rd")
+ (3,Classics,"Academic Rd")
+ (10,Mystery,"Black Raven Dr")
+ (9,Horror,"Black Raven Dr")
+ (0,Arts,"Creativity St")
+ (5,Cooking,"Creativity St")
+ (2,"Children's Books","Kids Ct")
+ (7,Entertainment,"Main St")
+ (6,Drama,"Main St")
+ (13,Romance,"Main St")
+ (15,"Science Fiction","Main St")
+ (14,Science,"Productivity Ave")
+ (4,Computers,"Productivity Ave")
+ (1,Business,"Productivity Ave")
+ (11,Poetry,"Sunset Dr")
+ (12,Religion,)
+(16 rows)
+
+booktown=# SELECT FROM books WHERE title = 'Little Women';
+--
+(1 row)
+
+booktown=# SELECT * FROM books WHERE title = 'Little Women';
+ id  |    title     | author_id | subject_id 
+-----+--------------+-----------+------------
+ 190 | Little Women |        16 |          6
+(1 row)
+
+booktown=# SELECT * FROM books WHERE title LIKE '%Python%';
+  id   |       title        | author_id | subject_id 
+-------+--------------------+-----------+------------
+ 41473 | Programming Python |      7805 |          4
+ 41477 | Learning Python    |      7805 |          4
+(2 rows)
+
+booktown=# SELECT subject FROM subejcts WHERE location = 'Main Street';
+ERROR:  relation "subejcts" does not exist
+LINE 1: SELECT subject FROM subejcts WHERE location = 'Main Street';
+                            ^
+booktown=# SELECT subject FROM subjects WHERE location = 'Main Street';
+ subject 
+---------
+(0 rows)
+
+booktown=# SELECT subject FROM subjects WHERE location = 'Main Street' ORDER BY subject;
+ subject 
+---------
+(0 rows)
+
+booktown=# SELECT subject FROM subjects WHERE location = 'Main St' ORDER BY subject;
+     subject     
+-----------------
+ Drama
+ Entertainment
+ Romance
+ Science Fiction
+(4 rows)
+
+booktown=# SELECT books.title
+booktown-# FROM books INNER JOIN subjects
+booktown-# ;
+ERROR:  syntax error at or near ";"
+LINE 3: ;
+        ^
+booktown=# \d
+                      List of relations
+ Schema |         Name          |   Type   |      Owner       
+--------+-----------------------+----------+------------------
+ public | alternate_stock       | table    | katiemackenbrock
+ public | authors               | table    | katiemackenbrock
+ public | book_backup           | table    | katiemackenbrock
+ public | book_ids              | sequence | katiemackenbrock
+ public | book_queue            | table    | katiemackenbrock
+ public | books                 | table    | katiemackenbrock
+ public | customers             | table    | katiemackenbrock
+ public | daily_inventory       | table    | katiemackenbrock
+ public | distinguished_authors | table    | katiemackenbrock
+ public | editions              | table    | katiemackenbrock
+ public | employees             | table    | katiemackenbrock
+ public | favorite_authors      | table    | katiemackenbrock
+ public | favorite_books        | table    | katiemackenbrock
+ public | money_example         | table    | katiemackenbrock
+ public | my_list               | table    | katiemackenbrock
+ public | numeric_values        | table    | katiemackenbrock
+ public | publishers            | table    | katiemackenbrock
+ public | schedules             | table    | katiemackenbrock
+ public | shipments             | table    | katiemackenbrock
+ public | states                | table    | katiemackenbrock
+ public | stock                 | table    | katiemackenbrock
+ public | stock_backup          | table    | katiemackenbrock
+ public | subject_ids           | sequence | katiemackenbrock
+ public | subjects              | table    | katiemackenbrock
+ public | text_sorting          | table    | katiemackenbrock
+(25 rows)
+
+booktown=# SELECT * FROM subjects;
+ id |     subject      |     location     
+----+------------------+------------------
+  0 | Arts             | Creativity St
+  1 | Business         | Productivity Ave
+  2 | Children's Books | Kids Ct
+  3 | Classics         | Academic Rd
+  4 | Computers        | Productivity Ave
+  5 | Cooking          | Creativity St
+  6 | Drama            | Main St
+  7 | Entertainment    | Main St
+  8 | History          | Academic Rd
+  9 | Horror           | Black Raven Dr
+ 10 | Mystery          | Black Raven Dr
+ 11 | Poetry           | Sunset Dr
+ 12 | Religion         | 
+ 13 | Romance          | Main St
+ 14 | Science          | Productivity Ave
+ 15 | Science Fiction  | Main St
+(16 rows)
+
+booktown=# SELECT * FROM books;
+  id   |            title            | author_id | subject_id 
+-------+-----------------------------+-----------+------------
+  7808 | The Shining                 |      4156 |          9
+  4513 | Dune                        |      1866 |         15
+  4267 | 2001: A Space Odyssey       |      2001 |         15
+  1608 | The Cat in the Hat          |      1809 |          2
+  1590 | Bartholomew and the Oobleck |      1809 |          2
+ 25908 | Franklin in the Dark        |     15990 |          2
+  1501 | Goodnight Moon              |      2031 |          2
+   190 | Little Women                |        16 |          6
+  1234 | The Velveteen Rabbit        |     25041 |          3
+  2038 | Dynamic Anatomy             |      1644 |          0
+   156 | The Tell-Tale Heart         |       115 |          9
+ 41473 | Programming Python          |      7805 |          4
+ 41477 | Learning Python             |      7805 |          4
+ 41478 | Perl Cookbook               |      7806 |          4
+ 41472 | Practical PostgreSQL        |      1212 |          4
+(15 rows)
+
+booktown=# SELECT books.title FROM books INNER JOIN subjects ON subject.id=books.subject_id;
+ERROR:  missing FROM-clause entry for table "subject"
+LINE 1: ...ECT books.title FROM books INNER JOIN subjects ON subject.id...
+                                                             ^
+booktown=# SELECT books.title FROM books INNER JOIN subjects ON subjects.id=books.subject_id;
+            title            
+-----------------------------
+ Dynamic Anatomy
+ Goodnight Moon
+ Franklin in the Dark
+ Bartholomew and the Oobleck
+ The Cat in the Hat
+ The Velveteen Rabbit
+ Practical PostgreSQL
+ Perl Cookbook
+ Learning Python
+ Programming Python
+ Little Women
+ The Tell-Tale Heart
+ The Shining
+ 2001: A Space Odyssey
+ Dune
+(15 rows)
+
+booktown=# SELECT books.title FROM books INNER JOIN subjects ON subjects.id=books.subject_id WHERE subjects.subject=computers;
+ERROR:  column "computers" does not exist
+LINE 1: ...bjects.id=books.subject_id WHERE subjects.subject=computers;
+                                                             ^
+booktown=# SELECT books.title FROM books INNER JOIN subjects ON subjects.id=books.subject_id WHERE subjects.subject="Computers";
+ERROR:  column "Computers" does not exist
+LINE 1: ...bjects.id=books.subject_id WHERE subjects.subject="Computers...
+                                                             ^
+booktown=# SELECT books.title FROM books INNER JOIN subjects ON subjects.id=books.subject_id WHERE subjects.subject= "Computers";
+ERROR:  column "Computers" does not exist
+LINE 1: ...jects.id=books.subject_id WHERE subjects.subject= "Computers...
+                                                             ^
+booktown=# SELECT books.title FROM books INNER JOIN subjects ON subjects.id=books.subject_id WHERE subjects.subject= 'Computers';
+        title         
+----------------------
+ Practical PostgreSQL
+ Perl Cookbook
+ Learning Python
+ Programming Python
+(4 rows)
+
+booktown=# SELECT * FROM authors;
+  id   |  last_name   |    first_name    
+-------+--------------+------------------
+  1111 | Denham       | Ariel
+  1212 | Worsley      | John
+ 15990 | Bourgeois    | Paulette
+ 25041 | Bianco       | Margery Williams
+    16 | Alcott       | Louisa May
+  4156 | King         | Stephen
+  1866 | Herbert      | Frank
+  1644 | Hogarth      | Burne
+  2031 | Brown        | Margaret Wise
+   115 | Poe          | Edgar Allen
+  7805 | Lutz         | Mark
+  7806 | Christiansen | Tom
+  1533 | Brautigan    | Richard
+  1717 | Brite        | Poppy Z.
+  2112 | Gorey        | Edward
+  2001 | Clarke       | Arthur C.
+  1213 | Brookins     | Andrew
+ 25043 | Simon        | Neil
+  1809 | Geisel       | Theodor Seuss
+(19 rows)
+
+booktown=# SELECT books.title, authors.first_name, authors.last_name, subjects.subject FROM books INNER JOIN authors ON authors.id=books.author_id INNER JOIN subjects ON subjects.id=books.subject_id;
+            title            |    first_name    |  last_name   |     subject      
+-----------------------------+------------------+--------------+------------------
+ Practical PostgreSQL        | John             | Worsley      | Computers
+ Franklin in the Dark        | Paulette         | Bourgeois    | Children's Books
+ The Velveteen Rabbit        | Margery Williams | Bianco       | Classics
+ Little Women                | Louisa May       | Alcott       | Drama
+ The Shining                 | Stephen          | King         | Horror
+ Dune                        | Frank            | Herbert      | Science Fiction
+ Dynamic Anatomy             | Burne            | Hogarth      | Arts
+ Goodnight Moon              | Margaret Wise    | Brown        | Children's Books
+ The Tell-Tale Heart         | Edgar Allen      | Poe          | Horror
+ Programming Python          | Mark             | Lutz         | Computers
+ Learning Python             | Mark             | Lutz         | Computers
+ Perl Cookbook               | Tom              | Christiansen | Computers
+ 2001: A Space Odyssey       | Arthur C.        | Clarke       | Science Fiction
+ The Cat in the Hat          | Theodor Seuss    | Geisel       | Children's Books
+ Bartholomew and the Oobleck | Theodor Seuss    | Geisel       | Children's Books
+(15 rows)
+
+booktown=# SELECT * FROM stock;
+    isbn    | cost  | retail | stock 
+------------+-------+--------+-------
+ 0385121679 | 29.00 |  36.95 |    65
+ 039480001X | 30.00 |  32.95 |    31
+ 0394900014 | 23.00 |  23.95 |     0
+ 044100590X | 36.00 |  45.95 |    89
+ 0441172717 | 17.00 |  21.95 |    77
+ 0451160916 | 24.00 |  28.95 |    22
+ 0451198492 | 36.00 |  46.95 |     0
+ 0451457994 | 17.00 |  22.95 |     0
+ 0590445065 | 23.00 |  23.95 |    10
+ 0679803335 | 20.00 |  24.95 |    18
+ 0694003611 | 25.00 |  28.95 |    50
+ 0760720002 | 18.00 |  23.95 |    28
+ 0823015505 | 26.00 |  28.95 |    16
+ 0929605942 | 19.00 |  21.95 |    25
+ 1885418035 | 23.00 |  24.95 |    77
+ 0394800753 | 16.00 |  16.95 |     4
+(16 rows)
+
+booktown=# SELECT * FROM book_ids
+booktown-# ;
+ last_value | log_cnt | is_called 
+------------+---------+-----------
+          0 |       0 | f
+(1 row)
+
+booktown=# SELECT * FROM editios;
+ERROR:  relation "editios" does not exist
+LINE 1: SELECT * FROM editios;
+                      ^
+booktown=# SELECT * FROM editions;
+    isbn    | book_id | edition | publisher_id | publication | type 
+------------+---------+---------+--------------+-------------+------
+ 039480001X |    1608 |       1 |           59 | 1957-03-01  | h
+ 0451160916 |    7808 |       1 |           75 | 1981-08-01  | p
+ 0394800753 |    1590 |       1 |           59 | 1949-03-01  | p
+ 0590445065 |   25908 |       1 |          150 | 1987-03-01  | p
+ 0694003611 |    1501 |       1 |           65 | 1947-03-04  | p
+ 0679803335 |    1234 |       1 |          102 | 1922-01-01  | p
+ 0760720002 |     190 |       1 |           91 | 1868-01-01  | p
+ 0394900014 |    1608 |       1 |           59 | 1957-01-01  | p
+ 0385121679 |    7808 |       2 |           75 | 1993-10-01  | h
+ 1885418035 |     156 |       1 |          163 | 1995-03-28  | p
+ 0929605942 |     156 |       2 |          171 | 1998-12-01  | p
+ 0441172717 |    4513 |       2 |           99 | 1998-09-01  | p
+ 044100590X |    4513 |       3 |           99 | 1999-10-01  | h
+ 0451457994 |    4267 |       3 |          101 | 2000-09-12  | p
+ 0451198492 |    4267 |       3 |          101 | 1999-10-01  | h
+ 0823015505 |    2038 |       1 |           62 | 1958-01-01  | p
+ 0596000855 |   41473 |       2 |          113 | 2001-03-01  | p
+(17 rows)
+
+booktown=# SELECT books.title, stock.retail FROM books INNER JOIN editions ON books.id=editions.book_id INNER JOIN stock ON editions.isbn=stock.isbn;
+            title            | retail 
+-----------------------------+--------
+ The Cat in the Hat          |  32.95
+ The Shining                 |  28.95
+ Bartholomew and the Oobleck |  16.95
+ Franklin in the Dark        |  23.95
+ Goodnight Moon              |  28.95
+ The Velveteen Rabbit        |  24.95
+ Little Women                |  23.95
+ The Cat in the Hat          |  23.95
+ The Shining                 |  36.95
+ The Tell-Tale Heart         |  24.95
+ The Tell-Tale Heart         |  21.95
+ Dune                        |  21.95
+ Dune                        |  45.95
+ 2001: A Space Odyssey       |  22.95
+ 2001: A Space Odyssey       |  46.95
+ Dynamic Anatomy             |  28.95
+(16 rows)
+
+booktown=# SELECT books.title, stock.retail FROM books INNER JOIN editions ON books.id=editions.book_id INNER JOIN stock ON editions.isbn=stock.isbn ORDER BY stock.retail DESC;
+            title            | retail 
+-----------------------------+--------
+ 2001: A Space Odyssey       |  46.95
+ Dune                        |  45.95
+ The Shining                 |  36.95
+ The Cat in the Hat          |  32.95
+ Goodnight Moon              |  28.95
+ The Shining                 |  28.95
+ Dynamic Anatomy             |  28.95
+ The Tell-Tale Heart         |  24.95
+ The Velveteen Rabbit        |  24.95
+ The Cat in the Hat          |  23.95
+ Franklin in the Dark        |  23.95
+ Little Women                |  23.95
+ 2001: A Space Odyssey       |  22.95
+ The Tell-Tale Heart         |  21.95
+ Dune                        |  21.95
+ Bartholomew and the Oobleck |  16.95
+(16 rows)
+
+booktown=# SELECT * FROM publishers;
+ id  |            name             |                                       address                                       
+-----+-----------------------------+-------------------------------------------------------------------------------------
+ 150 | Kids Can Press              | Kids Can Press, 29 Birch Ave. Toronto, ON  M4V 1E2
+  91 | Henry Holt & Company, Inc.  | Henry Holt & Company, Inc. 115 West 18th Street New York, NY 10011
+ 113 | O'Reilly & Associates       | O'Reilly & Associates, Inc. 101 Morris St, Sebastopol, CA 95472
+  62 | Watson-Guptill Publications | 1515 Boradway, New York, NY 10036
+ 105 | Noonday Press               | Farrar Straus & Giroux Inc, 19 Union Square W, New York, NY 10003
+  99 | Ace Books                   | The Berkley Publishing Group, Penguin Putnam Inc, 375 Hudson St, New York, NY 10014
+ 101 | Roc                         | Penguin Putnam Inc, 375 Hudson St, New York, NY 10014
+ 163 | Mojo Press                  | Mojo Press, PO Box 1215, Dripping Springs, TX 78720
+ 171 | Books of Wonder             | Books of Wonder, 16 W. 18th St. New York, NY, 10011
+ 102 | Penguin                     | Penguin Putnam Inc, 375 Hudson St, New York, NY 10014
+  75 | Doubleday                   | Random House, Inc, 1540 Broadway, New York, NY 10036
+  65 | HarperCollins               | HarperCollins Publishers, 10 E 53rd St, New York, NY 10022
+  59 | Random House                | Random House, Inc, 1540 Broadway, New York, NY 10036
+(13 rows)
+
+booktown=# books.title, stock.isbn, stock.retail, publishers.name FROM books INNER JOIN editions ON books.id=editions.book_id INNER JOIN stock ON stock.isbn=editions.isbn INNER JOIN publishers ON stock.publisher_id=publishers.id WHERE books.title = 'Dune';
+ERROR:  syntax error at or near "SELEs"
+LINE 1: SELEs.title, stock.isbn, stock.retail, publishers.name FROM ...
+        ^
+booktown=# booktown=# SELECT books.title, stock.isbn, stock.retail, publishers.name FROM books INNER JOIN editions ON books.id=editions.book_id INNER JOIN stock ON stock.isbn=editions.isbn INNER JOIN publishers ON stock.publisher_id=publHERE book
+ERROR:  syntax error at or near "SELEs"
+LINE 1: SELEs.title, stCT booksck.isbn, stock.retail, publishers.nam...
+        ^
+booktown=# SELECT books.title, stock.isbn, stock.retail, publishers.name FROM books INNER JOIN editions ON books.id=editions.book_id INNER JOIN stock ON stock.isbn=editions.isbn INNER JOIN publishers ON stock.publisher_id=publishers.id WHERE books.title = 'Dune';
+ERROR:  column stock.publisher_id does not exist
+LINE 1: ...stock.isbn=editions.isbn INNER JOIN publishers ON stock.publ...
+                                                             ^
+booktown=# SELECT books.title, stock.isbn, stock.retail, publishers.name FROM books INNER JOIN editions ON books.id=editions.book_id INNER JOIN stock ON stock.isbn=editions.isbn INNER JOIN publishers ON editions.publisher_id=publishers.id WHERE books.title = 'Dune';
+ title |    isbn    | retail |   name    
+-------+------------+--------+-----------
+ Dune  | 0441172717 |  21.95 | Ace Books
+ Dune  | 044100590X |  45.95 | Ace Books
+(2 rows)
+
+booktown=# SELECT * FROM customers;
+  id  | last_name | first_name 
+------+-----------+------------
+  107 | Jackson   | Annie
+  112 | Gould     | Ed
+  142 | Allen     | Chad
+  146 | Williams  | James
+  172 | Brown     | Richard
+  185 | Morrill   | Eric
+  221 | King      | Jenny
+  270 | Bollman   | Julie
+  388 | Morrill   | Royce
+  409 | Holloway  | Christine
+  430 | Black     | Jean
+  476 | Clark     | James
+  480 | Thomas    | Rich
+  488 | Young     | Trevor
+  574 | Bennett   | Laura
+  652 | Anderson  | Jonathan
+  655 | Olson     | Dave
+  671 | Brown     | Chuck
+  723 | Eisele    | Don
+  724 | Holloway  | Adam
+  738 | Gould     | Shirley
+  830 | Robertson | Royce
+  853 | Black     | Wendy
+  860 | Owens     | Tim
+  880 | Robinson  | Tammy
+  898 | Gerdes    | Kate
+  964 | Gould     | Ramon
+ 1045 | Owens     | Jean
+ 1125 | Bollman   | Owen
+ 1149 | Becker    | Owen
+ 1123 | Corner    | Kathy
+(31 rows)
+
+booktown=# SELECT * FROM shipments;
+  id  | customer_id |    isbn    |       ship_date        
+------+-------------+------------+------------------------
+  375 |         142 | 039480001X | 2001-08-06 09:29:21-07
+  323 |         671 | 0451160916 | 2001-08-14 10:36:41-07
+  998 |        1045 | 0590445065 | 2001-08-12 12:09:47-07
+  749 |         172 | 0694003611 | 2001-08-11 10:52:34-07
+  662 |         655 | 0679803335 | 2001-08-09 07:30:07-07
+  806 |        1125 | 0760720002 | 2001-08-05 09:34:04-07
+  102 |         146 | 0394900014 | 2001-08-11 13:34:08-07
+  813 |         112 | 0385121679 | 2001-08-08 09:53:46-07
+  652 |         724 | 1885418035 | 2001-08-14 13:41:39-07
+  599 |         430 | 0929605942 | 2001-08-10 08:29:42-07
+  969 |         488 | 0441172717 | 2001-08-14 08:42:58-07
+  433 |         898 | 044100590X | 2001-08-12 08:46:35-07
+  660 |         409 | 0451457994 | 2001-08-07 11:56:42-07
+  310 |         738 | 0451198492 | 2001-08-15 14:02:01-07
+  510 |         860 | 0823015505 | 2001-08-14 07:33:47-07
+  997 |         185 | 039480001X | 2001-08-10 13:47:52-07
+  999 |         221 | 0451160916 | 2001-08-14 13:45:51-07
+   56 |         880 | 0590445065 | 2001-08-14 13:49:00-07
+   72 |         574 | 0694003611 | 2001-08-06 07:49:44-07
+  146 |         270 | 039480001X | 2001-08-13 09:42:10-07
+  981 |         652 | 0451160916 | 2001-08-08 08:36:44-07
+   95 |         480 | 0590445065 | 2001-08-10 07:29:52-07
+  593 |         476 | 0694003611 | 2001-08-15 11:57:40-07
+  977 |         853 | 0679803335 | 2001-08-09 09:30:46-07
+  117 |         185 | 0760720002 | 2001-08-07 13:00:48-07
+  406 |        1123 | 0394900014 | 2001-08-13 09:47:04-07
+  340 |        1149 | 0385121679 | 2001-08-12 13:39:22-07
+  871 |         388 | 1885418035 | 2001-08-07 11:31:57-07
+ 1000 |         221 | 039480001X | 2001-09-14 16:46:32-07
+ 1001 |         107 | 039480001X | 2001-09-14 17:42:22-07
+  754 |         107 | 0394800753 | 2001-08-11 09:55:05-07
+  458 |         107 | 0394800753 | 2001-08-07 10:58:36-07
+  189 |         107 | 0394800753 | 2001-08-06 11:46:36-07
+  720 |         107 | 0394800753 | 2001-08-08 10:46:13-07
+ 1002 |         107 | 0394800753 | 2001-09-22 11:23:28-07
+    2 |         107 | 0394800753 | 2001-09-22 20:58:56-07
+(36 rows)
+
+booktown=# SELECT customers.first_name, customers.last_name, shipments.ship_date, books.title FROM books INNER JOIN editions ON books.id=editions.book_id INNER JOIN shipments ON editions.isbn=stock.isbn JOIN customers ON customers.id=stock.customer_id;
+ERROR:  missing FROM-clause entry for table "stock"
+LINE 1: ...ons.book_id INNER JOIN shipments ON editions.isbn=stock.isbn...
+                                                             ^
+booktown=# SELECT customers.first_name, customers.last_name, shipments.ship_date, books.title FROM books INNER JOIN editions ON books.id=editions.book_id INNER JOIN shipments ON editions.isbn=shipments.isbn JOIN customers ON customers.id=stock.customer_id;
+ERROR:  missing FROM-clause entry for table "stock"
+LINE 1: ...sbn=shipments.isbn JOIN customers ON customers.id=stock.cust...
+                                                             ^
+booktown=# booktown=# SELECT customers.first_name, customers.last_name, shipments.ship_date, books.title FROM books INNER JOIN editions ON books.id=editions.book_id INNER JOIN shipments ON editions.isbn=shipments.isbn JOIN customers ON cushipments.customer_id;
+ first_name | last_name |       ship_date        |            title            
+------------+-----------+------------------------+-----------------------------
+ Annie      | Jackson   | 2001-09-14 17:42:22-07 | The Cat in the Hat
+ Jenny      | King      | 2001-09-14 16:46:32-07 | The Cat in the Hat
+ Julie      | Bollman   | 2001-08-13 09:42:10-07 | The Cat in the Hat
+ Eric       | Morrill   | 2001-08-10 13:47:52-07 | The Cat in the Hat
+ Chad       | Allen     | 2001-08-06 09:29:21-07 | The Cat in the Hat
+ Jonathan   | Anderson  | 2001-08-08 08:36:44-07 | The Shining
+ Jenny      | King      | 2001-08-14 13:45:51-07 | The Shining
+ Chuck      | Brown     | 2001-08-14 10:36:41-07 | The Shining
+ Annie      | Jackson   | 2001-09-22 20:58:56-07 | Bartholomew and the Oobleck
+ Annie      | Jackson   | 2001-09-22 11:23:28-07 | Bartholomew and the Oobleck
+ Annie      | Jackson   | 2001-08-08 10:46:13-07 | Bartholomew and the Oobleck
+ Annie      | Jackson   | 2001-08-06 11:46:36-07 | Bartholomew and the Oobleck
+ Annie      | Jackson   | 2001-08-07 10:58:36-07 | Bartholomew and the Oobleck
+ Annie      | Jackson   | 2001-08-11 09:55:05-07 | Bartholomew and the Oobleck
+ Rich       | Thomas    | 2001-08-10 07:29:52-07 | Franklin in the Dark
+ Tammy      | Robinson  | 2001-08-14 13:49:00-07 | Franklin in the Dark
+ Jean       | Owens     | 2001-08-12 12:09:47-07 | Franklin in the Dark
+ James      | Clark     | 2001-08-15 11:57:40-07 | Goodnight Moon
+ Laura      | Bennett   | 2001-08-06 07:49:44-07 | Goodnight Moon
+ Richard    | Brown     | 2001-08-11 10:52:34-07 | Goodnight Moon
+ Wendy      | Black     | 2001-08-09 09:30:46-07 | The Velveteen Rabbit
+ Dave       | Olson     | 2001-08-09 07:30:07-07 | The Velveteen Rabbit
+ Eric       | Morrill   | 2001-08-07 13:00:48-07 | Little Women
+ Owen       | Bollman   | 2001-08-05 09:34:04-07 | Little Women
+ Kathy      | Corner    | 2001-08-13 09:47:04-07 | The Cat in the Hat
+ James      | Williams  | 2001-08-11 13:34:08-07 | The Cat in the Hat
+ Owen       | Becker    | 2001-08-12 13:39:22-07 | The Shining
+ Ed         | Gould     | 2001-08-08 09:53:46-07 | The Shining
+ Royce      | Morrill   | 2001-08-07 11:31:57-07 | The Tell-Tale Heart
+ Adam       | Holloway  | 2001-08-14 13:41:39-07 | The Tell-Tale Heart
+ Jean       | Black     | 2001-08-10 08:29:42-07 | The Tell-Tale Heart
+ Trevor     | Young     | 2001-08-14 08:42:58-07 | Dune
+ Kate       | Gerdes    | 2001-08-12 08:46:35-07 | Dune
+ Christine  | Holloway  | 2001-08-07 11:56:42-07 | 2001: A Space Odyssey
+ Shirley    | Gould     | 2001-08-15 14:02:01-07 | 2001: A Space Odyssey
+ Tim        | Owens     | 2001-08-14 07:33:47-07 | Dynamic Anatomy
+(36 rows)
+
+booktown=# SELECT COUNT(*) FROM books;
+ count 
+-------
+    15
+(1 row)
+
+booktown=# SELECT COUNT(location) from SUBJECTS;
+ count 
+-------
+    15
+(1 row)
+
+booktown=# select COUNT(location) FROM subjects;
+ count 
+-------
+    15
+(1 row)
+
+booktown=# SELECT location COUNT(subjects) FROM subjects GROUP BY location;
+ERROR:  syntax error at or near "("
+LINE 1: SELECT location COUNT(subjects) FROM subjects GROUP BY locat...
+                             ^
+booktown=# SELECT location COUNT(location) FROM subjects GROUP BY location;
+ERROR:  syntax error at or near "("
+LINE 1: SELECT location COUNT(location) FROM subjects GROUP BY locat...
+                             ^
+booktown=# SELECT location, COUNT(location) FROM subjects GROUP BY location;
+     location     | count 
+------------------+-------
+                  |     0
+ Sunset Dr        |     1
+ Kids Ct          |     1
+ Black Raven Dr   |     2
+ Creativity St    |     2
+ Academic Rd      |     2
+ Main St          |     4
+ Productivity Ave |     3
+(8 rows)
+
+booktown=# SELECT books.title, COUNT(editions.book_id) FROM books INNER JOIN editions ON books.id=editions.book_id GROUP BY books.title;
+            title            | count 
+-----------------------------+-------
+ The Tell-Tale Heart         |     2
+ Bartholomew and the Oobleck |     1
+ Programming Python          |     1
+ 2001: A Space Odyssey       |     2
+ Dune                        |     2
+ The Shining                 |     2
+ The Velveteen Rabbit        |     1
+ Little Women                |     1
+ The Cat in the Hat          |     2
+ Franklin in the Dark        |     1
+ Dynamic Anatomy             |     1
+ Goodnight Moon              |     1
+(12 rows)
+
+booktown=# SELECT books.title, books.id, COUNT(editions.book_id) FROM books INNER JOIN editions ON books.id=editions.book_id GROUP BY books.title;
+ERROR:  column "books.id" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: SELECT books.title, books.id, COUNT(editions.book_id) FROM b...
+                            ^
+booktown=# SELECT books.title, editions.book_id, COUNT(editions.book_id) FROM books INNER JOIN editions ON books.id=editions.book_id GROUP BY books.title;
+ERROR:  column "editions.book_id" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: SELECT books.title, editions.book_id, COUNT(editions.book_id...
+                            ^
+booktown=# SELECT books.title, COUNT(editions.book_id) FROM books INNER JOIN editions ON books.id=editions.book_id GROUP BY books.title;
+            title            | count 
+-----------------------------+-------
+ The Tell-Tale Heart         |     2
+ Bartholomew and the Oobleck |     1
+ Programming Python          |     1
+ 2001: A Space Odyssey       |     2
+ Dune                        |     2
+ The Shining                 |     2
+ The Velveteen Rabbit        |     1
+ Little Women                |     1
+ The Cat in the Hat          |     2
+ Franklin in the Dark        |     1
+ Dynamic Anatomy             |     1
+ Goodnight Moon              |     1
+(12 rows)
+
+booktown=# 
