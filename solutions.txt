@@ -67,3 +67,15 @@ JOIN editions e
 JOIN stock s 
     ON e.isbn=s.isbn 
 ORDER BY s.retail DESC;
+
+
+SELECT b.title, e.isbn, p.name, s.retail
+FROM books  b                                                
+JOIN editions e 
+    ON b.id=e.book_id 
+JOIN stock s  
+    ON e.isbn=s.isbn 
+JOIN publishers p  
+    ON p.id=e.publisher_id
+WHERE b.title   
+    LIKE '%Dune%';
