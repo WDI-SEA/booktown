@@ -54,7 +54,7 @@ SELECT books.title, editions.isbn,publishers.name, stock.retail FROM books INNER
 -- 	* ship date
 -- 	* book title
 
-SELECT customers.first_name,customers.last_name,shipments.ship_date,books.titlebooktown=# SELECT customers.first_name,customers.last_name,shipments.ship_date,books.title FROM shipments INNER J= editions.isbn INNER JOIN books ON editions.book_id = books.id ORDER BY ship_date; 
+SELECT customers.first_name,customers.last_name,shipments.ship_date,books.title FROM shipments INNER JOIN customers ON customers.id = shipments.customer_id INNER JOIN editions ON editions.isbn=shipments.isbn INNER JOIN books ON editions.book_id = books.id;
 
 -- ### Grouping and Counting
 
