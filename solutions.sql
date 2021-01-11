@@ -36,3 +36,15 @@
 -- 12. Get the COUNT of all Locations
 -- 13. Get the COUNT of each unique location in the subjects table. Display the count and the location name. (hint: requires GROUP BY).
 -- 14. List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)
+
+
+-- SELECT * FROM subjects
+-- SELECT * FROM subjects ORDER BY location;
+-- SELECT * FROM books    SELECT * FROM books WHERE id = '190'
+-- SELECT * FROM subjects WHERE location ='Main St' ORDER BY subject;
+-- SELECT * FROM books WHERE subject_id = '4';
+-- SELECT books.title, authors.first_name, authors.last_name, subjects.subject
+-- booktown-# FROM authors
+-- booktown-# JOIN books ON books.author_id = authors.id
+-- booktown-# JOIN subjects ON subjects.id = books.subject_id;
+-- SELECT * FROM stock ORDER BY retail DESC;     
