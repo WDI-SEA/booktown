@@ -21,6 +21,8 @@ SELECT * FROM subjects WHERE location = 'Main St' ORDER BY subject ASC;
 6. Find all books about Computers and list ONLY the book titles
 SELECT title FROM books WHERE subject_id = '4';
 
+*(REVIEW)* SELECT b.title FROM books b JOIN subjects s ON b.subject_id=s.id WHERE s.subject = 'Computers';
+
 7. Find all books and display a result table with ONLY the following columns
 * Book title
 * Author's first name
@@ -36,11 +38,11 @@ JOIN authors ON authors.id=books.author_id;
 * Sort them by retail price (most expensive first)
 * Display ONLY: title and price
 
-SELECT books.title, stock.cost
+SELECT books.title, stock.retail
 FROM editions
 JOIN stock ON stock.isbn=editions.isbn
 JOIN books ON editions.book_id=books.id
-ORDER BY stock.cost DESC;
+ORDER BY stock.retail DESC;
 
 **9. Find the book "Dune" and display ONLY the following columns
 * Book title
@@ -48,11 +50,27 @@ ORDER BY stock.cost DESC;
 * Publisher name
 * Retail price
 
+*(REVIEW - Modified to my own version)*
+SELECT books.title, stock.isbn, publishers.name, stock.retail
+FROM books
+JOIN editions ON books.id=editions.book_id
+JOIN stock ON stock.isbn=editions.isbn
+JOIN publishers ON editions.publisher_id=publishers.id
+WHERE books.title = 'Dune';
+
 **10. Find all shipments sorted by ship date display a result table with ONLY the following columns:
 * Customer first name
 * Customer last name
 * ship date
 * book title
+
+*(REVIEW - Modified to my own version)*
+SELECT customers.first_name, customers.last_name, shipments.ship_date, books.title
+FROM customers
+JOIN shipments ON customers.id=shipments.customer_id
+JOIN editions ON editions.isbn=shipments.isbn
+JOIN books ON books.id=editions.book_id
+ORDER BY shipments.ship_date DESC;
 
 # Grouping and Counting
 
@@ -66,3 +84,8 @@ SELECT COUNT(location) FROM subjects;
 SELECT location, COUNT(location) FROM subjects GROUP BY location;
 
 **14. List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)
+
+*(REVIEW)*
+SELECT books.id, books.title, COUNT(editions.edition)
+FROM books
+JOIN editions ON books.id=editions.book_id GROUP BY books.id;
