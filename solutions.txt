@@ -19,6 +19,10 @@ WHERE s.subject = 'Computers';
 7. SELECT b.title, a.first_name, a.last_name, b.subject_id FROM books b 
 JOIN authors a ON b.author_id=a.id;
 
+                        OR
+SELECT b.title, a.first_name, a.last_name, s.subject FROM books b 
+JOIN authors a ON b.author_id=a.id JOIN subjects s ON b.subject_id=s.id;
+
 8. SELECT b.title, s.retail FROM books b JOIN editions e ON b.id=e.book_id 
 JOIN stock s ON e.isbn=s.isbn ORDER BY s.retail DESC;
 
