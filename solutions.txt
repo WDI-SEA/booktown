@@ -1,0 +1,120 @@
+1.
+ id |     subject      |     location
+----+------------------+------------------
+  0 | Arts             | Creativity St
+  1 | Business         | Productivity Ave
+  2 | Children's Books | Kids Ct
+  3 | Classics         | Academic Rd
+  4 | Computers        | Productivity Ave
+  5 | Cooking          | Creativity St
+  6 | Drama            | Main St
+  7 | Entertainment    | Main St
+  8 | History          | Academic Rd
+  9 | Horror           | Black Raven Dr
+ 10 | Mystery          | Black Raven Dr
+ 11 | Poetry           | Sunset Dr
+ 12 | Religion         |
+ 13 | Romance          | Main St
+ 14 | Science          | Productivity Ave
+ 15 | Science Fiction  | Main St
+
+2.
+ id |     subject      |     location
+----+------------------+------------------
+  8 | History          | Academic Rd
+  3 | Classics         | Academic Rd
+ 10 | Mystery          | Black Raven Dr
+  9 | Horror           | Black Raven Dr
+  0 | Arts             | Creativity St
+  5 | Cooking          | Creativity St
+  2 | Children's Books | Kids Ct
+  7 | Entertainment    | Main St
+  6 | Drama            | Main St
+ 13 | Romance          | Main St
+ 15 | Science Fiction  | Main St
+ 14 | Science          | Productivity Ave
+  4 | Computers        | Productivity Ave
+  1 | Business         | Productivity Ave
+ 11 | Poetry           | Sunset Dr
+ 12 | Religion         |
+
+3.
+ id  |    title     | author_id | subject_id
+-----+--------------+-----------+------------
+ 190 | Little Women |        16 |          6
+
+4.
+  id   |       title        | author_id | subject_id
+-------+--------------------+-----------+------------
+ 41473 | Programming Python |      7805 |          4
+ 41477 | Learning Python    |      7805 |          4
+
+5.
+ id |     subject     | location
+----+-----------------+----------
+  6 | Drama           | Main St
+  7 | Entertainment   | Main St
+ 13 | Romance         | Main St
+ 15 | Science Fiction | Main St
+
+6.
+        title
+----------------------
+ Programming Python
+ Learning Python
+ Perl Cookbook
+ Practical PostgreSQL
+
+7.
+            title            |  last_name   |    first_name    |     subject
+-----------------------------+--------------+------------------+------------------
+ Practical PostgreSQL        | Worsley      | John             | Computers
+ Franklin in the Dark        | Bourgeois    | Paulette         | Children's Books
+ The Velveteen Rabbit        | Bianco       | Margery Williams | Classics
+ Little Women                | Alcott       | Louisa May       | Drama
+ The Shining                 | King         | Stephen          | Horror
+ Dune                        | Herbert      | Frank            | Science Fiction
+ Dynamic Anatomy             | Hogarth      | Burne            | Arts
+ Goodnight Moon              | Brown        | Margaret Wise    | Children's Books
+ The Tell-Tale Heart         | Poe          | Edgar Allen      | Horror
+ Programming Python          | Lutz         | Mark             | Computers
+ Learning Python             | Lutz         | Mark             | Computers
+ Perl Cookbook               | Christiansen | Tom              | Computers
+ 2001: A Space Odyssey       | Clarke       | Arthur C.        | Science Fiction
+ The Cat in the Hat          | Geisel       | Theodor Seuss    | Children's Books
+ Bartholomew and the Oobleck | Geisel       | Theodor Seuss    | Children's Books
+
+8.
+            title            | cost
+-----------------------------+-------
+ The Cat in the Hat          | 30.00
+ The Shining                 | 24.00
+ Bartholomew and the Oobleck | 16.00
+ Franklin in the Dark        | 23.00
+ Goodnight Moon              | 25.00
+ The Velveteen Rabbit        | 20.00
+ Little Women                | 18.00
+ The Cat in the Hat          | 23.00
+ The Shining                 | 29.00
+ The Tell-Tale Heart         | 23.00
+ The Tell-Tale Heart         | 19.00
+ Dune                        | 17.00
+ Dune                        | 36.00
+ 2001: A Space Odyssey       | 17.00
+ 2001: A Space Odyssey       | 36.00
+ Dynamic Anatomy             | 26.00
+
+9.
+
+10.
+
+11.
+ count
+-------
+    15
+
+12.
+ count
+-------
+    13
+
