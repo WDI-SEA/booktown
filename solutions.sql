@@ -73,15 +73,56 @@ ORDER BY s.retail DESC;
 -- 	* ISBN number
 -- 	* Publisher name
 -- 	* Retail price
+SELECT b.title, e.isbn, p.name, s.retail                        FROM books  b                                                
+JOIN editions e 
+    ON b.id=e.book_id 
+JOIN stock s  
+    ON e.isbn=s.isbn 
+JOIN publishers p  
+    ON p.id=e.publisher_id
+WHERE b.title   
+    LIKE '%Dune%';
+
 -- 10. Find all shipments sorted by ship date display a result table with ONLY the following columns:
 -- 	* Customer first name
 -- 	* Customer last name
 -- 	* ship date
 -- 	* book title
 
+SELECT c.first_name, c.last_name, s.ship_date, b.title
+FROM customers c
+JOIN shipments s
+    ON c.id=s.customer_id
+JOIN editions e
+    ON e.isbn=s.isbn
+JOIN books b
+    ON b.id=e.book_id 
+ORDER BY s.ship_date DESC;
+
+
+
 -- ### Grouping and Counting
 
 -- 11. Get the COUNT of all books
+
+SELECT COUNT(*) 
+FROM books;
 -- 12. Get the COUNT of all Locations
+
+SELECT COUNT(location) 
+FROM subjects;
+
 -- 13. Get the COUNT of each unique location in the subjects table. Display the count and the location name. (hint: requires GROUP BY).
+
+
+SELECT location, COUNT(location) 
+FROM subjects
+GROUP BY location;
+
 -- 14. List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)
+
+SELECT e.book_id, COUNT(edition) 
+FROM editions e
+JOIN books b 
+ON b.id=e.book_id 
+GROUP BY e.book_id;
