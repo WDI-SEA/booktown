@@ -247,7 +247,7 @@ CREATE TABLE "text_sorting" (
 	"letter" character(1)
 );
 
---
+
 -- TOC Entry ID 38 (OID 3751882)
 --
 -- Name: subjects Type: TABLE Owner: postgres
