@@ -1,0 +1,39 @@
+PostgreSQL - How to add a foreign key?
+August 2, 2018
+
+You have two tables:
+
+CREATE TABLE customers (
+    id SERIAL PRIMARY KEY,
+    full_name TEXT
+);
+and
+
+CREATE TABLE orders (
+    order_id SERIAL,
+    dish_name TEXT,
+    customer_id INTEGER
+);
+And you want to make customer_id from orders refer to id from customer.
+
+There are a couple ways to do that.
+
+1. Define the foreign key inside the CREATE TABLE statement
+
+CREATE TABLE orders (
+    order_id SERIAL,
+    dish_name TEXT,
+    customer_id INTEGER REFERENCES customers (id)
+);
+2. Use a separate ALTER TABLE statement
+
+ALTER TABLE orders
+    ADD CONSTRAINT fk_orders_customers FOREIGN KEY (customer_id) REFERENCES customers (id);
+3. Use TableP lus GUI tool for Postgres
+
+You can create a foreign key directly from the GUI Tool.
+Select to view table orders from the right sidebar
+Switch to structure tab at the bottom bar
+Choose customer_id column and add a foreign key in the foreign_key field.
+Remember to press Cmd + S to commit the changes to the server.
+
