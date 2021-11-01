@@ -1,10 +1,61 @@
 -- ### Order
 -- 1. Find all subjects sorted by subject
+SELECT subject FROM subjects ORDER BY subject;
+output:  Arts
+ Business
+ Childrens Books
+ Classics
+ Computers
+ Cooking
+ Drama
+ Entertainment
+ History
+ Horror
+ Mystery
+ Poetry
+ Religion
+ Romance
+ Science
+ Science Fiction
+(16 rows)
 -- 2. Find all subjects sorted by location
+SELECT subject FROM subjects ORDER BY location;
+output:  History
+ Classics
+ Mystery
+ Horror
+ Arts
+ Cooking
+ Childrens Books
+ Entertainment
+ Drama
+ Romance
+ Science Fiction
+ Science
+ Computers
+ Business
+ Poetry
+ Religion
+(16 rows)
 
 -- ### Where
 -- 3. Find the book "Little Women"
+SELECT * FROM books WHERE title = 'Little Women';
+output:  
+id  |    title     | author_id | subject_id 
+-----+--------------+-----------+------------
+ 190 | Little Women |        16 |          6
+(1 row)
+
+
 -- 4. Find all books containing the word "Python"
+SELECT * FROM books WHERE title LIKE '%Python%';
+output:
+  id   |       title        | author_id | subject_id 
+-------+--------------------+-----------+------------
+ 41473 | Programming Python |      7805 |          4
+ 41477 | Learning Python    |      7805 |          4
+(2 rows)
 -- 5. Find all subjects with the location "Main St" sort them by subject
 
 
