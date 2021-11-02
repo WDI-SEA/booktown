@@ -68,7 +68,7 @@ books.title
 FROM shipments 
 INNER JOIN customers ON customers.id=shipments.customer_id
 INNER JOIN editions ON editions.isbn=shipments.isbn
-INNER JOIN books ON books.id=editions.book_id;
+INNER JOIN books ON books.id=editions.book_id ORDER BY ship_date;
 -- ### Grouping and Counting
 
 -- 11. Get the COUNT of all books
