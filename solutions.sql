@@ -130,6 +130,27 @@ ON b.subject_id = s.id;
 -- 8. Find all books that are listed in the stock table
 -- 	* Sort them by retail price (most expensive first)
 -- 	* Display ONLY: title and price
+            title            | retail 
+-----------------------------+--------
+ 2001: A Space Odyssey       |  46.95
+ Dune                        |  45.95
+ The Shining                 |  36.95
+ The Cat in the Hat          |  32.95
+ Goodnight Moon              |  28.95
+ The Shining                 |  28.95
+ Dynamic Anatomy             |  28.95
+ The Tell-Tale Heart         |  24.95
+ The Velveteen Rabbit        |  24.95
+ The Cat in the Hat          |  23.95
+ Franklin in the Dark        |  23.95
+ Little Women                |  23.95
+ 2001: A Space Odyssey       |  22.95
+ The Tell-Tale Heart         |  21.95
+ Dune                        |  21.95
+ Bartholomew and the Oobleck |  16.95
+(16 rows)
+
+booktown=# 
 -- 9. Find the book "Dune" and display ONLY the following columns
 -- 	* Book title
 -- 	* ISBN number
@@ -144,6 +165,28 @@ ON b.subject_id = s.id;
 -- ### Grouping and Counting
 
 -- 11. Get the COUNT of all books
+booktown=# SELECT COUNT (*) FROM books;
+ count 
+-------
+    15
+(1 row)
 -- 12. Get the COUNT of all Locations
+booktown=# SELECT COUNT (location) FROM subjects;
+ count 
+-------
+    15
+(1 row)
 -- 13. Get the COUNT of each unique location in the subjects table. Display the count and the location name. (hint: requires GROUP BY).
+booktown=# SELECT location, COUNT(location) FROM subjects GROUP BY location;
+     location     | count 
+------------------+-------
+                  |     0
+ Sunset Dr        |     1
+ Kids Ct          |     1
+ Black Raven Dr   |     2
+ Creativity St    |     2
+ Academic Rd      |     2
+ Main St          |     4
+ Productivity Ave |     3
+(8 rows)
 -- 14. List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)
