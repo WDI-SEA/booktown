@@ -1,6 +1,6 @@
 -- ### Order
 -- 1. Find all subjects sorted by subject
-booktown=# SELECT subject FROM subjects;
+SELECT subject FROM subjects;
      subject      
 ------------------
  Arts
@@ -22,7 +22,7 @@ booktown=# SELECT subject FROM subjects;
 (16 rows)
 
 -- 2. Find all subjects sorted by location
-booktown=# SELECT location FROM subjects;
+SELECT location FROM subjects;
      location     
 ------------------
  Creativity St
@@ -45,7 +45,7 @@ booktown=# SELECT location FROM subjects;
 
 -- ### Where
 -- 3. Find the book "Little Women"
-booktown=# SELECT * FROM books WHERE title='Little Women';
+SELECT * FROM books WHERE title='Little Women';
  id  |    title     | author_id | subject_id 
 -----+--------------+-----------+------------
  190 | Little Women |        16 |          6
@@ -53,7 +53,7 @@ booktown=# SELECT * FROM books WHERE title='Little Women';
 
 
 -- 4. Find all books containing the word "Python"
-booktown=# SELECT title FROM books WHERE title LIKE '%Python%';
+SELECT title FROM books WHERE title LIKE '%Python%';
        title        
 --------------------
  Programming Python
@@ -61,7 +61,7 @@ booktown=# SELECT title FROM books WHERE title LIKE '%Python%';
 (2 rows)
 
 -- 5. Find all subjects with the location "Main St" sort them by subject
-booktown=# SELECT location, subject FROM subjects WHERE location LIKE '%Main St%' ORDER BY subject;
+SELECT location, subject FROM subjects WHERE location LIKE '%Main St%' ORDER BY subject;
  location |     subject     
 ----------+-----------------
  Main St  | Drama
@@ -75,7 +75,11 @@ booktown=# SELECT location, subject FROM subjects WHERE location LIKE '%Main St%
 -- ### Joins
 
 -- 6. Find all books about Computers and list ONLY the book titles
-booktown=# SELECT b.title, s.subject FROM books b INNER JOIN subjects s ON b.subject_id=s.id WHERE subject='Computers';
+SELECT b.title, s.subject FROM books b 
+INNER JOIN subjects s ON b.subject_id=s.id WHERE subject='Computers';
+
+// SELECT b. title FROM books b 
+INNER JOIN subjects s ON s.subjects = 'Computers' AND s.id = b.subject_id;
         title         |  subject  
 ----------------------+-----------
  Practical PostgreSQL | Computers
@@ -88,7 +92,13 @@ booktown=# SELECT b.title, s.subject FROM books b INNER JOIN subjects s ON b.sub
 -- 	* Author's first name
 -- 	* Author's last name
 -- 	* Book subject
-booktown=# SELECT b.title, a.first_name, a.last_name, s.subject FROM books b INNER JOIN authors a ON b.author_id=a.id INNER JOIN subjects s ON b.subject_id=s.id;
+SELECT b.title, a.first_name, a.last_name, s.subject 
+FROM books b INNER JOIN authors a ON b.author_id=a.id 
+INNER JOIN subjects s ON b.subject_id=s.id;
+
+SELECT b.title, a.first_name, a.last_name, s.subject
+FROM books b LEFT JOIN authors a ON b.author_id = a.id
+LEFT JOIN subjects s ON b.subject_id = s.id;
             title            |    first_name    |  last_name   |     subject      
 -----------------------------+------------------+--------------+------------------
  Practical PostgreSQL        | John             | Worsley      | Computers
@@ -110,7 +120,12 @@ booktown=# SELECT b.title, a.first_name, a.last_name, s.subject FROM books b INN
 -- 8. Find all books that are listed in the stock table
 -- 	* Sort them by retail price (most expensive first)
 -- 	* Display ONLY: title and price
-SELECT b.title, s.retail FROM books b INNER JOIN editions e ON b.id=e.book_id INNER JOIN stock s ON e.isbn=s.isbn ORDER BY s.retail DESC;
+SELECT b.title, s.retail FROM books b 
+INNER JOIN editions e ON b.id=e.book_id 
+INNER JOIN stock s ON e.isbn=s.isbn ORDER BY s.retail DESC;
+
+SELECT books.title, stock.cost FROM editions INNER JOIN books ON editions.book_id = books.id
+INNER JOIN stock ON editions.isbn = stock.isbn ORDER BY stock.cost DESC;
             title            | retail 
 -----------------------------+--------
  2001: A Space Odyssey       |  46.95
@@ -135,8 +150,16 @@ SELECT b.title, s.retail FROM books b INNER JOIN editions e ON b.id=e.book_id IN
 -- 	* ISBN number
 -- 	* Publisher name
 -- 	* Retail price
-booktown=# SELECT b.title, e.isbn, p.name, s.retail FROM books b INNER JOIN editions e ON b.id=e.book_id INNER JOIN publishers p ON p.id=e.publisher_id INNER JOIN stock s ON s.isbn=e.isbn WHERE b.title='Dune'
-booktown-# ;
+SELECT b.title, e.isbn, p.name, s.retail FROM books b 
+INNER JOIN editions e ON b.id = e.book_id 
+INNER JOIN publishers p ON p.id = e.publisher_id 
+INNER JOIN stock s ON s.isbn = e.isbn WHERE b.title='Dune';
+
+SElECT books.title, stock.sibn, stock.retail, publishers.name
+FROM editions
+INNER JOIN books ON books.id = editions.books_id
+INNER JOIn publishers ON publishers.id = editions.publisher_id
+INNEr JOIN stock ON stock.isbn = editions.isbn WHERE title = 'Dune';
  title |    isbn    |   name    | retail 
 -------+------------+-----------+--------
  Dune  | 0441172717 | Ace Books |  21.95
@@ -147,7 +170,10 @@ booktown-# ;
 -- 	* Customer last name
 -- 	* ship date/
 -- 	* book title
-booktown=# SELECT c.first_name, c.last_name, s.ship_date, b.title FROM books b INNER JOIN editions e ON b.id=e.book_id INNER JOIN shipments s ON e.isbn=s.isbn INNER JOIN customers c ON s.customer_id=c.id ORDER BY s.ship_date;
+SELECT c.first_name, c.last_name, s.ship_date, b.title FROM books b 
+INNER JOIN editions e ON b.id=e.book_id 
+INNER JOIN shipments s ON e.isbn=s.isbn 
+INNER JOIN customers c ON s.customer_id=c.id ORDER BY s.ship_date;
  first_name | last_name |       ship_date        |            title            
 ------------+-----------+------------------------+-----------------------------
  Owen       | Bollman   | 2001-08-05 10:34:04-06 | Little Women
@@ -186,23 +212,23 @@ booktown=# SELECT c.first_name, c.last_name, s.ship_date, b.title FROM books b I
  Annie      | Jackson   | 2001-09-14 18:42:22-06 | The Cat in the Hat
  Annie      | Jackson   | 2001-09-22 12:23:28-06 | Bartholomew and the Oobleck
  Annie      | Jackson   | 2001-09-22 21:58:56-06 | Bartholomew and the Oobleck
-(36 rows
+(36 rows)
 -- ### Grouping and Counting
 
 -- 11. Get the COUNT of all books
-booktown=# SELECT COUNT(*) FROM books;
+SELECT COUNT(*) FROM books;
  count 
 -------
     15
 (1 row)
 -- 12. Get the COUNT of all Locations
-booktown=# SELECT COUNT(location) FROM subjects;
+SELECT COUNT(location) FROM subjects;
  count 
 -------
     15
 (1 row)
 -- 13. Get the COUNT of each unique location in the subjects table. Display the count and the location name. (hint: requires GROUP BY).
-booktown=# SELECT location, COUNT(location) FROM subjects GROUP BY location;
+SELECT location, COUNT(location) FROM subjects GROUP BY location;
      location     | count 
 ------------------+-------
                   |     0
@@ -215,3 +241,5 @@ booktown=# SELECT location, COUNT(location) FROM subjects GROUP BY location;
  Productivity Ave |     3
 (8 rows)
 -- 14. List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)
+SELECT books.id, books.title, COUNT(editions.edition) FROM editions 
+INNER JOIN books ON books.id = editions.book_id GROUP BY books.id;
