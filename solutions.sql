@@ -19,7 +19,8 @@ booktown=# SELECT * FROM subjects WHERE location='Main St' ORDER BY subject;
 -- ### Joins
 
 -- 6. Find all books about Computers and list ONLY the book titles
-booktown=# SELECT books.title FROM books INNER JOIN subjects ON subjects.id=books.subject_id;
+booktown=# SELECT books.title FROM books INNER JOIN subjects ON subjects.id=books.subject_id
+WHERE subjects.id=4;
 -- 7. Find all books and display a result table with ONLY the following columns
 -- 	* Book title
 -- 	* Author's first name
