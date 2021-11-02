@@ -109,8 +109,11 @@
 -- 	* Author's last name
 -- 	* Book subject
 -- <----------------- ANSWER -------------------> --
--- booktown=# SELECT books.title, authors.first_name, authors.last_name, subjects.subject FROM books 
--- INNER JOIN authors ON books.author_id=authors.id INNER JOIN subjects ON books.subject_id=subjects.id;
+-- booktown=# SELECT books.title, authors.first_name, authors.last_name, subjects.subject 
+-- FROM books 
+-- INNER JOIN authors ON books.author_id=authors.id 
+-- INNER JOIN subjects ON books.subject_id=subjects.id;
+
 --             title            |    first_name    |  last_name   |     subject      
 -- -----------------------------+------------------+--------------+------------------
 --  Practical PostgreSQL        | John             | Worsley      | Computers
@@ -133,9 +136,15 @@
 
 -- 8. Find all books that are listed in the stock table
 -- 	* Sort them by retail price (most expensive first)
+
+-- booktown=# SELECT * FROM stock ORDER BY  retail DESC;
+
 -- 	* Display ONLY: title and price
 -- <----------------- ANSWER -------------------> --
-
+-- booktown=# SELECT books.title, stock.retail 
+-- FROM books
+-- INNER JOIN editions ON editions.book_id=books.id
+-- INNER JOIN stock ON editions.isbn=stock.isbn;
 
 
 -- 9. Find the book "Dune" and display ONLY the following columns
@@ -143,6 +152,12 @@
 -- 	* ISBN number
 -- 	* Publisher name
 -- 	* Retail price
+-- booktown=# SELECT books.title, stock.retail, stock.isbn, publishers.name 
+-- FROM books
+-- INNER JOIN editions ON editions.book_id=books.id
+-- INNER JOIN stock ON editions.isbn=stock.isbn
+-- INNER JOIN publishers ON editions.publisher_id=publishers.id
+-- booktown-# WHERE title='Dune';
 
 
 
@@ -152,9 +167,31 @@
 -- 	* ship date
 -- 	* book title
 
+-- booktown=# SELECT customers.first_name, customers.last_name, shipments.ship_date, books.title
+-- FROM books
+-- INNER JOIN editions ON editions.book_id=books.id 
+-- INNER JOIN shipments ON shipments.isbn=editions.isbn
+-- INNER JOIN customers ON shipments.customer_id=customers.id
+-- booktown-# ORDER BY ship_date;
+
 -- ### Grouping and Counting
 
 -- 11. Get the COUNT of all books
+
+-- booktown=# SELECT COUNT(*) FROM books;
+
 -- 12. Get the COUNT of all Locations
--- 13. Get the COUNT of each unique location in the subjects table. Display the count and the location name. (hint: requires GROUP BY).
+
+-- booktown=# SELECT COUNT(location) FROM subjects;
+
+-- 13. Get the COUNT of each unique location in the subjects table. Display the count and the location name. (hint: requires GROU
+
+-- booktown=# SELECT location, COUNT(location) FROM subjects GROUP BY location;
+
 -- 14. List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)
+
+-- SELECT books.id, books.title, COUNT(isbn)
+-- FROM editions 
+-- INNER JOIN books ON editions.book_id=books.id
+-- GROUP BY books.id;
+
