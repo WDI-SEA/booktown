@@ -16,6 +16,7 @@ SELECT * FROM subjects WHERE location = 'Main St' ORDER BY subject;
 
 -- 6. Find all books about Computers and list ONLY the book titles
 SELECT DISTINCT title FROM books WHERE subject_id = 4;
+SELECT b.title FROM books b INNER JOIN subjects s ON s.subjects = 'Computers' AND s.id = b.subject_id
 -- 7. Find all books and display a result table with ONLY the following columns
 -- 	* Book title
 -- 	* Author's first name
@@ -25,6 +26,10 @@ SELECT DISTINCT title FROM books WHERE subject_id = 4;
  FROM books 
  INNER JOIN authors
  ON books.author_id = authors.id
+
+ SELECT b.title, a.first_name, a.last_name, s.subject
+ FROM books b LEFT JOIN authors a ON b.author_id = a.id
+ LEFT JOIN  subjects s ON b.subject_id = s.id;
 -- 8. Find all books that are listed in the stock table
 -- 	* Sort them by retail price (most expensive first)
 -- 	* Display ONLY: title and price
@@ -55,12 +60,22 @@ ON publishers.id = editions.publisher_id;
 -- 	* Customer last name
 -- 	* ship date
 -- 	* book title
+SELECT c.first_name, c.last_name, s.ship_date, b.title
+FROM shipments s
+JOIN customers c
+ON s.customers_id = c.id
+JOIN editions e 
+ON e.isbn = s.isbn
+JOIN books books
+ON e.book_id = b_id
+ORDER BY ship_date;
 
 -- ### Grouping and Counting
 
 -- 11. Get the COUNT of all books
 SELECT title, COUNT(title) FROM books GROUP BY title;
 -- 12. Get the COUNT of all Locations
+SELECT COUNT (location) FROM subjects;
 -- 13. Get the COUNT of each unique location in the subjects table. Display the count and the location name. (hint: requires GROUP BY).
 SELECT location, COUNT (location)
 FROM subjects
