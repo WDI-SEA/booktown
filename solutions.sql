@@ -362,6 +362,54 @@ output:
 -- ### Grouping and Counting
 
 -- 11. Get the COUNT of all books
+SELECT count(*) FROM books;
+
+output:
+    15
+(1 row)
+
 -- 12. Get the COUNT of all Locations
+SELECT count(location) FROM subjects;
+
+output: 
+    15
+(1 row)
+
 -- 13. Get the COUNT of each unique location in the subjects table. Display the count and the location name. (hint: requires GROUP BY).
+SELECT location, count(location) FROM subjects GROUP BY location;
+
+output:
+    location     | count 
+------------------+-------
+                  |     0
+ Sunset Dr        |     1
+ Kids Ct          |     1
+ Black Raven Dr   |     2
+ Creativity St    |     2
+ Academic Rd      |     2
+ Main St          |     4
+ Productivity Ave |     3
+(8 rows)
 -- 14. List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)
+SELECT b.id, b.title, count(e.edition) FROM 
+books b JOIN editions e
+ON b.id=e.book_id 
+GROUP BY b.id;
+
+output: 
+  id   |            title            | count 
+-------+-----------------------------+-------
+  2038 | Dynamic Anatomy             |     1
+ 25908 | Franklin in the Dark        |     1
+  7808 | The Shining                 |     2
+  4267 | 2001: A Space Odyssey       |     2
+ 41473 | Programming Python          |     1
+  1234 | The Velveteen Rabbit        |     1
+  4513 | Dune                        |     2
+  1608 | The Cat in the Hat          |     2
+   190 | Little Women                |     1
+  1501 | Goodnight Moon              |     1
+   156 | The Tell-Tale Heart         |     2
+  1590 | Bartholomew and the Oobleck |     1
+(12 rows)
+
