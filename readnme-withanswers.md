@@ -85,11 +85,11 @@ Complete the following exercises to practice using SQL.
 11. Get the COUNT of all books
 <!-- A: SELECT COUNT(*) FROM books; -->
 12. Get the COUNT of all Locations
-<!-- select count(location) from subjects; -->
+<!-- A: select count(location) from subjects; -->
 13. Get the COUNT of each unique location in the subjects table. Display the count and the location name. (hint: requires GROUP BY).
-<!-- select count(location), location from subjects GROUP BY location; -->
+<!-- A: select count(location), location from subjects GROUP BY location; -->
 14. List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)
-
+<!-- A: select book_id, title, count(edition) from books JOIN editions ON books.id = editions.book_id GROUP BY books.title AND editions.book_id; -->
 
 #### YAY! You're done!!
 
