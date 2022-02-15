@@ -34,6 +34,7 @@ Complete the following exercises to practice using SQL.
 
 ### Order
 1. Find all subjects sorted by subject
+
 2. Find all subjects sorted by location
 
 ### Where
