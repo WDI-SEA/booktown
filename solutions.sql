@@ -34,7 +34,7 @@ SELECT title, retail FROM books JOIN editions on books.id=editions.book_id JOIN 
 -- 	* ISBN number
 -- 	* Publisher name
 -- 	* Retail price
-SELECT title, editions.isbn, name, retail FROM books JOIN editions ON books.id=editions.book_id JOIN publishers ON publishers.id=editions.publisher_id JOIN stock ON editions.isbn=stock.isbn;
+SELECT title, editions.isbn, name, retail FROM books JOIN editions ON books.id=editions.book_id JOIN publishers ON publishers.id=editions.publisher_id JOIN stock ON editions.isbn=stock.isbn WHERE title='Dune';
 
 -- 10. Find all shipments sorted by ship date display a result table with ONLY the following columns:
 -- 	* Customer first name
