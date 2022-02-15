@@ -1,21 +1,40 @@
 -- ### Order
 -- 1. Find all subjects sorted by subject
+--SELECT subject FROM subjects ORDER BY subject;
 -- 2. Find all subjects sorted by location
-
+--SELECT location  FROM subjects ORDER BY location ASC;
+--SELECT * FROM subjects ORDER BY location; class soulution 
 -- ### Where
 -- 3. Find the book "Little Women"
+--SELECT title FROM books WHERE title = 'Little Women';
+--SELECT * FROM books WHERE title = 'Little Women';
 -- 4. Find all books containing the word "Python"
+--SELECT * FROM books WHERE title LIKE '%Python%';
 -- 5. Find all subjects with the location "Main St" sort them by subject
+--SELECT * FROM subjects WHERE location LIKE '%Main St';
 
 
 -- ### Joins
 
 -- 6. Find all books about Computers and list ONLY the book titles
+--SELECT books.title FROM books
+--JOIN subjects ON books.subject_id = subjects.d 
+--WHERE subjects.subject = 'Computers'; 
+
+-- books = b and subjects = s
+-- define alias in the FROM and JOIN clause 
+--SELECT b.title FROM books b -- here we tell SQL we are calling books 'b'
+--JOIN subjects s -- here we tell SQL we are calling subjects 'S'
+--WHERE s.subject = 'Computers'
 -- 7. Find all books and display a result table with ONLY the following columns
 -- 	* Book title
 -- 	* Author's first name
--- 	* Author's last name
+-- 	* Author's last name 
 -- 	* Book subject
+SELECT a.last_name, a.first_name, b.title, s.subject 
+FROM authors a
+JOIN books b ON a.id = b.author_id
+JOIN subjects s ON s.id = b.subject_id;
 -- 8. Find all books that are listed in the stock table
 -- 	* Sort them by retail price (most expensive first)
 -- 	* Display ONLY: title and price
@@ -36,3 +55,5 @@
 -- 12. Get the COUNT of all Locations
 -- 13. Get the COUNT of each unique location in the subjects table. Display the count and the location name. (hint: requires GROUP BY).
 -- 14. List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)
+SELECT books.title, COUNT(editions.edition)
+FROM books JOIN edition ON books.id = editions.book_id GROUP BY books.id;
