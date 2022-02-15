@@ -3,21 +3,25 @@
 --\i booktown/booktown.sql
 
 -- 1. Find all subjects sorted by subject
-SELECT * FROM subjects;
+SELECT * FROM subjects
+ORDER BY subject DESC;
 -- 2. Find all subjects sorted by location
 SELECT * FROM subjects
 ORDER BY location;
 -- ### Where
 -- 3. Find the book "Little Women"
-SELECT * FROM books;
+SELECT * FROM books
+WHERE title='Little Women';
 -- 4. Find all books containing the word "Python"
 SELECT * FROM books
-WHERE books.title LIKE '%Python'; 
+WHERE title LIKE '%Python%'
+OR WHERE title LIKE '%python%'; 
 
 
 -- 5. Find all subjects with the location "Main St" sort them by subject
 SELECT * FROM subjects
-WHERE location='Main St';
+WHERE location='Main St'
+ORDER BY subject;
 
 -- ### Joins
 
@@ -27,31 +31,39 @@ WHERE location='Main St';
 -- WHERE subject_id='4';
 
 SELECT title FROM books
-INNER JOIN subjects
+JOIN subjects
 ON books.subject_id=subjects.id
 WHERE subject = 'Computers';
+
+--books = b and subjects = s
+--define alias in the FROM and JOIN cause
+SELECT b.title FROM book b --we tell sql we are calling books b
+JOIN subjects s --we telling sql we are calling subjects s
+ON b.subject_id = s.id 
+WHERE s.subject = 'Computers'
 -- 7. Find all books and display a result table with ONLY the following columns
 -- 	* Book title
 -- 	* Author's first name
 -- 	* Author's last name
 -- 	* Book subject
-SELECT authors.last_name, authors.first_name, books.title, subjects.subject FROM authors
-INNER JOIN books
-ON authors.id=books.author_id
-INNER JOIN subjects 
-ON subjects.id=books.subject_id;
+SELECT a.last_name, a.first_name, b.title, s.subject 
+FROM authors a
+JOIN books b 
+ON a.id=b.author_id
+JOIN subjects s 
+ON s.id=b.subject_id;
 
 -- 8. Find all books that are listed in the stock table
 -- 	* Sort them by retail price (most expensive first)
 -- 	* Display ONLY: title and price
 -- editions.isbn stock.isbn 
 -- SELECT isbn FROM public.stock
-SELECT books.title, stock.cost
-FROM books
-INNER JOIN editions
-ON editions.book_id=books.id
-INNER JOIN stock
-on editions.isbn=stock.ISBN
+SELECT b.title, s.cost
+FROM books b
+INNER JOIN editions e
+ON e.book_id=b.id
+INNER JOIN stock s
+on e.isbn=s.ISBN
 ORDER BY retail DESC;
 -- INNER JOIN books 
 -- ON books.title=editions.isbn;
@@ -111,11 +123,10 @@ SELECT COUNT(subjects.location) FROM subjects;
 
 SELECT subjects.location, COUNT(subjects.location) FROM subjects GROUP BY subjects.location;
 -- 14. List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)
-SELECT editions.book_id,  COUNT(editions.edition), title FROM books
-INNER JOIN editions
+SELECT editions.book_id,  COUNT(editions.edition), books.title FROM books
+JOIN editions 
 ON books.id=editions.book_id;
-WHERE title = (
-  SELECT title FROM books
-)
-GROUP BY editions.edition
+GROUP BY books.id
 
+
+-- group by whatever table you're selecting
