@@ -2,7 +2,7 @@
 -- Selected TOC Entries:
 --
 --
--- TOC Entry ID 1 (OID 0)
+-- TOC Entry ID 1 (OID 0)`
 --
 -- Name: booktown Type: DATABASE Owner: postgres
 --
