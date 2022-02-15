@@ -40,7 +40,7 @@ ORDER BY retail DESC;
 -- 	* Publisher name
 -- 	* Retail price
 
-SELECT title, isbn, name, retail FROM books
+SELECT title, stock.isbn, name, retail FROM books
 JOIN editions ON books.id = editions.book_id
 JOIN stock ON editions.isbn = stock.isbn
 JOIN publishers ON editions.publisher_id = publishers.id
@@ -52,7 +52,10 @@ WHERE title = 'Dune';
 -- 	* Customer last name
 -- 	* ship date
 -- 	* book title
-SELECT * FROM shipments 
+SELECT first_name, last_name, ship_date, title FROM books
+JOIN editions ON books.id = editions.book_id
+JOIN stock ON editions.isbn = stock.isbn
+JOIN shipments ON shipments.isbn = stock.isbn
 JOIN customers ON shipments.customer_id = customers.id;
 
 
