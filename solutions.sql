@@ -22,6 +22,12 @@ SELECT books.title FROM books
       WHERE subjects.subject = 'Computers';
 
 -- 7. Find all books and display a result table with ONLY the following columns
+booktown=# select b.title a.first_name a.last_name s.subject  
+from books b
+join authors a
+on b.author_id = a.id
+join subjects s
+on b.subject_id = s.id;
 
 -- 	* Book title
 -- 	* Author's first name
