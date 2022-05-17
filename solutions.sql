@@ -64,7 +64,8 @@ SELECT books.title, editions.isbn, publishers.name AS publisher, stock.retail
 FROM books
 JOIN editions ON books.id = editions.book_id
 JOIN publishers ON editions.publisher_id = publishers.id
-JOIN stock ON editions.isbn = stock.isbn;
+JOIN stock ON editions.isbn = stock.isbn
+WHERE books.title = 'Dune';
 
 -- 10
 SELECT customers.first_name, customers.last_name, shipments.ship_date, books.title
