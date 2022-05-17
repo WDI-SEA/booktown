@@ -34,6 +34,8 @@ Complete the following exercises to practice using SQL.
 
 ### Order
 1. Find all subjects sorted by subject
+
+
 2. Find all subjects sorted by location
 
 ### Where
@@ -45,6 +47,28 @@ Complete the following exercises to practice using SQL.
 ### Joins
 
 6. Find all books about Computers and list ONLY the book titles
+
+SELECT books.title FROM books 
+booktown-# JOIN subjects ON books.subject_id = subjects.id;
+            title            
+-----------------------------
+ Dynamic Anatomy
+ Goodnight Moon
+ Franklin in the Dark
+ Bartholomew and the Oobleck
+ The Cat in the Hat
+ The Velveteen Rabbit
+ Practical PostgreSQL
+ Perl Cookbook
+ Learning Python
+ Programming Python
+ Little Women
+ The Tell-Tale Heart
+ The Shining
+ 2001: A Space Odyssey
+ Dune
+(15 rows)
+
 7. Find all books and display a result table with ONLY the following columns
 	* Book title
 	* Author's first name
