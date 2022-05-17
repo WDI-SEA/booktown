@@ -34,11 +34,15 @@ Complete the following exercises to practice using SQL.
 
 ### Order
 1. Find all subjects sorted by subject
+
 2. Find all subjects sorted by location
+
 
 ### Where
 3. Find the book "Little Women"
+
 4. Find all books containing the word "Python"
+
 5. Find all subjects with the location "Main St" sort them by subject
 
 
