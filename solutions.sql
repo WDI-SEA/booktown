@@ -142,11 +142,22 @@ booktown-# ORDER BY retail DESC;
 -- 	* ISBN number
 -- 	* Publisher name
 -- 	* Retail price
+booktown=# select books.title, editions.isbn, publishers.name, stock.retail from books                                                                                  join editions on books.id = editions.book_id                                        join stock on editions.isbn = stock.isbn                                            join publishers on editions.publisher_id = publishers.id                            where title = 'Dune'                                                                ;
+ title |    isbn    |   name    | retail 
+-------+------------+-----------+--------
+ Dune  | 0441172717 | Ace Books |  21.95
+ Dune  | 044100590X | Ace Books |  45.95
+(2 rows)
 -- 10. Find all shipments sorted by ship date display a result table with ONLY the following columns:
 -- 	* Customer first name
 -- 	* Customer last name
 -- 	* ship date
 -- 	* book title
+booktown=# select customers.first_name, customers.last_name, shipments.ship_date, books.title from books
+booktown-# join editions on books.id = editions.book_id
+booktown-# join shipments on editions.isbn = shipments.isbn
+booktown-# join customers on shipments.customer_id = customers.id
+booktown-# order by shipments.ship_date;
 
 -- ### Grouping and Counting
 
