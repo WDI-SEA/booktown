@@ -1,6 +1,6 @@
 # Booktown, USA
 
-For each question below, find the approriate SQL query to obtain the information requested. Put all your answers in the `solutions.txt` file.
+For each question below, find the approriate SQL query to obtain the information requested. Put all your answers in the `solutions.sql` file.
 ## Getting Started
 
 To get started we'll need to import the booktown.sql file.
