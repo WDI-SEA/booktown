@@ -25,8 +25,8 @@ JOIN subjects ON books.subject_id = subjects.id WHERE subjects.id = 4;
 -- 	* Author's last name
 -- 	* Book subject
 SELECT books.title, authors.first_name, authors.last_name, subjects.subject FROM books
-booktown-# JOIN authors ON books.author_id = authors.id
-booktown-# JOIN subjects ON books.subject_id = subjects.id;
+JOIN authors ON books.author_id = authors.id
+JOIN subjects ON books.subject_id = subjects.id;
 
 -- 8. Find all books that are listed in the stock table
 -- 	* Sort them by retail price (most expensive first)
@@ -49,16 +49,27 @@ JOIN publishers ON editions.publisher_id = publishers.id
 JOIN stock ON editions.isbn = stock.isbn
 WHERE books.title = 'Dune';
 
--- 10. Find all shipments sorted by ship date display a result table with ONLY the following columns:
+-- 10. Find all shipments sorted by ship date, display a result table with ONLY the following columns:
 -- 	* Customer first name
 -- 	* Customer last name
 -- 	* ship date
 -- 	* book title
-
+SELECT customers.first_name, customers.last_name, shipments.ship_date, books.title FROM shipments
+JOIN customers ON customers.id = shipments.customer_id
+JOIN editions ON shipments.isbn = editions.isbn
+JOIN books ON editions.book_id = books.id
+ORDER BY shipments.ship_date DESC;
 
 -- ### Grouping and Counting
 
 -- 11. Get the COUNT of all books
+SELECT count(*) FROM books;
 -- 12. Get the COUNT of all Locations
+SELECT count(subjects.location) FROM subjects;
 -- 13. Get the COUNT of each unique location in the subjects table. Display the count and the location name. (hint: requires GROUP BY).
+SELECT count(subjects.location), subjects.location FROM subjects
+GROUP BY subjects.location;
 -- 14. List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)
+SELECT editions.book_id, books.title, count(editions.edition) FROM books
+FULL OUTER JOIN editions ON books.id = editions.book_id
+GROUP BY editions.book_id, books.title;
