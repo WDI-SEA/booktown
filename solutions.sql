@@ -229,7 +229,45 @@ SELECT title, stock.isbn, name, cost FROM publishers JOIN editions ON publishers
 -- 	* ship date
 -- 	* book title
 
-
+SELECT first_name, last_name, ship_date, title FROM customers JOIN shipments ON customers.id = shipments.customer_id JOIN editions ON editions.isbn = shipments.isbn JOIN books ON book_id = books.id;
+ first_name | last_name |       ship_date        |            title            
+------------+-----------+------------------------+-----------------------------
+ Annie      | Jackson   | 2001-09-14 17:42:22-07 | The Cat in the Hat
+ Jenny      | King      | 2001-09-14 16:46:32-07 | The Cat in the Hat
+ Julie      | Bollman   | 2001-08-13 09:42:10-07 | The Cat in the Hat
+ Eric       | Morrill   | 2001-08-10 13:47:52-07 | The Cat in the Hat
+ Chad       | Allen     | 2001-08-06 09:29:21-07 | The Cat in the Hat
+ Jonathan   | Anderson  | 2001-08-08 08:36:44-07 | The Shining
+ Jenny      | King      | 2001-08-14 13:45:51-07 | The Shining
+ Chuck      | Brown     | 2001-08-14 10:36:41-07 | The Shining
+ Annie      | Jackson   | 2001-09-22 20:58:56-07 | Bartholomew and the Oobleck
+ Annie      | Jackson   | 2001-09-22 11:23:28-07 | Bartholomew and the Oobleck
+ Annie      | Jackson   | 2001-08-08 10:46:13-07 | Bartholomew and the Oobleck
+ Annie      | Jackson   | 2001-08-06 11:46:36-07 | Bartholomew and the Oobleck
+ Annie      | Jackson   | 2001-08-07 10:58:36-07 | Bartholomew and the Oobleck
+ Annie      | Jackson   | 2001-08-11 09:55:05-07 | Bartholomew and the Oobleck
+ Rich       | Thomas    | 2001-08-10 07:29:52-07 | Franklin in the Dark
+ Tammy      | Robinson  | 2001-08-14 13:49:00-07 | Franklin in the Dark
+ Jean       | Owens     | 2001-08-12 12:09:47-07 | Franklin in the Dark
+ James      | Clark     | 2001-08-15 11:57:40-07 | Goodnight Moon
+ Laura      | Bennett   | 2001-08-06 07:49:44-07 | Goodnight Moon
+ Richard    | Brown     | 2001-08-11 10:52:34-07 | Goodnight Moon
+ Wendy      | Black     | 2001-08-09 09:30:46-07 | The Velveteen Rabbit
+ Dave       | Olson     | 2001-08-09 07:30:07-07 | The Velveteen Rabbit
+ Eric       | Morrill   | 2001-08-07 13:00:48-07 | Little Women
+ Owen       | Bollman   | 2001-08-05 09:34:04-07 | Little Women
+ Kathy      | Corner    | 2001-08-13 09:47:04-07 | The Cat in the Hat
+ James      | Williams  | 2001-08-11 13:34:08-07 | The Cat in the Hat
+ Owen       | Becker    | 2001-08-12 13:39:22-07 | The Shining
+ Ed         | Gould     | 2001-08-08 09:53:46-07 | The Shining
+ Royce      | Morrill   | 2001-08-07 11:31:57-07 | The Tell-Tale Heart
+ Adam       | Holloway  | 2001-08-14 13:41:39-07 | The Tell-Tale Heart
+ Jean       | Black     | 2001-08-10 08:29:42-07 | The Tell-Tale Heart
+ Trevor     | Young     | 2001-08-14 08:42:58-07 | Dune
+ Kate       | Gerdes    | 2001-08-12 08:46:35-07 | Dune
+ Christine  | Holloway  | 2001-08-07 11:56:42-07 | 2001: A Space Odyssey
+ Shirley    | Gould     | 2001-08-15 14:02:01-07 | 2001: A Space Odyssey
+ Tim        | Owens     | 2001-08-14 07:33:47-07 | Dynamic Anatomy
 
 -- ### Grouping and Counting
 
