@@ -1,0 +1,192 @@
+\q
+\q
+\l
+\list
+\?
+CREATE DATABASE testdb;
+\l
+\connect testdb;
+\dt 
+CREATE TABLE students (id SERIAL PRIMARY KEY,name TEXT,phone VARCHAR(15),email TEXT);
+\dt
+\d students
+\d students
+INSERT INTO students (name, phone, email)VALUES ('Ammon', '(555)555-5555', 'ammon@GA.com');
+INSERT INTO students (name, phone, email)VALUES ('Tyler', '(222)222-2222', 'tyler@GA.com');
+SELECT * FROM students;
+SELECT * FROM students WHERE name = 'Ammon';
+SELECT phone FROM students WHERE name = "Ammon";
+SELECT phone FROM students WHERE name = 'Ammon';
+UPDATE students SET email = 'ammon@GA.com' WHERE name = 'Ammon';
+\dt students
+\d students
+SELECT * FROM students;
+UPDATE students SET email = 'tyler@GA.com' WHERE name = 'Tyler';
+SELECT * FROM students;
+DROP TABLE;
+DROP TABLE students;
+\dt
+CREATE DATABASE movie_lesson;
+\l
+\c movie_lesson
+\i create_movie_table.sql 
+\d movies
+\i insert_movies.sql 
+\d movies
+\d movies
+\dt movies
+SELECT * FROM movies;
+SELECT * FROM movies WHERE rating > 4;
+SELECT title FROM movies WHERE rating > 4;
+\q
+SELECT * FROM world;
+\dt
+SELECT * FROM countries;
+SELECT * FROM countries WHERE region = 'Southern Europe';
+SELECT * FROM countries WHERE region = 'Southern Europe';
+SELECT * FROM countrylanguages;
+SELECT * FROM countrylanguages WHERE countrycode = 'ITA';
+SELECT * FROM countries WHERE countrycode = 'SMR';
+SELECT * FROM countries;
+SELECT * FROM countries WHERE code = 'SMR';
+\dt
+SELECT * FROM cities;
+SELECT * FROM cities WHERE 'Ser';
+SELECT * FROM cities WHERE 'Serra';
+SELECT * FROM cities WHERE cities = 'Serra';
+SELECT & FROM cities WHERE population = '19084';
+SELECT *  FROM cities WHERE population = '19084';
+SELECT *  FROM cities WHERE population = '91084';
+SELECT * FROM cities WHERE district = 'California';
+SELECT * FROM cities WHERE countrycode = 'USA';
+cd .cd ..cd ..;
+cd ..
+\q
+\list
+\c booktown
+\d
+\d public.books
+\d public.authors
+SELECT * FROM public.authors;
+SELECT * FROM public.books;
+code .
+\q
+\c booktown
+\d
+SELECT * FROM public.subjects;
+SELECT * FROM public.subjects;
+SELECT * FROM public.subjects.subjectSELECT * FROM public.subjects.subject;
+SELECT subject FROM public.subjectsSELECT * FROM public.subjects.subjectSELECT * FROM public.subjects.subject;
+SELECT subject FROM public.subjects;
+SELECT subject, location FROM public.subjects;
+SELECT * FROM public.books;
+SELECT * FROM public.books WHERE title = 'Little Woman';
+SELECT * FROM public.books WHERE title = 'Little Women';
+SELECT * FROM public.books WHERE title = 'Python';
+SELECT * FROM public.books WHERE title LIKE 'Python';
+SELECT subject, location FROM public.subjects GROUPBY subjects;
+SELECT subject, location FROM public.subjects GROUPBY subject;
+SELECT subject, location FROM public.subjects GROUP BY subject;
+SELECT subject FROM public.subjects GROUP BY subject;
+SELECT subject, location FROM public.subjects GROUP BY location;
+SELECT subject FROM public.subjects GROUP BY location;
+SELECT subject, location  FROM public.subjects GROUP BY location;
+SELECT *  FROM public.subjects GROUP BY location;
+SELECT *  FROM public.subjects GROUP BY subject, location;
+SELECT subject from public.subjects;
+SELECT * from public.subjects;
+SELECT * from public.subjects GROUP BY location;
+SELECT location from public.subjects GROUP BY location;
+SELECT location, subject FROM public.subjects GROUP BY location;
+SELECT location, subject FROM public.subjects ORDER BY location;
+SELECT subject, location FROM public.subjects ORDER BY location;
+SELECT subject, location FROM public.subjects ORDER BY subject;
+SELECT subject FROM public.subjects ORDER BY subject;
+SELECT * FROM public.books WHERE title LIKE '%Python%';
+SELECT * FROM public.books WHERE title;
+SELECT * FROM public.books;
+SELECT * FROM public.books WHERE location = 'Main St';
+SELECT * FROM public.subjects WHERE location = 'Main St';
+SELECT * FROM public.subjects WHERE location = 'Main St' GROUP BY subject;
+SELECT * FROM public.subjects WHERE location = 'Main St' ORDER BY subject;
+\d
+SELECT * FROM public.books;
+SELECT * FROM subject_ids;
+SELECT * FROM subjects;
+SELECT * FROM public.books WHERE title = 'Little Women';
+SELECT * FROM books WHERE title = 'Little Women';
+SELECT * FROM subjects;
+SELECT * FROM public.books;
+SELECT * FROM books JOIN subjects ON subject_id=id;
+SELECT * FROM books JOIN subjects ON subject_id=subjects.id;
+SELECT * FROM books JOIN subjects ON subject_id=subjects.id WHERE subject = 'Computers';
+SELECT * FROM books;
+SELECT * FROM books JOIN authors;
+SELECT * FROM authors;
+SELECT * FROM books JOIN authors ON author_id=authors.id;
+SELECT * FROM books JOIN authors JOIN subjects ON author_id=authors.id ON subject_id=subjects.id;
+SELECT * FROM books JOIN authors ON author_id=authors.id JOIN subjects ON subject_id=subjects.id;
+SELECT title, last_name, first_name, subject FROM books JOIN authors ON author_id=authors.id JOIN subjects ON subject_id=subjects.id;
+SELECT title, first_name, last_name, subject FROM books JOIN authors ON author_id=authors.id JOIN subjects ON subject_id=subjects.id;
+\dt
+SELECT * FROM stock;
+SELECT * FROM stock ORDER BY cost;
+SELECT * FROM stock ORDER BY cost DESC;
+SELECT * FROM books;
+SELECT * FROM numeric_values;
+SELECT * FROM stock_backup;
+\dt
+\dt
+SELECT * FROM money_example;
+SELECT * FROM editions;
+SELECT * FROM stock;
+SELECT * FROM stock JOIN editions ON stock.isbn=editions.isbn;
+SELECT * FROM stock JOIN editions ON stock.isbn=editions.isbn JOIN books ON book_id=books.id;
+SELECT title, retail FROM stock JOIN editions ON stock.isbn=editions.isbn JOIN books ON book_id=books.id ORDER BY retail DESC;
+SELECT title, cost FROM stock JOIN editions ON stock.isbn=editions.isbn JOIN books ON book_id=books.id ORDER BY cost DESC;
+SELECT title, cost FROM stock JOIN editions ON stock.isbn=editions.isbn JOIN books ON book_id=books.id ORDER BY cost DESC;
+SELECT * FROM stock JOIN editions ON stock.isbn=editions.isbn JOIN books ON book_id=books.id;
+SELECT * FROM stock JOIN editions ON stock.isbn=editions.isbn JOIN books ON book_id=books.id WHERE title = 'Dune';
+SELECT title, isbn, publisher_id, retail FROM stock JOIN editions ON stock.isbn=editions.isbn JOIN books ON book_id=books.id WHERE title = 'Dune';
+SELECT title, stock.isbn, publisher_id, retail FROM stock JOIN editions ON stock.isbn=editions.isbn JOIN books ON book_id=books.id WHERE title = 'Dune';
+SELECT * FROM publishers;
+SELECT title, stock.isbn, publisher_id, retail FROM stock JOIN editions ON stock.isbn=editions.isbn JOIN books ON book_id=books.id JOIN publishers ON publisher_id=publishers.id WHERE title = 'Dune';
+SELECT title, stock.isbn, publishers.name, retail FROM stock JOIN editions ON stock.isbn=editions.isbn JOIN books ON book_id=books.id JOIN publishers ON publisher_id=publishers.id WHERE title = 'Dune';
+\dt
+SELECT * FROM shipments;
+SELECT * FROM customers;
+SELECT * FROM shipments JOIN customers ON customer_id=customers.id;
+SELECT * FROM editions;
+SELECT * FROM shipments JOIN customers ON customer_id=customers.id JOIN editions ON shipments.isbn=editions.isbn;
+SELECT * FROM shipments JOIN customers ON customer_id=customers.id JOIN editions ON shipments.isbn=editions.isbn JOIN books ON book_id=books.id;
+SELECT first_name, last_name, ship_date, name FROM shipments JOIN customers ON customer_id=customers.id JOIN editions ON shipments.isbn=editions.isbn JOIN books ON book_id=books.id;
+SELECT first_name, last_name, ship_date FROM shipments JOIN customers ON customer_id=customers.id JOIN editions ON shipments.isbn=editions.isbn JOIN books ON book_id=books.id;
+SELECT * FROM books;
+SELECT first_name, last_name, ship_date, title FROM shipments JOIN customers ON customer_id=customers.id JOIN editions ON shipments.isbn=editions.isbn JOIN books ON book_id=books.id;
+SELECT first_name, last_name, ship_date, title FROM shipments JOIN customers ON customer_id=customers.id JOIN editions ON shipments.isbn=editions.isbn JOIN books ON book_id=books.id ORDER BY ship_date;
+SELECT COUNT(*) FROM books;
+SELECT COUNT(*) FROM locations;
+SELECT COUNT(*) FROM locationSELECT COUNT(*) FROM location;
+SELECT COUNT(*) FROM location;
+\dt
+SELECT * FROM books;
+SELECT * FROM states;
+SELECT * FROM subjects;
+SELECT COUNT(location) FROM subjects;
+SELECT location, COUNT(location) FROM subjects GROUP BY location;
+SELECT * FROM books;
+SELECT * FROM books JOIN editions;
+SELECT * FROM books JOIN editions ON books.id=book_idl;
+SELECT * FROM books JOIN editions ON books.id=book_id;
+SELECT id, title FROM books JOIN editions ON books.id=book_id;
+SELECT id, title, edition FROM books JOIN editions ON books.id=book_id GROUP BY edition;
+SELECT id, title, edition FROM books JOIN editions GROUP BY edition ON books.id=book_id;
+SELECT id, title, edition FROM books JOIN editions ON books.id=book_id GROUP BY edition;
+SELECT id, title, COUNT(edition) FROM books JOIN editions ON books.id=book_id GROUP BY edition;
+SELECT id, title, COUNT(edition) FROM books JOIN editions ON books.id=book_id GROUP BY COUNT(edition);
+SELECT location, COUNT(location) FROM subjects GROUP BY location;
+SELECT id, title, COUNT(edition) FROM books JOIN editions ON books.id=book_id GROUP BY books.id;
+SELECT id, title FROM books JOIN editions ON books.id=book_id;
+SELECT * FROM books JOIN editions ON books.id=book_id;
+SELECT id, title, COUNT(edition) FROM books JOIN editions ON books.id=book_id GROUP BY books.id;
+\q
