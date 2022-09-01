@@ -60,4 +60,8 @@ SELECT COUNT(*) FROM books;
 -- 12. Get the COUNT of all Locations
 SELECT COUNT(location) FROM subjects;
 -- 13. Get the COUNT of each unique location in the subjects table. Display the count and the location name. (hint: requires GROUP BY).
+SELECT COUNT(location), subjects.location FROM subjects GROUP BY location;
 -- 14. List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)
+SELECT books.id, books.title, COUNT(edition) FROM books
+JOIN editions ON books.id = editions.book_id
+GROUP BY edition, books.id;

@@ -1,0 +1,29 @@
+                 List of relations
+ Schema |         Name          |   Type   | Owner  
+--------+-----------------------+----------+--------
+ public | alternate_stock       | table    | duster
+ public | authors               | table    | duster
+ public | book_backup           | table    | duster
+ public | book_ids              | sequence | duster
+ public | book_queue            | table    | duster
+ public | books                 | table    | duster
+ public | customers             | table    | duster
+ public | daily_inventory       | table    | duster
+ public | distinguished_authors | table    | duster
+ public | editions              | table    | duster
+ public | employees             | table    | duster
+ public | favorite_authors      | table    | duster
+ public | favorite_books        | table    | duster
+ public | money_example         | table    | duster
+ public | my_list               | table    | duster
+ public | numeric_values        | table    | duster
+ public | publishers            | table    | duster
+ public | schedules             | table    | duster
+ public | shipments             | table    | duster
+ public | states                | table    | duster
+ public | stock                 | table    | duster
+ public | stock_backup          | table    | duster
+ public | subject_ids           | sequence | duster
+ public | subjects              | table    | duster
+ public | text_sorting          | table    | duster
+(25 rows)
