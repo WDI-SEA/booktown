@@ -1,11 +1,17 @@
 -- ### Order
 -- 1. Find all subjects sorted by subject
+SELECT subject FROM subjects;
 -- 2. Find all subjects sorted by location
+SELECT location FROM subjects;
 
 -- ### Where
 -- 3. Find the book "Little Women"
+SELECT * FROM books
+    SELECT * FROM books WHERE id = 190;
 -- 4. Find all books containing the word "Python"
+SELECT * FROM books WHERE title LIKE '%Python';
 -- 5. Find all subjects with the location "Main St" sort them by subject
+SELECT * FROM subjects WHERE location = 'Main St';
 
 
 -- ### Joins
@@ -33,6 +39,7 @@
 -- ### Grouping and Counting
 
 -- 11. Get the COUNT of all books
+SELECT COUNT(*) FROM books;
 -- 12. Get the COUNT of all Locations
 -- 13. Get the COUNT of each unique location in the subjects table. Display the count and the location name. (hint: requires GROUP BY).
 -- 14. List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)
