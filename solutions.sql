@@ -272,6 +272,9 @@ SELECT first_name, last_name, ship_date, title FROM customers JOIN shipments ON 
 -- ### Grouping and Counting
 
 -- 11. Get the COUNT of all books
+
+
+
 -- 12. Get the COUNT of all Locations
 -- 13. Get the COUNT of each unique location in the subjects table. Display the count and the location name. (hint: requires GROUP BY).
 -- 14. List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)
