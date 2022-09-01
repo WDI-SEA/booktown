@@ -38,11 +38,11 @@ JOIN subjects s ON b.subject_id = s.id;
 -- 8. Find all books that are listed in the stock table
 -- 	* Sort them by retail price (most expensive first)
 -- 	* Display ONLY: title and price
-SELECT b.title, s.cost
+SELECT b.title, s.retail
 FROM editions e
 JOIN books b ON e.book_id = b.id
 JOIN stock s ON e.isbn = s.isbn
-ORDER BY s.cost;
+ORDER BY s.retail;
 
 -- 9. Find the book "Dune" and display ONLY the following columns
 -- 	* Book title
