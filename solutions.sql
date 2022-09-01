@@ -1,12 +1,70 @@
 -- ### Order
 -- 1. Find all subjects sorted by subject
+SELECT subject FROM subjects ORDER BY subject;
+ Arts
+ Business
+ Children''s Books
+ Classics
+ Computers
+ Cooking
+ Drama
+ Entertainment
+ History
+ Horror
+ Mystery
+ Poetry
+ Religion
+ Romance
+ Science
+ Science Fiction
+
 -- 2. Find all subjects sorted by location
+SELECT subject, location FROM subjects ORDER BY location;
+'
+ subject      |     location     
+------------------+------------------
+ History          | Academic Rd
+ Classics         | Academic Rd
+ Mystery          | Black Raven Dr
+ Horror           | Black Raven Dr
+ Arts             | Creativity St
+ Cooking          | Creativity St
+ Children's Books | Kids Ct
+ Entertainment    | Main St
+ Drama            | Main St
+ Romance          | Main St
+ Science Fiction  | Main St
+ Science          | Productivity Ave
+ Computers        | Productivity Ave
+ Business         | Productivity Ave
+ Poetry           | Sunset Dr
+ Religion         | 
+
 
 -- ### Where
--- 3. Find the book "Little Women"
--- 4. Find all books containing the word "Python"
--- 5. Find all subjects with the location "Main St" sort them by subject
+-- 3. Find the book "Littl`e Women"
+SELECT * FROM books WHERE title = 'Little Women';
+ id  |    title     | author_id | subject_id 
+-----+--------------+-----------+------------
+ 190 | Little Women |        16 |          6
 
+
+-- 4. Find all books containing the word "Python"
+SELECT * FROM books WHERE title LIKE '%Python%';
+  id   |       title        | author_id | subject_id 
+-------+--------------------+-----------+------------
+ 41473 | Programming Python |      7805 |          4
+ 41477 | Learning Python    |      7805 |          4
+
+
+-- 5. Find all subjects with the location "Main St" sort them by subject
+SELECT * FROM subjects WHERE location = 'Main St' ORDER BY subject;
+ id |     subject     | location 
+----+-----------------+----------
+  6 | Drama           | Main St
+  7 | Entertainment   | Main St
+ 13 | Romance         | Main St
+ 15 | Science Fiction | Main St
 
 -- ### Joins
 
