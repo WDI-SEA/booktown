@@ -286,4 +286,17 @@ SELECT count(location) FROM subjects;
     15
 
 -- 13. Get the COUNT of each unique location in the subjects table. Display the count and the location name. (hint: requires GROUP BY).
+
+SELECT DISTINCT location FROM subjects;
+     location     
+------------------
+ 
+ Sunset Dr
+ Kids Ct
+ Black Raven Dr
+ Creativity St
+ Academic Rd
+ Main St
+ Productivity Ave
+
 -- 14. List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)
