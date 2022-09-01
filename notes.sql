@@ -1,0 +1,72 @@
+--                      List of relations
+--  Schema |         Name          |   Type   |     Owner
+-- --------+-----------------------+----------+---------------
+--  public | alternate_stock       | table    | brandon-w1205
+--  public | authors               | table    | brandon-w1205
+--  public | book_backup           | table    | brandon-w1205
+--  public | book_ids              | sequence | brandon-w1205
+--  public | book_queue            | table    | brandon-w1205
+--  public | books                 | table    | brandon-w1205
+--  public | customers             | table    | brandon-w1205
+--  public | daily_inventory       | table    | brandon-w1205
+--  public | distinguished_authors | table    | brandon-w1205
+--  public | editions              | table    | brandon-w1205
+--  public | employees             | table    | brandon-w1205
+--  public | favorite_authors      | table    | brandon-w1205
+--  public | favorite_books        | table    | brandon-w1205
+--  public | money_example         | table    | brandon-w1205
+--  public | my_list               | table    | brandon-w1205
+--  public | numeric_values        | table    | brandon-w1205
+--  public | publishers            | table    | brandon-w1205
+--  public | schedules             | table    | brandon-w1205
+--  public | shipments             | table    | brandon-w1205
+--  public | states                | table    | brandon-w1205
+--  public | stock                 | table    | brandon-w1205
+--  public | stock_backup          | table    | brandon-w1205
+--  public | subject_ids           | sequence | brandon-w1205
+--  public | subjects              | table    | brandon-w1205
+--  public | text_sorting          | table    | brandon-w1205
+-- (25 rows)
+
+-- SELECT * FROM editions;
+--     isbn    | book_id | edition | publisher_id | publication | type
+-- ------------+---------+---------+--------------+-------------+------
+--  039480001X |    1608 |       1 |           59 | 1957-03-01  | h
+--  0451160916 |    7808 |       1 |           75 | 1981-08-01  | p
+--  0394800753 |    1590 |       1 |           59 | 1949-03-01  | p
+--  0590445065 |   25908 |       1 |          150 | 1987-03-01  | p
+--  0694003611 |    1501 |       1 |           65 | 1947-03-04  | p
+--  0679803335 |    1234 |       1 |          102 | 1922-01-01  | p
+--  0760720002 |     190 |       1 |           91 | 1868-01-01  | p
+--  0394900014 |    1608 |       1 |           59 | 1957-01-01  | p
+--  0385121679 |    7808 |       2 |           75 | 1993-10-01  | h
+--  1885418035 |     156 |       1 |          163 | 1995-03-28  | p
+--  0929605942 |     156 |       2 |          171 | 1998-12-01  | p
+--  0441172717 |    4513 |       2 |           99 | 1998-09-01  | p
+--  044100590X |    4513 |       3 |           99 | 1999-10-01  | h
+--  0451457994 |    4267 |       3 |          101 | 2000-09-12  | p
+--  0451198492 |    4267 |       3 |          101 | 1999-10-01  | h
+--  0823015505 |    2038 |       1 |           62 | 1958-01-01  | p
+--  0596000855 |   41473 |       2 |          113 | 2001-03-01  | p
+
+-- SELECT * FROM books;
+--   id   |            title            | author_id | subject_id
+-- -------+-----------------------------+-----------+------------
+--   7808 | The Shining                 |      4156 |          9
+--   4513 | Dune                        |      1866 |         15
+--   4267 | 2001: A Space Odyssey       |      2001 |         15
+--   1608 | The Cat in the Hat          |      1809 |          2
+--   1590 | Bartholomew and the Oobleck |      1809 |          2
+--  25908 | Franklin in the Dark        |     15990 |          2
+--   1501 | Goodnight Moon              |      2031 |          2
+--    190 | Little Women                |        16 |          6
+--   1234 | The Velveteen Rabbit        |     25041 |          3
+--   2038 | Dynamic Anatomy             |      1644 |          0
+--    156 | The Tell-Tale Heart         |       115 |          9
+--  41473 | Programming Python          |      7805 |          4
+--  41477 | Learning Python             |      7805 |          4
+--  41478 | Perl Cookbook               |      7806 |          4
+--  41472 | Practical PostgreSQL        |      1212 |          4
+
+
+
