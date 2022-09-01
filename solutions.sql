@@ -300,3 +300,19 @@ SELECT DISTINCT location FROM subjects;
  Productivity Ave
 
 -- 14. List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)
+
+SELECT DISTINCT book_id, books.title, COUNT(edition) FROM editions JOIN books ON books.id=editions.book_id GROUP BY book_id, books.title;
+ book_id |            title            | count 
+---------+-----------------------------+-------
+    2038 | Dynamic Anatomy             |     1
+    1608 | The Cat in the Hat          |     2
+   25908 | Franklin in the Dark        |     1
+    1501 | Goodnight Moon              |     1
+     190 | Little Women                |     1
+    7808 | The Shining                 |     2
+    4267 | 2001: A Space Odyssey       |     2
+    1590 | Bartholomew and the Oobleck |     1
+    1234 | The Velveteen Rabbit        |     1
+    4513 | Dune                        |     2
+   41473 | Programming Python          |     1
+     156 | The Tell-Tale Heart         |     2
