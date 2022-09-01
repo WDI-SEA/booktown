@@ -87,5 +87,5 @@ SELECT COUNT(*), location FROM (
 -- 14. List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)
 SELECT b.id, b.title, COUNT(e.edition) 
 FROM editions e
-JOIN books b ON e.book_id = b.id
+FULL JOIN books b ON e.book_id = b.id
 GROUP BY b.id;
