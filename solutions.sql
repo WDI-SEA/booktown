@@ -189,6 +189,26 @@ SELECT * FROM results;
 -- 	* Sort them by retail price (most expensive first)
 -- 	* Display ONLY: title and price
 
+SELECT title,cost FROM editions JOIN stock ON stock.isbn = editions.isbn JOIN books ON book_id = books.id ORDER BY cost DESC; 
+
+title            | cost  
+-----------------------------+-------
+ 2001: A Space Odyssey       | 36.00
+ Dune                        | 36.00
+ The Cat in the Hat          | 30.00
+ The Shining                 | 29.00
+ Dynamic Anatomy             | 26.00
+ Goodnight Moon              | 25.00
+ The Shining                 | 24.00
+ The Cat in the Hat          | 23.00
+ Franklin in the Dark        | 23.00
+ The Tell-Tale Heart         | 23.00
+ The Velveteen Rabbit        | 20.00
+ The Tell-Tale Heart         | 19.00
+ Little Women                | 18.00
+ 2001: A Space Odyssey       | 17.00
+ Dune                        | 17.00
+ Bartholomew and the Oobleck | 16.00
 
 
 -- 9. Find the book "Dune" and display ONLY the following columns
@@ -196,6 +216,9 @@ SELECT * FROM results;
 -- 	* ISBN number
 -- 	* Publisher name
 -- 	* Retail price
+
+
+
 -- 10. Find all shipments sorted by ship date display a result table with ONLY the following columns:
 -- 	* Customer first name
 -- 	* Customer last name
