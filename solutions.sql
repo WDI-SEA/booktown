@@ -60,10 +60,18 @@ WHERE books.title = 'Dune';
 -- 	* Customer last name
 -- 	* ship date
 -- 	* book title
+SELECT customers.first_name, customers.last_name, shipments.ship_date, books.title FROM shipments
+JOIN editions ON shipments.isbn = editions.isbn
+JOIN books ON editions.book_id = books.id
+JOIN customers ON shipments.customer_id = customers.id
+ORDER BY shipments.ship_date DESC;
 
 -- ### Grouping and Counting
 
 -- 11. Get the COUNT of all books
+SELECT count(*) FROM books;
 -- 12. Get the COUNT of all Locations
+SELECT count(subjects.location) FROM subjects;
 -- 13. Get the COUNT of each unique location in the subjects table. Display the count and the location name. (hint: requires GROUP BY).
+SELECT count(subjects.location), subjects.location FROM subjects GROUP BY subjects.location;
 -- 14. List all books. Display the book_id, title, and a count of how many editions each book has. (hint: requires GROUP BY and JOIN)
