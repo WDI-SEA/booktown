@@ -217,13 +217,19 @@ title            | cost
 -- 	* Publisher name
 -- 	* Retail price
 
-
+SELECT title, stock.isbn, name, cost FROM publishers JOIN editions ON publishers.id=editions.publisher_id JOIN stock ON stock.isbn = editions.isbn JOIN books ON book_id=books.id WHERE title = 'Dune';
+ title |    isbn    |   name    | cost  
+-------+------------+-----------+-------
+ Dune  | 0441172717 | Ace Books | 17.00
+ Dune  | 044100590X | Ace Books | 36.00
 
 -- 10. Find all shipments sorted by ship date display a result table with ONLY the following columns:
 -- 	* Customer first name
 -- 	* Customer last name
 -- 	* ship date
 -- 	* book title
+
+
 
 -- ### Grouping and Counting
 
