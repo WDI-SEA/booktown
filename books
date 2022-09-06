@@ -1,0 +1,30 @@
+                   List of relations
+ Schema |         Name          |   Type   |   Owner    
+--------+-----------------------+----------+------------
+ public | alternate_stock       | table    | mcpeepants
+ public | authors               | table    | mcpeepants
+ public | book_backup           | table    | mcpeepants
+ public | book_ids              | sequence | mcpeepants
+ public | book_queue            | table    | mcpeepants
+ public | books                 | table    | mcpeepants
+ public | customers             | table    | mcpeepants
+ public | daily_inventory       | table    | mcpeepants
+ public | distinguished_authors | table    | mcpeepants
+ public | editions              | table    | mcpeepants
+ public | employees             | table    | mcpeepants
+ public | favorite_authors      | table    | mcpeepants
+ public | favorite_books        | table    | mcpeepants
+ public | money_example         | table    | mcpeepants
+ public | my_list               | table    | mcpeepants
+ public | numeric_values        | table    | mcpeepants
+ public | publishers            | table    | mcpeepants
+ public | schedules             | table    | mcpeepants
+ public | shipments             | table    | mcpeepants
+ public | states                | table    | mcpeepants
+ public | stock                 | table    | mcpeepants
+ public | stock_backup          | table    | mcpeepants
+ public | subject_ids           | sequence | mcpeepants
+ public | subjects              | table    | mcpeepants
+ public | text_sorting          | table    | mcpeepants
+(25 rows)
+
