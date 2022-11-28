@@ -146,7 +146,7 @@ CREATE TABLE "shipments" (
 
 CREATE TABLE "customers" (
 	"id" integer NOT NULL,
-	"last_name" text,
+	"last_name" text,st
 	"first_name" text,
 	Constraint "customers_pkey" Primary Key ("id")
 );
@@ -209,7 +209,7 @@ CREATE TABLE "employees" (
 --
 -- TOC Entry ID 32 (OID 3629174)
 --
--- Name: editions Type: TABLE Owner: manager
+-- Name:  Type: TABLE Owner: manager
 --
 
 CREATE TABLE "editions" (
